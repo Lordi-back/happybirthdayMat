@@ -2,57 +2,495 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Key 1: The Mathematician</title>
+    <title>SOUL SHARD 1: Calculus Requiem</title>
     <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        .hidden { display: none; }
-        input { background: black; color: #0f0; border: 1px solid #0f0; padding: 5px; margin: 10px 0; }
-        button { background: #333; color: #0f0; border: 1px solid #0f0; padding: 5px 15px; cursor: pointer; }
-        .success { color: #0f0; font-weight: bold; }
-        .video-container { margin: 20px 0; }
+        body {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(65, 105, 225, 0.1) 50%,
+                    rgba(0, 0, 0, 0.95) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50,5 L95,50 L50,95 L5,50 Z" stroke="rgba(255,107,0,0.05)" fill="none"/></svg>');
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px double var(--bonfire-orange);
+            position: relative;
+        }
+        
+        .soul-title {
+            font-family: 'MedievalSharp', cursive;
+            color: var(--estus-yellow);
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 
+                2px 2px 0 #000,
+                0 0 15px rgba(255, 107, 0, 0.7);
+        }
+        
+        .stand-subtitle {
+            color: var(--souls-blue);
+            font-family: 'MS Gothic', monospace;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .puzzle-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--bonfire-orange);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .stand-card {
+            display: flex;
+            align-items: center;
+            background: rgba(20, 20, 40, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--souls-blue);
+        }
+        
+        .stand-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--souls-blue), #000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 2.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .stand-info h3 {
+            color: var(--estus-yellow);
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+        }
+        
+        .riddle-box {
+            background: rgba(0, 10, 20, 0.7);
+            border: 1px solid rgba(65, 105, 225, 0.3);
+            padding: 25px;
+            border-radius: 5px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+        
+        .riddle-text {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .code-block {
+            background: #001122;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 3px solid var(--estus-yellow);
+            overflow-x: auto;
+        }
+        
+        .input-group {
+            margin: 30px 0;
+        }
+        
+        .jojo-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--bonfire-orange);
+            color: var(--estus-yellow);
+            font-size: 1.2rem;
+            font-family: 'MS Gothic', monospace;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .jojo-input:focus {
+            outline: none;
+            border-color: var(--estus-yellow);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .hint-text {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .success-section {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 30, 0, 0.3);
+            border: 2px solid var(--estus-yellow);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .key-reveal {
+            font-size: 2rem;
+            color: var(--estus-yellow);
+            font-family: 'MS Gothic', monospace;
+            letter-spacing: 5px;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px dashed var(--bonfire-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin: 20px 0;
+            font-family: 'MS Gothic', monospace;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .back-link {
+            color: var(--souls-blue);
+            text-decoration: none;
+            font-family: 'MS Gothic', monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            color: var(--estus-yellow);
+            transform: translateX(-5px);
+        }
+        
+        .soul-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="terminal">
+    <!-- Японские символы -->
+    <div class="japanese-border top">∫∑∏∞∇∆∂数学の謎</div>
+    <div class="japanese-border bottom">公式定理証明解</div>
+    
+    <!-- Частицы душ -->
+    <div class="soul-particles" id="soulParticles"></div>
+
     <div class="container">
-        <a href="index.html" style="color: #888;"><< BACK TO MISSION CONTROL</a>
-        <hr>
-        <h2>> CONNECTION ESTABLISHED: THE MATHEMATICIAN</h2>
-        <p>> "Привет, инженер. Чтобы получить мой кристалл, реши задачу."</p>
-        <blockquote>
-            <p><i>Твой год рождения — 2004. Наш код дружбы — (2004 % 12) + (21 / 7) — (кол-во нас, т.е. команды).</i></p>
-            <p><i>Введи числовой результат. Подсказка: оператор '%' — это остаток от деления.</i></p>
-            <p><i>P.S. Не забывай про знак.</i></p>
-        </blockquote>
-        <p>> ВВЕДИТЕ РЕШЕНИЕ:</p>
-        <input type="text" id="answer-input" placeholder="Ваш ответ...">
-        <button onclick="checkAnswer()">ПРОВЕРИТЬ КОД</button>
-
-        <!-- Секция, которая покажется при правильном ответе -->
-        <div id="success-message" class="hidden">
-            <p class="success">>> CODE ACCEPTED. KEY_1 = "INVICTA"</p>
-            <p>> TRANSMITTING VIDEO MESSAGE...</p>
-            <div class="video-container">
-                <!-- Вставьте сюда iframe с видео от Математика (например, с YouTube, VK, Google Drive) -->
-                <p>[ЗДЕСЬ БУДЕТ ВИДЕО ОТ МАТЕМАТИКА С ГРАФИКОМ]</p>
-                <!-- Пример iframe для YouTube (замените src на ваше видео) -->
-                <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
-            </div>
-            <p>> <a href="puzzle_economist.html" style="color: #0f0;">[>> PROCEED TO NEXT FREQUENCY]</a></p>
+        <!-- Заголовок -->
+        <div class="page-header">
+            <h1 class="soul-title">«CALCULUS REQUIEM»</h1>
+            <p class="stand-subtitle">STAND USER: THE MATHEMATICIAN | SOUL TYPE: LOGICAL FLAME</p>
         </div>
-
-        <script>
-            function checkAnswer() {
-                const userAnswer = document.getElementById('answer-input').value.trim();
-                // Правильный ответ, посчитанный заранее: (0) + (3) - (4) = -1
-                const correctAnswers = ["-1", "минус один", "минус 1"]; // Несколько вариантов
-
-                if (correctAnswers.includes(userAnswer.toLowerCase())) {
-                    document.getElementById('success-message').classList.remove('hidden');
-                } else {
-                    alert('>> ERROR: CODE INVALID. TRY AGAIN.');
-                }
-            }
-        </script>
+        
+        <!-- Стенд -->
+        <div class="stand-card">
+            <div class="stand-icon">∫</div>
+            <div class="stand-info">
+                <h3>CALCULUS REQUIEM</h3>
+                <p style="color: #aaa; margin: 0;">Stand Ability: «Infinite Calculation» — Bends reality through mathematical truth</p>
+                <p style="color: var(--souls-blue); margin-top: 5px; font-size: 0.9rem;">
+                    Precision: A | Speed: B | Range: C | Durability: A | Potential: ∞
+                </p>
+            </div>
+        </div>
+        
+        <!-- Загадка -->
+        <div class="puzzle-container">
+            <h2 style="color: var(--estus-yellow); text-align: center; margin-bottom: 25px;">
+                謎 №1: THE EQUATION OF FRIENDSHIP
+            </h2>
+            
+            <div class="riddle-box">
+                <p class="riddle-text">
+                    <span style="color: var(--souls-blue);">「数学者より」</span><br>
+                    Engineer, my friend. To prove you're worthy of this soul shard, 
+                    you must solve the fundamental equation of our bond.
+                </p>
+                
+                <div class="code-block">
+                    // FRIENDSHIP.EQUATION<br>
+                    // Input: birth_year = 2004<br>
+                    // Input: current_age = 21<br>
+                    // Input: party_size = 4 (us)<br>
+                    <br>
+                    function calculateBondCode() {<br>
+                    &nbsp;&nbsp;let crystal = (birth_year % 12) + (current_age / 7) - party_size;<br>
+                    &nbsp;&nbsp;return crystal;<br>
+                    }
+                </div>
+                
+                <p class="riddle-text" style="color: var(--estus-yellow);">
+                    Calculate the result.<br>
+                    <span style="color: #888; font-size: 0.9rem;">
+                        Operator '%' means remainder. Keep the sign. This is our inside joke.
+                    </span>
+                </p>
+            </div>
+            
+            <!-- Ввод ответа -->
+            <div class="input-group">
+                <input type="text" 
+                       class="jojo-input" 
+                       id="answerInput" 
+                       placeholder="Enter the numerical result... (e.g., -1)"
+                       onkeypress="if(event.key === 'Enter') checkAnswer()">
+                <p class="hint-text">
+                    Hint: 2004 % 12 = 0, 21 / 7 = 3, minus the squad...
+                </p>
+            </div>
+            
+            <!-- Кнопка проверки -->
+            <div style="text-align: center;">
+                <button class="hybrid-button" onclick="checkAnswer()" style="padding: 15px 40px; font-size: 1.2rem;">
+                    CRACK THE CODE → ゴ
+                </button>
+            </div>
+            
+            <!-- Успех (скрыто изначально) -->
+            <div class="success-section" id="successSection">
+                <div style="font-size: 3rem; color: var(--estus-yellow);">✨</div>
+                <h3 style="color: var(--estus-yellow); margin: 20px 0;">
+                    SOUL SHARD ACQUIRED!
+                </h3>
+                
+                <div class="key-reveal">
+                    KEY_1 = "INVICTA"
+                </div>
+                
+                <p style="color: #ccc; margin: 20px 0;">
+                    The Mathematical Stand acknowledges your intellect.<br>
+                    Transmission incoming...
+                </p>
+                
+                <!-- Место для видео -->
+                <div class="video-placeholder">
+                    [VIDEO MESSAGE FROM MATHEMATICIAN]<br>
+                    <span style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">
+                        Replace with actual video
+                    </span>
+                </div>
+                
+                <!-- Следующая страница -->
+                <div style="margin-top: 30px;">
+                    <a href="puzzle_economist.html" class="hybrid-button" style="text-decoration: none; display: inline-block;">
+                        CLAIM NEXT SOUL SHARD → メ
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Навигация -->
+        <div class="navigation">
+            <a href="index.html" class="back-link">
+                ← RETURN TO BONFIRE
+            </a>
+            <div style="color: #666; font-family: 'MS Gothic';">
+                SOUL SHARDS: <span id="collectedCount">0</span>/3
+            </div>
+        </div>
     </div>
+
+    <script src="hybrid-sounds.js"></script>
+    <script>
+        // Создаём частицы душ
+        function createSoulParticles() {
+            const container = document.getElementById('soulParticles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 8 + 2}px;
+                    height: ${Math.random() * 8 + 2}px;
+                    background: radial-gradient(circle, 
+                        rgba(65, 105, 225, ${Math.random() * 0.5 + 0.2}) 0%,
+                        transparent 70%);
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float ${Math.random() * 10 + 5}s infinite linear;
+                    pointer-events: none;
+                `;
+                
+                // Добавляем анимацию
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes float {
+                        0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+                        10% { opacity: ${Math.random() * 0.5 + 0.2}; }
+                        90% { opacity: ${Math.random() * 0.5 + 0.2}; }
+                        100% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Проверка ответа
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const correctAnswers = ["-1", "минус один", "минус 1", "negative one"];
+            
+            if (correctAnswers.includes(userAnswer)) {
+                // Успех
+                document.getElementById('successSection').style.display = 'block';
+                window.hybridSounds.playEstusSound();
+                
+                // Сохраняем прогресс
+                let progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+                progress.math = true;
+                localStorage.setItem('quest_progress', JSON.stringify(progress));
+                
+                // Обновляем счётчик
+                updateCounter();
+                
+                // Анимация успеха
+                const button = document.querySelector('.hybrid-button');
+                button.style.display = 'none';
+                
+                // Эффект
+                createSuccessEffects();
+                
+            } else {
+                // Ошибка
+                window.hybridSounds.playSoulsSound();
+                alert('>> ERROR: Incorrect calculation.\n>> The Stand demands mathematical precision!');
+                document.getElementById('answerInput').style.borderColor = 'var(--abyss-red)';
+            }
+        }
+        
+        // Эффекты при успехе
+        function createSuccessEffects() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const spark = document.createElement('div');
+                    spark.style.cssText = `
+                        position: fixed;
+                        width: 4px;
+                        height: 4px;
+                        background: var(--estus-yellow);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 10000;
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        animation: sparkle 1s forwards;
+                    `;
+                    document.body.appendChild(spark);
+                    
+                    setTimeout(() => spark.remove(), 1000);
+                }, i * 50);
+            }
+            
+            // Добавляем анимацию
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes sparkle {
+                    0% { transform: scale(1); opacity: 1; }
+                    100% { transform: scale(0); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Обновление счётчика
+        function updateCounter() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            const count = Object.values(progress).filter(Boolean).length;
+            document.getElementById('collectedCount').textContent = count;
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            createSoulParticles();
+            updateCounter();
+            
+            // Автофокус на поле ввода
+            document.getElementById('answerInput').focus();
+            
+            // Звук при наведении на кнопку
+            const button = document.querySelector('.hybrid-button');
+            button.addEventListener('mouseenter', () => {
+                if (Math.random() > 0.5) {
+                    window.hybridSounds.playJojoSound();
+                } else {
+                    window.hybridSounds.playSoulsSound();
+                }
+            });
+            
+            // Добавляем японские символы при вводе
+            const input = document.getElementById('answerInput');
+            input.addEventListener('input', function() {
+                if (Math.random() > 0.7) {
+                    const symbols = ['∫', '∑', '∏', '∞', '∆', '∂'];
+                    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    
+                    const effect = document.createElement('span');
+                    effect.textContent = randomSymbol;
+                    effect.style.cssText = `
+                        position: absolute;
+                        color: rgba(65, 105, 225, 0.5);
+                        font-size: 20px;
+                        pointer-events: none;
+                        animation: floatUp 1s forwards;
+                        left: ${Math.random() * 100}%;
+                        top: 50%;
+                    `;
+                    
+                    input.parentElement.appendChild(effect);
+                    setTimeout(() => effect.remove(), 1000);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
