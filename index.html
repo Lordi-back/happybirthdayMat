@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>LICENSE_21.EXE</title>
+    <link rel="stylesheet" href="terminal.css"> <!-- Подключаем тему-терминал -->
+    <style>
+        /* Дополнительные стили для мигающего курсора и кликабельности */
+        .cursor { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .typewriter { overflow: hidden; border-right: .15em solid green; white-space: nowrap; margin: 0 auto; letter-spacing: .15em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: green; } }
+        .hidden { display: none; }
+        a { color: #0f0; text-decoration: none; } /* Зелёные ссылки как в терминале */
+    </style>
+</head>
+<body class="terminal">
+    <div class="container" style="max-width: 800px;">
+        <!-- Часть 1: Анимация загрузки -->
+        <div id="boot-screen">
+            <div class="typewriter">
+                <span>> SYSTEM BOOT... WELCOME, ENGINEER.</span><br>
+                <span>> SCANNING USER PROFILE... CONFIRMED: ИМЯ_ИМЕНИННИКА, 2004 UNIT.</span><br>
+                <span>> LOADING MISSION: 'ADULT_LICENSE.EXE'</span><br>
+                <span>> STATUS: <span style="color:orange">READY. BUT NOT ACTIVATED.</span></span><br><br>
+                <span>> TO INSTALL, YOU NEED 3 CRYSTALS OF EXPERIENCE.</span><br>
+                <span>> YOUR GUARDIAN FRIENDS HOLD THE KEYS.</span><br>
+                <span>> SYNC WITH THEIR FREQUENCIES TO PROCEED.</span><br><br>
+                <span>> TYPE '<span style="color:#0f0">START</span>' AND PRESS ENTER TO BEGIN INITIALIZATION...</span><br>
+                > <span id="cursor" class="cursor">_</span>
+            </div>
+            <!-- Поле ввода, изначально скрытое -->
+            <input type="text" id="start-input" class="hidden" style="background: black; color: #0f0; border: none; outline: none; width: 80%;" autofocus>
+        </div>
 
+        <!-- Часть 2: Главное меню (появляется после ввода "START") -->
+        <div id="main-menu" class="hidden">
+            <br>
+            <h2>> MISSION CONTROL</h2>
+            <hr>
+            <p>> OBJECTIVE: COLLECT 3 KEYS FROM YOUR GUARDIANS.</p>
+            <ul>
+                <li>> KEY 1: <a href="puzzle_math.html">[CONNECT TO: THE MATHEMATICIAN]</a> - Frequency: Logic Core</li>
+                <li>> KEY 2: <a href="puzzle_economist.html">[CONNECT TO: THE ECONOMIST & TRANSLATOR]</a> - Frequency: Contract & Soul</li>
+                <li>> KEY 3: <a href="puzzle_programmer.html">[CONNECT TO: THE PROGRAMMER]</a> - Frequency: Source Code</li>
+            </ul>
+            <p>> ACCESS WILL BE GRANTED UPON CORRECT ANSWER.</p>
+            <p>> ALL KEYS ACQUIRED? <a href="final.html">[ATTEMPT FINALIZATION]</a> (Link will be disabled)</p>
+            <hr>
+            <p style="color: #888;">> System Hint: Use your knowledge, engineer. And maybe a calculator.</p>
+        </div>
+
+        <script>
+            // Простейший скрипт для анимации начала
+            document.addEventListener('DOMContentLoaded', function() {
+                const inputField = document.getElementById('start-input');
+                const mainMenu = document.getElementById('main-menu');
+                const bootScreen = document.getElementById('boot-screen');
+
+                // Через 4 секунды показываем поле для ввода "START"
+                setTimeout(() => {
+                    inputField.classList.remove('hidden');
+                    inputField.focus();
+                }, 4000);
+
+                // Обрабатываем ввод
+                inputField.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        if (this.value.toUpperCase() === 'START') {
+                            // Прячем загрузочный экран, показываем меню
+                            bootScreen.innerHTML = ''; // Можно просто очистить
+                            mainMenu.classList.remove('hidden');
+                        } else {
+                            this.value = ''; // Очищаем поле при неверном вводе
+                            // Можно добавить сообщение об ошибке
+                            const errorMsg = document.createElement('p');
+                            errorMsg.textContent = '> ERROR: COMMAND NOT RECOGNIZED. TRY "START".';
+                            errorMsg.style.color = 'red';
+                            bootScreen.appendChild(errorMsg);
+                        }
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
