@@ -2,205 +2,417 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LICENSE_21.EXE</title>
+    <title>KINDLE THE FIRST FLAME | 成人の証</title>
     <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        /* ... предыдущие стили остаются ... */
-        .cursor { animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        .hidden { display: none; }
-        a { color: #0f0; text-decoration: none; }
-        
-        /* Новые стили для костра */
-        .bonfire {
-            display: none; /* По умолчанию скрыт */
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 100px;
-            height: 150px;
-            z-index: 1000;
-            cursor: pointer;
-            transition: all 0.5s ease;
+        body {
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path d="M20,50 Q50,20 80,50 T140,50" stroke="%23FF6B00" fill="none"/></svg>'),
+                radial-gradient(circle at 30% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 40%),
+                #0a0a0a;
+            min-height: 100vh;
         }
         
-        .bonfire:hover {
-            transform: scale(1.1);
+        .page-title {
+            font-family: 'MedievalSharp', cursive;
+            text-align: center;
+            color: var(--estus-yellow);
+            font-size: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            text-shadow: 
+                3px 3px 0 #000,
+                0 0 20px rgba(255, 107, 0, 0.7);
         }
         
-        .bonfire-flame {
+        .page-title::after {
+            content: '¶';
+            color: var(--abyss-red);
+            font-size: 2rem;
             position: absolute;
+            right: -30px;
+            top: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--souls-blue);
+            font-family: 'MS Gothic', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+        }
+        
+        .quest-log {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px double var(--bonfire-orange);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .quest-log::before {
+            content: '✧';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            padding: 0 15px;
+            color: var(--estus-yellow);
+            font-size: 1.5rem;
+        }
+        
+        .stand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stand-item {
+            background: linear-gradient(145deg, 
+                rgba(20, 20, 20, 0.9) 0%,
+                rgba(65, 105, 225, 0.1) 50%,
+                rgba(20, 20, 20, 0.9) 100%);
+            padding: 1.5rem;
+            border-left: 4px solid var(--bonfire-orange);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stand-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--estus-yellow);
+            box-shadow: 
+                -10px 0 20px rgba(255, 107, 0, 0.3),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        
+        .stand-icon {
             width: 60px;
-            height: 80px;
-            background: radial-gradient(ellipse at center, 
-                rgba(255,100,0,0.9) 0%,
-                rgba(255,50,0,0.7) 40%,
-                rgba(255,0,0,0.3) 70%,
-                transparent 100%);
-            border-radius: 50%;
-            bottom: 60px;
-            left: 20px;
-            animation: fire-flicker 1s infinite alternate;
-            filter: blur(2px);
-        }
-        
-        .bonfire-wood {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
             height: 60px;
-            background: 
-                linear-gradient(45deg, #8B4513 20%, transparent 20%),
-                linear-gradient(-45deg, #8B4513 20%, transparent 20%),
-                linear-gradient(135deg, #8B4513 20%, transparent 20%),
-                linear-gradient(-135deg, #8B4513 20%, transparent 20%);
-            background-color: #A0522D;
-            border-radius: 5px;
-        }
-        
-        .bonfire-spark {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #FFAA00;
+            background: var(--bonfire-orange);
             border-radius: 50%;
-            animation: spark-float 2s infinite linear;
-            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #000;
+            font-weight: bold;
         }
         
-        @keyframes fire-flicker {
-            0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.8; }
-            50% { transform: scaleY(1.2) scaleX(0.9); opacity: 1; }
+        .stand-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #444;
         }
         
-        @keyframes spark-float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        .stand-status.active {
+            background: var(--estus-yellow);
+            box-shadow: 0 0 10px var(--estus-yellow);
         }
         
-        /* Стили для страницы финала с туманом */
-        .fog-overlay {
+        .bonfire-corner {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(50,50,50,0.1) 0%, rgba(0,0,0,0.8) 100%),
-                radial-gradient(circle at 80% 80%, rgba(100,100,100,0.1) 0%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-            z-index: 9999;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 100px;
+            cursor: pointer;
             opacity: 0;
-            animation: fog-roll 5s ease-out forwards;
+            transition: opacity 1s;
+            z-index: 1000;
         }
         
-        @keyframes fog-roll {
-            0% { 
-                opacity: 0;
-                backdrop-filter: blur(20px);
-            }
-            100% { 
-                opacity: 1;
-                backdrop-filter: blur(5px);
-            }
+        .bonfire-lit {
+            opacity: 1;
+            animation: bonfire-glow 3s infinite alternate;
         }
         
-        .fog-content {
-            opacity: 0;
-            animation: content-appear 3s 2s ease-out forwards;
+        @keyframes bonfire-glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.7)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
         }
         
-        @keyframes content-appear {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body class="terminal">
-    <!-- Костёр (появится после прохождения квеста) -->
-    <div id="bonfire" class="bonfire hidden" onclick="restAtBonfire()" title="Rest at Bonfire - Restore humanity">
-        <div class="bonfire-flame"></div>
-        <div class="bonfire-wood"></div>
-        <!-- Искры -->
-        <div class="bonfire-spark" style="left: 30px; animation-delay: 0s;"></div>
-        <div class="bonfire-spark" style="left: 50px; animation-delay: 0.5s;"></div>
-        <div class="bonfire-spark" style="left: 70px; animation-delay: 1s;"></div>
+    <!-- Гибридные символы по краям -->
+    <div class="japanese-border top dynamic-symbols"></div>
+    <div class="japanese-border bottom dynamic-symbols"></div>
+    <div class="japanese-border left">火<br>継<br>ぐ<br>者<br>へ</div>
+    <div class="japanese-border right">魂<br>の<br>価<br>値</div>
+
+    <!-- Костёр (появится после прохождения) -->
+    <div id="bonfire-corner" class="bonfire-corner" onclick="restAtBonfire()" title="Rest at Bonfire">
+        <div style="text-align: center;">
+            <div style="font-size: 40px;">🔥</div>
+            <div style="font-size: 12px; color: var(--estus-yellow);">Bonfire</div>
+        </div>
     </div>
 
-    <div class="container" style="max-width: 800px;">
-        <!-- ... остальной код главной страницы ... -->
-        
-        <script>
-            // Проверяем, пройден ли квест (по кукам или localStorage)
-            document.addEventListener('DOMContentLoaded', function() {
-                const bonfire = document.getElementById('bonfire');
-                
-                // Проверяем, есть ли отметка о прохождении квеста
-                if (localStorage.getItem('quest_completed') === 'true') {
-                    // Показываем костёр
-                    setTimeout(() => {
-                        bonfire.classList.remove('hidden');
-                        createSparks();
-                    }, 1000);
-                    
-                    // Добавляем сообщение о костре
-                    const menu = document.getElementById('main-menu');
-                    if (menu && !menu.classList.contains('hidden')) {
-                        const bonfireMsg = document.createElement('p');
-                        bonfireMsg.innerHTML = '>> <span style="color: #FF9900;">BONFIRES LIT: 1</span> - You may rest here, Engineer.';
-                        bonfireMsg.style.marginTop = '20px';
-                        menu.appendChild(bonfireMsg);
-                    }
-                }
-                function playBonfireSound() {
-    // Создаём звук через Web Audio API
-    try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
-        
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-        
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 1);
-    } catch (e) {
-        console.log("Audio not supported");
-    }
-}
+    <div class="container" style="max-width: 1200px; position: relative; z-index: 100;">
+        <!-- Частицы душ -->
+        <div id="soul-particles"></div>
 
-// При клике на костёр
-window.restAtBonfire = function() {
-    playBonfireSound();
-    alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> All status effects cured\n\nPraise the Sun! \\[T]/');
-};
-                // Создаём дополнительные искры
-                function createSparks() {
-                    const bonfire = document.getElementById('bonfire');
-                    for (let i = 0; i < 10; i++) {
-                        const spark = document.createElement('div');
-                        spark.className = 'bonfire-spark';
-                        spark.style.left = Math.random() * 80 + 10 + 'px';
-                        spark.style.animationDelay = Math.random() * 2 + 's';
-                        spark.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                        bonfire.appendChild(spark);
+        <h1 class="page-title">KINDLING THE ADULT FLAME</h1>
+        <p class="subtitle">¶ スタンドは魂の形 ¶ Stands are but Souls given Form ¶</p>
+        
+        <div class="quest-log">
+            <h2 style="color: var(--estus-yellow); border-bottom: 2px solid var(--bonfire-orange); padding-bottom: 10px;">
+                <span style="color: var(--abyss-red)">†</span> QUEST: ASCENSION TO ADULTHOOD <span style="color: var(--abyss-red)">†</span>
+            </h2>
+            
+            <p style="line-height: 1.6; margin: 20px 0;">
+                <span style="color: var(--bonfire-orange)">Chosen Undead</span>, you stand at the precipice of a new Age.<br>
+                To claim your <span style="color: var(--estus-yellow)">License of Adulthood</span>, you must gather three <span style="color: var(--souls-blue)">"Soul Shards"</span> - 
+                manifestations of your companions' <span style="color: var(--abyss-red)">Stands</span>.<br>
+                Each shard holds a fragment of experience, a memory forged in friendship's fire.
+            </p>
+            
+            <p style="font-style: italic; color: #aaa; border-left: 3px solid var(--undead-purple); padding-left: 15px; margin: 25px 0;">
+                "Fear not the dark, my friend, and let the feast begin."<br>
+                - But with 21 years comes great responsibility... and great gaming sessions.
+            </p>
+        </div>
+
+        <!-- Стенды-души -->
+        <h2 style="text-align: center; color: var(--estus-yellow); margin: 40px 0 20px 0;">
+            <span style="color: var(--abyss-red)">《</span> 
+            SOUL STANDS AWAITING 
+            <span style="color: var(--abyss-red)">》</span>
+        </h2>
+        
+        <div class="stand-grid">
+            <!-- Математик - Soul Stand 1 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_math.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--souls-blue), #000);">∫</div>
+                <div class="stand-status" id="status-math"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «CALCULUS REQUIEM»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keeper:</strong> The Mathematician<br>
+                    <strong>Soul Type:</strong> Logical Flame<br>
+                    <strong>Power:</strong> ∞ (Transcendent)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    This Stand bends reality through mathematical truth. Its equations can unravel the fabric of the mundane world.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    CHALLENGE THIS STAND → ゴ
+                </button>
+            </div>
+            
+            <!-- Экономист/Переводчик - Soul Stand 2 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_economist.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--undead-purple), #000);">⚖️</div>
+                <div class="stand-status" id="status-economist"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «GOLDEN CONTRACT»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keepers:</strong> Economist & Translator<br>
+                    <strong>Soul Type:</strong Binding Oath<br>
+                    <strong>Range:</strong> A (Wide)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    Words given weight, contracts made manifest. This Stand enforces agreements upon reality itself.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    NEGOTIATE TERMS → メ
+                </button>
+            </div>
+            
+            <!-- Программист - Soul Stand 3 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_programmer.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--abyss-red), #000);">{ }</div>
+                <div class="stand-status" id="status-programmer"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «DIGITAL OVERDRIVE»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keeper:</strong> The Programmer<br>
+                    <strong>Soul Type:</strong> Reality Hack<br>
+                    <strong>Speed:</strong> S (Maximum)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    Code becomes will, syntax becomes law. This Stand rewrites the world's source code in real-time.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    HACK REALITY → ム
+                </button>
+            </div>
+        </div>
+        
+        <!-- Финальный вызов -->
+        <div style="text-align: center; margin: 50px 0; padding: 30px; border-top: 2px dashed var(--bonfire-orange);">
+            <p style="color: var(--estus-yellow); font-size: 1.2rem; margin-bottom: 20px;">
+                When all three Soul Shards are gathered, approach the First Flame...
+            </p>
+            <button class="hybrid-button" id="final-button" disabled style="opacity: 0.5; padding: 15px 40px; font-size: 1.3rem;">
+                KINDLING DISABLED - GATHER SOULS FIRST
+            </button>
+            <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">
+                <em>«Do not dare go hollow on this journey, chosen engineer.»</em>
+            </p>
+        </div>
+        
+        <!-- Легенда -->
+        <div style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 5px; margin-top: 40px; border: 1px solid #333;">
+            <h4 style="color: var(--bonfire-orange); margin-bottom: 10px;">¶ LEGEND OF THE FLAME ¶</h4>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; text-align: center;">
+                <div>
+                    <div style="color: var(--estus-yellow); font-size: 1.5rem;">🔥</div>
+                    <div style="font-size: 0.8rem;">Bonfire<br><span style="color: #aaa;">Rest Point</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--souls-blue); font-size: 1.5rem;">💎</div>
+                    <div style="font-size: 0.8rem;">Soul Shard<br><span style="color: #aaa;">Stand Fragment</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--abyss-red); font-size: 1.5rem;">ゴ</div>
+                    <div style="font-size: 0.8rem;">Stand Cry<br><span style="color: #aaa;">Sound Effect</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--undead-purple); font-size: 1.5rem;">⚔️</div>
+                    <div style="font-size: 0.8rem;">Challenge<br><span style="color: #aaa;">Puzzle Battle</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="hybrid-sounds.js"></script>
+    <script>
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем прогресс
+            checkProgress();
+            
+            // Создаём частицы душ
+            createSoulParticles();
+            
+            // Привязываем звуки к кнопкам
+            const buttons = document.querySelectorAll('.hybrid-button, .stand-item');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    // 50% шанс звука Dark Souls, 50% JoJo
+                    if (Math.random() > 0.5) {
+                        playSoulsSound();
+                    } else {
+                        playJojoSound();
                     }
-                }
+                });
                 
-                // Функция для "отдыха у костра"
-                window.restAtBonfire = function() {
-                    alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> All status effects cured\n\nPraise the Sun! \\[T]/');
-                };
+                button.addEventListener('click', () => {
+                    playEstusSound();
+                });
             });
-        </script>
-    </div>
+            
+            // Проверяем, зажжён ли костёр
+            if (localStorage.getItem('bonfire_lit') === 'true') {
+                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
+            }
+        });
+        
+        function checkProgress() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            
+            // Обновляем статусы стендов
+            if (progress.math) {
+                document.getElementById('status-math').classList.add('active');
+            }
+            if (progress.economist) {
+                document.getElementById('status-economist').classList.add('active');
+            }
+            if (progress.programmer) {
+                document.getElementById('status-programmer').classList.add('active');
+            }
+            
+            // Активируем финальную кнопку если всё пройдено
+            if (progress.math && progress.economist && progress.programmer) {
+                const finalBtn = document.getElementById('final-button');
+                finalBtn.disabled = false;
+                finalBtn.style.opacity = '1';
+                finalBtn.innerHTML = 'APPROACH THE FIRST FLAME → 🔥';
+                finalBtn.onclick = () => window.location.href = 'final.html';
+                
+                // Зажигаем костёр
+                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
+                localStorage.setItem('bonfire_lit', 'true');
+            }
+        }
+        
+        function navigateTo(page) {
+            playBonfireSound();
+            window.location.href = page;
+        }
+        
+        function restAtBonfire() {
+            playEstusSound();
+            alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> Stand Power: 100%\n\nPraise the Sun! \\[T]/\n\nNow go forth, chosen engineer. The Age of Adulthood awaits.');
+        }
+        
+        function createSoulParticles() {
+            const container = document.getElementById('soul-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'soul-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.width = particle.style.height = (Math.random() * 6 + 4) + 'px';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Звуковые функции
+        function playSoulsSound() {
+            // Звук Dark Souls (меч, доспехи и т.д.)
+            if (window.hybridSounds) {
+                window.hybridSounds.playSoulsSound();
+            }
+        }
+        
+        function playJojoSound() {
+            // Звук JoJo
+            if (window.hybridSounds) {
+                window.hybridSounds.playJojoSound();
+            }
+        }
+        
+        function playEstusSound() {
+            // Звук употребления эстуса
+            if (window.hybridSounds) {
+                window.hybridSounds.playEstusSound();
+            }
+        }
+        
+        function playBonfireSound() {
+            // Звук костра
+            if (window.hybridSounds) {
+                window.hybridSounds.playBonfireSound();
+            }
+        }
+    </script>
 </body>
 </html>
