@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Key 2: The Economist & Translator</title>
+    <link rel="stylesheet" href="terminal.css">
+    <style>
+        .hidden { display: none; }
+        input { background: black; color: #0f0; border: 1px solid #0f0; padding: 5px; margin: 10px 0; }
+        button { background: #333; color: #0f0; border: 1px solid #0f0; padding: 5px 15px; cursor: pointer; }
+        .success { color: #0f0; font-weight: bold; }
+        .video-container { margin: 20px 0; }
+        .contract { 
+            border: 1px solid #555; 
+            padding: 15px; 
+            margin: 20px 0; 
+            background: #111;
+            font-size: 0.9em;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="terminal">
+    <div class="container">
+        <a href="index.html" style="color: #888;"><< BACK TO MISSION CONTROL</a>
+        <hr>
+        <h2>> CONNECTION ESTABLISHED: ECONOMIST & TRANSLATOR DUO</h2>
+        <p>> "Салют, инженер! Мы подготовили для тебя 'Договор о взрослении'."</p>
+        <p>> "Экономист составил финансовую модель, а я перевел её на язык понятный твоей душе."</p>
+        
+        <!-- ВСТАВЬТЕ ВАШ ТЕКСТ ЗАГАДКИ ЗДЕСЬ -->
+        <blockquote>
+            <!-- 
+            ЗАГАДКА ОТ ЭКОНОМИСТА/ПЕРЕВОДЧИКА
+            Пример текста:
+            <i>"Прочти 'Договор о взрослении' ниже и найди пункт о 'бесконечных пополнениях запасов эстусов'. 
+            Какое у этого пункта порядковое число? (Ответ введи цифрой)"</i>
+            -->
+        </blockquote>
+        
+        <!-- Договор для чтения -->
+        <div class="contract">
+            <h4>ДОГОВОР О ВЗРОСЛЕНИИ (ВЕРСИЯ 21+)</h4>
+            <p><strong>Сторона 1:</strong> Инженер-Энергетик, далее "Взрослеющий"</p>
+            <p><strong>Сторона 2:</strong> Друзья-Хранители, далее "Поддержка"</p>
+            <hr>
+            <p><strong>Статья 1.</strong> Право на вечерний гейминг после лабораторных испытаний неотъемлемо.</p>
+            <p><strong>Статья 2.</strong> Praising the Sun (Восхваление Солнца) является обязательным ритуалом утра.</p>
+            <p><strong>Статья 3.</strong> Поддержка обязуется поставлять фразы поддержки типа "Don't you dare go hollow!"</p>
+            <p><strong>Статья 4.</strong> Бюджетная модель: Доходы (Мощность инженера = 21 у.е.) > Расходы (Кофе + Xbox).</p>
+            <p><strong>Статья 5.</strong> Скиллы из Dark Souls (упорство) могут быть конвертированы в рабочие компетенции.</p>
+            <p><strong>Статья 6.</strong> Каждая сданная лабораторная работа = +1 к карме и +100 к уважению.</p>
+            <!-- 
+            ДОБАВЬТЕ ВАШ ПУНКТ С ЗАГАДКОЙ ЗДЕСЬ
+            Пример:
+            <p><strong>Статья 7.</strong> Сторона 2 гарантирует бесконечные пополнения запасов эстусов (моральной поддержки).</p>
+            -->
+            <p><strong>Статья 8.</strong> Нарушение договора карается обязательным просмотром всей трилогии "Властелина Колец" за один день.</p>
+            <p><strong>Статья 9.</strong> Договор вступает в силу немедленно после получения всех 3 Кристаллов Опыта.</p>
+        </div>
+        
+        <!-- ВСТАВЬТЕ ВАШ ВОПРОС/ИНСТРУКЦИЮ ДЛЯ ПОЛЬЗОВАТЕЛЯ ЗДЕСЬ -->
+        <p>> ВВЕДИТЕ ОТВЕТ (ПОРЯДКОВЫЙ НОМЕР СТАТЬИ):</p>
+        <!--
+        Пример:
+        <p>> Найди статью о "бесконечных пополнениях запасов эстусов" и введи её номер.</p>
+        -->
+        
+        <input type="text" id="answer-input" placeholder="Только цифра...">
+        <button onclick="checkAnswer()">ПРОВЕРИТЬ ДОГОВОР</button>
 
+        <!-- Секция успеха -->
+        <div id="success-message" class="hidden">
+            <p class="success">>> CONTRACT ACCEPTED. KEY_2 = "SOUL"</p>
+            <p>> TRANSMITTING VIDEO MESSAGE...</p>
+            <div class="video-container">
+                <!-- ВСТАВЬТЕ ВАШЕ ВИДЕО ОТ ЭКОНОМИСТА/ПЕРЕВОДЧИКА ЗДЕСЬ -->
+                <p>[VIDEO: Экономист с графиками "Финансовая модель вечеринки 21+", Переводчик с игровым глоссарием]</p>
+                <!-- Пример:
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/ВАШ_КОД_ВИДЕО" frameborder="0" allowfullscreen></iframe>
+                -->
+            </div>
+            <p>> <a href="puzzle_programmer.html" style="color: #0f0;">[>> PROCEED TO FINAL FREQUENCY]</a></p>
+        </div>
+
+        <script>
+            function checkAnswer() {
+                const userAnswer = document.getElementById('answer-input').value.trim();
+                // УКАЖИТЕ ПРАВИЛЬНЫЙ ОТВЕТ ЗДЕСЬ (например, "7")
+                const correctAnswers = ["7", "семь"]; // ← ИЗМЕНИТЕ НА ВАШ ОТВЕТ
+                
+                if (correctAnswers.includes(userAnswer.toLowerCase())) {
+                    document.getElementById('success-message').classList.remove('hidden');
+                } else {
+                    alert('>> ERROR: CONTRACT VIOLATION. CHECK THE DOCUMENT AGAIN.');
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
