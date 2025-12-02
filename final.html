@@ -2,228 +2,542 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LICENSE ACTIVATED</title>
+    <title>THE FIRST FLAME KINDLED | 成人の証</title>
     <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        /* ... предыдущие стили остаются ... */
-        .license { 
-            border: 2px dashed #0f0; 
-            padding: 20px; 
-            margin: 30px auto; 
-            max-width: 600px; 
-            text-align: center; 
-            font-family: monospace;
+        body {
+            background: #000;
+            color: var(--estus-yellow);
+            overflow: hidden;
+            min-height: 100vh;
             position: relative;
-            z-index: 10000;
         }
         
-        /* Эффект тумана */
-        .fog-overlay {
+        .fog-layer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(50,50,50,0.1) 0%, rgba(0,0,0,0.8) 100%),
-                radial-gradient(circle at 80% 80%, rgba(100,100,100,0.1) 0%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-            z-index: 9999;
+                radial-gradient(circle at 30% 40%, rgba(50, 50, 50, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(100, 100, 100, 0.1) 0%, transparent 50%);
+            animation: fog-move 30s infinite alternate linear;
+            z-index: 1;
             opacity: 0;
-            animation: fog-roll 5s ease-out forwards;
+            animation-delay: 1s;
         }
         
-        @keyframes fog-roll {
-            0% { 
-                opacity: 0;
-                backdrop-filter: blur(30px);
-                background-position: 0% 0%;
-            }
-            50% {
-                opacity: 0.7;
-                backdrop-filter: blur(20px);
-                background-position: 50% 50%;
-            }
-            100% { 
-                opacity: 1;
-                backdrop-filter: blur(5px);
-                background-position: 100% 100%;
-            }
+        @keyframes fog-move {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate(50px, -30px) scale(1.1); opacity: 0.7; }
+            100% { transform: translate(-50px, 30px) scale(1); opacity: 0.3; }
         }
         
-        /* Анимация появления контента */
-        .fog-content {
-            opacity: 0;
-            animation: content-appear 3s 2s ease-out forwards;
+        .content-wrapper {
             position: relative;
-            z-index: 10000;
+            z-index: 100;
+            opacity: 0;
+            animation: content-appear 4s 2s forwards;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         @keyframes content-appear {
-            0% { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.95);
-                filter: blur(10px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         
-        /* Дополнительные эффекты для текста */
-        .typewriter-final {
+        .flame-title {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 40px 0;
+            color: var(--bonfire-orange);
+            text-shadow: 
+                0 0 20px rgba(255, 107, 0, 0.8),
+                0 0 40px rgba(255, 215, 0, 0.4),
+                2px 2px 0 #000;
+            position: relative;
+        }
+        
+        .flame-title::before, .flame-title::after {
+            content: '«»';
+            color: var(--abyss-red);
+            font-size: 4rem;
+            position: absolute;
+            top: -20px;
+            opacity: 0.5;
+        }
+        
+        .flame-title::before {
+            content: '«';
+            left: -60px;
+        }
+        
+        .flame-title::after {
+            content: '»';
+            right: -60px;
+        }
+        
+        .activation-sequence {
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px double var(--bonfire-orange);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 
+                0 0 50px rgba(255, 107, 0, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sequence-text {
+            font-family: 'MS Gothic', monospace;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #ccc;
+            min-height: 150px;
+        }
+        
+        .key-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .key-item {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(65, 105, 225, 0.2) 100%);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid var(--souls-blue);
+            font-family: 'MS Gothic', monospace;
+            font-size: 1.5rem;
+            color: var(--estus-yellow);
+            min-width: 150px;
+            text-align: center;
+            animation: key-glow 3s infinite alternate;
+        }
+        
+        @keyframes key-glow {
+            0% { box-shadow: 0 0 10px rgba(65, 105, 225, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        }
+        
+        .license-container {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.9) 0%,
+                    rgba(255, 107, 0, 0.1) 50%,
+                    rgba(0, 0, 0, 0.9) 100%);
+            border: 5px double var(--estus-yellow);
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 700px;
+            text-align: center;
+            position: relative;
+            transform: perspective(1000px) rotateX(5deg);
+        }
+        
+        .license-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                transparent 30%,
+                rgba(255, 215, 0, 0.1) 50%,
+                transparent 70%);
+            z-index: -1;
+            border-radius: 20px;
+        }
+        
+        .license-title {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 2.5rem;
+            color: var(--estus-yellow);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .license-info {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .info-label {
+            color: var(--souls-blue);
+            font-family: 'MS Gothic', monospace;
+        }
+        
+        .info-value {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .stamp {
+            color: var(--abyss-red);
+            font-size: 5rem;
+            transform: rotate(-15deg);
+            display: inline-block;
+            margin: 30px 0;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .video-final {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px solid var(--bonfire-orange);
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-family: 'MS Gothic', monospace;
+            font-size: 1.2rem;
+            position: relative;
             overflow: hidden;
-            border-right: .15em solid orange;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            animation: typing-final 3.5s steps(40, end), 
-                       blink-caret-final .75s step-end infinite;
         }
         
-        @keyframes typing-final {
-            from { width: 0 }
-            to { width: 100% }
+        .video-final::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 40%,
+                rgba(255, 107, 0, 0.1) 50%,
+                transparent 60%);
+            animation: shine 3s infinite;
         }
         
-        @keyframes blink-caret-final {
-            from, to { border-color: transparent }
-            50% { border-color: orange; }
+        @keyframes shine {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .bonfire-final {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            border-top: 2px dashed var(--bonfire-orange);
+        }
+        
+        .flame-icon {
+            font-size: 4rem;
+            animation: flame-flicker 1s infinite alternate;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes flame-flicker {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .congrats-message {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 2rem;
+            color: var(--estus-yellow);
+            margin: 30px 0;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
-<body class="terminal" style="overflow-x: hidden;">
-    <!-- Слой тумана -->
-    <div class="fog-overlay"></div>
+<body class="terminal">
+    <!-- Слои тумана -->
+    <div class="fog-layer" style="animation-delay: 0s;"></div>
+    <div class="fog-layer" style="animation-delay: 2s;"></div>
+    <div class="fog-layer" style="animation-delay: 4s;"></div>
     
-    <!-- Контент, появляющийся из тумана -->
-    <div class="fog-content">
-        <div class="container" style="text-align: center;">
-            <h2 class="typewriter-final">>> SYSTEM MESSAGE: FINALIZATION PROTOCOL</h2>
-            <p>> ALL 3 CRYSTALS OF EXPERIENCE SYNCHRONIZED.</p>
-            <p>> ACTIVATING 'ADULT_LICENSE.EXE'...</p>
-            
-            <!-- Эффект активации -->
-            <div style="color:#0f0; margin: 30px 0;">
-                <div id="activation-text" style="font-size: 1.2em;"></div>
+    <!-- Японские символы -->
+    <div class="japanese-border top" style="color: rgba(255,107,0,0.2);">遂成達成完了終了</div>
+    <div class="japanese-border bottom" style="color: rgba(255,107,0,0.2);">火継祝福成人証</div>
+
+    <div class="content-wrapper">
+        <!-- Главный заголовок -->
+        <h1 class="flame-title">THE FIRST FLAME KINDLED</h1>
+        
+        <!-- Последовательность активации -->
+        <div class="activation-sequence">
+            <div class="sequence-text" id="sequenceText">
+                >> INITIALIZING ACTIVATION SEQUENCE...<br>
+                >> PLEASE WAIT...
             </div>
-
-            <hr>
-
-            <div class="license">
-                <h1 style="color: #ff9900;">ОФИЦИАЛЬНАЯ ЛИЦЕНЗИЯ НА ВЗРОСЛОСТЬ (21+)</h1>
-                <p><strong>Владелец:</strong> [Имя Именинника]</p>
-                <p><strong>Кодовое имя:</strong> Инженер-Энергетик</p>
-                <p><strong>Дата выдачи:</strong> [Дата рождения + 21 год]</p>
-                <p><strong>Ключи активации:</strong> INVICTA, SOUL, SOURCE</p>
-                <br>
-                <p>**НАСТОЯЩИМ УДОСТОВЕРЯЕТСЯ, ЧТО ВЛАДЕЛЕЦ:**</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li>✓ Имеет право на вечерний гейминг после лабораторных работ.</li>
-                    <li>✓ Обязан использовать навыки упорства из Dark Souls в реальной жизни.</li>
-                    <li>✓ Может легитимно ворчать на новые технологии.</li>
-                    <li>✓ Получает пожизненную поддержку от команды Guardians.</li>
-                </ul>
-                <br>
-                <p style="color: #ff9900;">PRAISING THE SUN IS MANDATORY.</p>
-                <p style="color: #ff9900;">DON'T YOU DARE GO HOLLOW!</p>
-                <br>
-                <div style="transform: rotate(-15deg); display: inline-block;">
-                    <p style="color: red; font-size: 1.5em; text-shadow: 2px 2px 0 #000;">**ОФИЦИАЛЬНАЯ ПЕЧАТЬ**</p>
-                    <p style="font-size: 0.8em; color: #888;">Dark Sign: Activated</p>
+        </div>
+        
+        <!-- Отображение ключей -->
+        <div class="key-display">
+            <div class="key-item">INVICTA</div>
+            <div class="key-item">SOUL</div>
+            <div class="key-item">SOURCE</div>
+        </div>
+        
+        <!-- Лицензия -->
+        <div class="license-container" id="licenseContainer" style="display: none;">
+            <h2 class="license-title">OFFICIAL LICENSE OF ADULTHOOD</h2>
+            
+            <div class="license-info">
+                <div class="info-row">
+                    <span class="info-label">BEARER:</span>
+                    <span class="info-value" id="userName">[МАКАРЕЙКИН МАТВЕЙ ЕВГЕНЬЕВИЧ]</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">TITLE:</span>
+                    <span class="info-value">Energy Engineer - Class 21</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ISSUANCE DATE:</span>
+                    <span class="info-value" id="currentDate"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">SOUL SIGNATURE:</span>
+                    <span class="info-value">INVICTA-SOUL-SOURCE</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">STAND SYNC:</span>
+                    <span class="info-value">100% (Full Harmony)</span>
                 </div>
             </div>
-
-            <hr>
-
-            <h3>> TRANSMISSION FROM ALL GUARDIANS:</h3>
-            <div class="video-container" style="margin: 30px 0;">
-                <!-- Ваше финальное видео -->
-                <p>[ЗДЕСЬ БУДЕТ ОБЩЕЕ ВИДЕО ОТ ВСЕХ ДРУЗЕЙ]</p>
+            
+            <div style="margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                <p style="color: #ccc; line-height: 1.6;">
+                    <strong>THIS DOCUMENT CERTIFIES:</strong><br>
+                    • Right to evening gaming after laboratory trials<br>
+                    • Obligation to Praise the Sun daily<br>
+                    • Unlimited Estus flask refills (moral support)<br>
+                    • Access to all future co-op sessions<br>
+                    • Immunity to "hollowing" from work stress
+                </p>
             </div>
-
-            <div style="margin: 40px 0; padding: 20px; border: 1px solid #444; background: rgba(0,30,0,0.3);">
-                <p style="color: #ff9900;">>> ACHIEVEMENT UNLOCKED: "FULLY LICENSED ADULT"</p>
-                <p style="color: #888;">>> Bonfire has been lit at Mission Control</p>
-                <p style="color: #888;">>> You may now rest, Engineer</p>
+            
+            <div class="stamp" title="Official Stamp">
+                **火**<br>
+                <span style="font-size: 1rem; color: #888;">FIRST FLAME SEAL</span>
             </div>
-
-            <p><a href="index.html" style="color: #ff9900; font-size: 1.1em; text-decoration: underline;">[RETURN TO BONFIRE]</a></p>
+            
+            <p style="color: var(--souls-blue); font-family: 'MS Gothic'; margin-top: 30px;">
+                ご武運を祈る！<br>
+                Don't you dare go hollow!
+            </p>
+        </div>
+        
+        <!-- Видео поздравление -->
+        <div class="video-final" id="videoPlaceholder">
+            [FINAL CONGRATULATIONS VIDEO FROM ALL FRIENDS]<br>
+            <span style="font-size: 0.9rem; display: block; margin-top: 10px;">
+                Replace with actual video
+            </span>
+        </div>
+        
+        <!-- Костёр и финальное сообщение -->
+        <div class="bonfire-final">
+            <div class="flame-icon">🔥</div>
+            <div class="congrats-message" id="congratsMessage">
+                >> BONFIRE LIT<br>
+                >> HUMANITY RESTORED<br>
+                >> THE AGE OF ADULTHOOD BEGINS
+            </div>
+            
+            <div style="margin: 40px 0;">
+                <a href="index.html" class="hybrid-button" style="font-size: 1.3rem; padding: 20px 50px; text-decoration: none;">
+                    RETURN TO BONFIRE \\[T]/
+                </a>
+            </div>
+            
+            <p style="color: #666; font-size: 0.9rem; font-family: 'MS Gothic';">
+                «The fire fades, and the lords go without thrones.<br>
+                But with friends by your side, every age is golden.»
+            </p>
         </div>
     </div>
 
+    <script src="hybrid-sounds.js"></script>
     <script>
-        // Устанавливаем флаг прохождения квеста
-        localStorage.setItem('quest_completed', 'true');
-        
         // Анимация активации
-        document.addEventListener('DOMContentLoaded', function() {
-            const activationText = document.getElementById('activation-text');
-            const messages = [
-                ">> DECRYPTING KEYS...",
-                ">> MERGING CRYSTALS...",
-                ">> OVERRIDING CHILDHOOD PROTOCOLS...",
-                ">> INSTALLING ADULT_MODULE.EXE...",
-                ">> COMPLETE."
-            ];
-            
-            let i = 0;
-            function typeMessage() {
-                if (i < messages.length) {
-                    activationText.innerHTML += messages[i] + "<br>";
-                    i++;
-                    setTimeout(typeMessage, 800);
-                } else {
-                    // Добавляем эффект завершения
-                    setTimeout(() => {
-                        activationText.innerHTML += '<br><span style="color: #ff9900; animation: pulse 2s infinite;">>> INSTALLATION SUCCESSFUL. WELCOME TO ADULTHOOD.</span>';
-                    }, 500);
-                }
-            }
-            
-            setTimeout(typeMessage, 1000);
-            
-            // Добавляем звуковой эффект (опционально)
-            // Можно добавить простой звук костра или активации
-        });
+        const activationMessages = [
+            ">> SOUL SHARDS DETECTED...",
+            ">> MERGING: INVICTA + SOUL + SOURCE...",
+            ">> OVERRIDING CHILDHOOD_PROTOCOL.EXE...",
+            ">> INSTALLING ADULT_MODULE v21+...",
+            ">> CALIBRATING STAND SYNCHRONIZATION...",
+            ">> KINDLING THE FIRST FLAME...",
+            ">> ACTIVATION COMPLETE!"
+        ];
         
-        // Эффект частиц тумана
-        function createFogParticles() {
-            const overlay = document.querySelector('.fog-overlay');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'fixed';
-                particle.style.width = Math.random() * 100 + 50 + 'px';
-                particle.style.height = Math.random() * 100 + 50 + 'px';
-                particle.style.background = 'radial-gradient(circle, rgba(200,200,200,0.1) 0%, transparent 70%)';
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.3 + 0.1;
-                particle.style.animation = `float ${Math.random() * 20 + 10}s infinite linear`;
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '9998';
+        let currentStep = 0;
+        
+        function runActivationSequence() {
+            const textElement = document.getElementById('sequenceText');
+            const licenseContainer = document.getElementById('licenseContainer');
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+            const congratsMessage = document.getElementById('congratsMessage');
+            
+            if (currentStep < activationMessages.length) {
+                // Показываем сообщение
+                textElement.innerHTML = activationMessages[currentStep];
                 
-                // Случайное движение
-                const keyframes = `
-                    @keyframes float {
-                        0% { transform: translate(0, 0) rotate(0deg); }
-                        100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(360deg); }
-                    }
-                `;
+                // Звуковой эффект
+                if (currentStep === 0) {
+                    window.hybridSounds.playBonfireSound();
+                } else if (currentStep === 3) {
+                    window.hybridSounds.playEstusSound();
+                } else if (currentStep === 5) {
+                    window.hybridSounds.playJojoSound('ora');
+                }
                 
-                const style = document.createElement('style');
-                style.innerHTML = keyframes;
-                document.head.appendChild(style);
+                // Анимация ключей
+                const keys = document.querySelectorAll('.key-item');
+                if (keys[currentStep - 1]) {
+                    keys[currentStep - 1].style.animation = 'key-glow 0.5s 3 alternate';
+                }
                 
-                overlay.appendChild(particle);
+                currentStep++;
+                setTimeout(runActivationSequence, 1000);
+            } else {
+                // Финальная стадия
+                textElement.innerHTML = ">> LICENSING PROTOCOL ENGAGED";
+                textElement.style.color = "var(--estus-yellow)";
+                textElement.style.fontWeight = "bold";
+                
+                // Показываем лицензию
+                setTimeout(() => {
+                    licenseContainer.style.display = 'block';
+                    document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+                    
+                    // Эффект появления
+                    licenseContainer.style.opacity = '0';
+                    licenseContainer.style.transform = 'perspective(1000px) rotateX(5deg) scale(0.9)';
+                    
+                    let opacity = 0;
+                    let scale = 0.9;
+                    const appear = setInterval(() => {
+                        opacity += 0.05;
+                        scale += 0.01;
+                        licenseContainer.style.opacity = opacity;
+                        licenseContainer.style.transform = `perspective(1000px) rotateX(5deg) scale(${scale})`;
+                        
+                        if (opacity >= 1) {
+                            clearInterval(appear);
+                            // Показываем видео
+                            setTimeout(() => {
+                                videoPlaceholder.innerHTML = '[VIDEO WILL PLAY HERE]<br><span style="color: #666; font-size: 0.9rem;">Video placeholder - replace with actual video</span>';
+                                videoPlaceholder.style.color = '#fff';
+                                
+                                // Финальное сообщение
+                                congratsMessage.innerHTML = 
+                                    "HAPPY 21ST BIRTHDAY!<br>" +
+                                    "<span style='font-size: 1.5rem; color: var(--bonfire-orange);'>PRAISE THE SUN! \\[T]/</span>";
+                                
+                                // Финальный звук
+                                window.hybridSounds.playBonfireSound();
+                                setTimeout(() => window.hybridSounds.playJojoSound('wryyy'), 500);
+                                
+                            }, 1000);
+                        }
+                    }, 50);
+                }, 1500);
             }
         }
         
-        // Запускаем частицы через 1 секунду
-        setTimeout(createFogParticles, 1000);
+        // Эффект частиц огня
+        function createFireParticles() {
+            const colors = ['#FF6B00', '#FFD700', '#FF4500', '#FFA500'];
+            
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: fixed;
+                        width: ${Math.random() * 10 + 5}px;
+                        height: ${Math.random() * 10 + 5}px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: 50%;
+                        left: ${Math.random() * 100}%;
+                        top: 100vh;
+                        pointer-events: none;
+                        z-index: 50;
+                        filter: blur(2px);
+                        animation: fireParticle 3s forwards;
+                    `;
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 3000);
+                }
+            }, 300);
+            
+            // Добавляем анимацию
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fireParticle {
+                    0% { transform: translateY(0) scale(1); opacity: 1; }
+                    100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Проверяем, пройден ли квест
+        document.addEventListener('DOMContentLoaded', function() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            const allCompleted = progress.math && progress.economist && progress.programmer;
+            
+            if (!allCompleted) {
+                // Если квест не пройден, перенаправляем на главную
+                alert('>> ACCESS DENIED\n>> You must gather all Soul Shards first!');
+                setTimeout(() => window.location.href = 'index.html', 2000);
+            } else {
+                // Запускаем финальную сцену
+                setTimeout(() => {
+                    runActivationSequence();
+                    createFireParticles();
+                    
+                    // Добавляем имя именинника из localStorage (если есть)
+                    const userName = localStorage.getItem('birthday_name') || '[МАКАРЕЙКИН МАТВЕЙ ЕВГЕНЬЕВИЧ]';
+                    document.getElementById('userName').textContent = userName;
+                }, 2000);
+            }
+            
+            // Добавляем клавиатурный интерактив
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'p' || e.key === 'P') {
+                    window.hybridSounds.playJojoSound('ora');
+                }
+                if (e.key === 'b' || e.key === 'B') {
+                    window.hybridSounds.playBonfireSound();
+                }
+            });
+        });
     </script>
 </body>
 </html>
