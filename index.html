@@ -153,7 +153,35 @@
                         menu.appendChild(bonfireMsg);
                     }
                 }
-                
+                function playBonfireSound() {
+    // Создаём звук через Web Audio API
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 1);
+    } catch (e) {
+        console.log("Audio not supported");
+    }
+}
+
+// При клике на костёр
+window.restAtBonfire = function() {
+    playBonfireSound();
+    alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> All status effects cured\n\nPraise the Sun! \\[T]/');
+};
                 // Создаём дополнительные искры
                 function createSparks() {
                     const bonfire = document.getElementById('bonfire');
