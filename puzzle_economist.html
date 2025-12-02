@@ -2,101 +2,281 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Key 2: The Economist & Translator</title>
+    <title>SOUL SHARD 2: Golden Contract</title>
     <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        .hidden { display: none; }
-        input { background: black; color: #0f0; border: 1px solid #0f0; padding: 5px; margin: 10px 0; }
-        button { background: #333; color: #0f0; border: 1px solid #0f0; padding: 5px 15px; cursor: pointer; }
-        .success { color: #0f0; font-weight: bold; }
-        .video-container { margin: 20px 0; }
-        .contract { 
-            border: 1px solid #555; 
-            padding: 15px; 
-            margin: 20px 0; 
-            background: #111;
-            font-size: 0.9em;
-            max-height: 200px;
+        body {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(138, 43, 226, 0.1) 50%,
+                    rgba(0, 0, 0, 0.95) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="rgba(255,215,0,0.05)" fill="none"/></svg>');
+            min-height: 100vh;
+        }
+        
+        .contract-container {
+            background: rgba(0, 0, 0, 0.85);
+            border: 3px solid var(--undead-purple);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            max-height: 300px;
             overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+        
+        .contract-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .contract-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .contract-container::-webkit-scrollbar-thumb {
+            background: var(--undead-purple);
+            border-radius: 4px;
+        }
+        
+        .contract-title {
+            color: var(--estus-yellow);
+            text-align: center;
+            font-family: 'MedievalSharp', cursive;
+            border-bottom: 2px solid var(--undead-purple);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .contract-clause {
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .clause-number {
+            color: var(--bonfire-orange);
+            font-weight: bold;
+        }
+        
+        .clause-content {
+            color: #ccc;
+        }
+        
+        .highlight {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 5px;
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { background: rgba(255, 215, 0, 0.1); }
+            50% { background: rgba(255, 215, 0, 0.2); }
+        }
+        
+        .stand-card {
+            border-left: 4px solid var(--undead-purple);
+        }
+        
+        .stand-icon {
+            background: linear-gradient(135deg, var(--undead-purple), #000) !important;
         }
     </style>
 </head>
 <body class="terminal">
-    <div class="container">
-        <a href="index.html" style="color: #888;"><< BACK TO MISSION CONTROL</a>
-        <hr>
-        <h2>> CONNECTION ESTABLISHED: ECONOMIST & TRANSLATOR DUO</h2>
-        <p>> "Салют, инженер! Мы подготовили для тебя 'Договор о взрослении'."</p>
-        <p>> "Экономист составил финансовую модель, а я перевел её на язык понятный твоей душе."</p>
-        
-        <!-- ВСТАВЬТЕ ВАШ ТЕКСТ ЗАГАДКИ ЗДЕСЬ -->
-        <blockquote>
-            <!-- 
-            ЗАГАДКА ОТ ЭКОНОМИСТА/ПЕРЕВОДЧИКА
-            Пример текста:
-            <i>"Прочти 'Договор о взрослении' ниже и найди пункт о 'бесконечных пополнениях запасов эстусов'. 
-            Какое у этого пункта порядковое число? (Ответ введи цифрой)"</i>
-            -->
-        </blockquote>
-        
-        <!-- Договор для чтения -->
-        <div class="contract">
-            <h4>ДОГОВОР О ВЗРОСЛЕНИИ (ВЕРСИЯ 21+)</h4>
-            <p><strong>Сторона 1:</strong> Инженер-Энергетик, далее "Взрослеющий"</p>
-            <p><strong>Сторона 2:</strong> Друзья-Хранители, далее "Поддержка"</p>
-            <hr>
-            <p><strong>Статья 1.</strong> Право на вечерний гейминг после лабораторных испытаний неотъемлемо.</p>
-            <p><strong>Статья 2.</strong> Praising the Sun (Восхваление Солнца) является обязательным ритуалом утра.</p>
-            <p><strong>Статья 3.</strong> Поддержка обязуется поставлять фразы поддержки типа "Don't you dare go hollow!"</p>
-            <p><strong>Статья 4.</strong> Бюджетная модель: Доходы (Мощность инженера = 21 у.е.) > Расходы (Кофе + Xbox).</p>
-            <p><strong>Статья 5.</strong> Скиллы из Dark Souls (упорство) могут быть конвертированы в рабочие компетенции.</p>
-            <p><strong>Статья 6.</strong> Каждая сданная лабораторная работа = +1 к карме и +100 к уважению.</p>
-            <!-- 
-            ДОБАВЬТЕ ВАШ ПУНКТ С ЗАГАДКОЙ ЗДЕСЬ
-            Пример:
-            <p><strong>Статья 7.</strong> Сторона 2 гарантирует бесконечные пополнения запасов эстусов (моральной поддержки).</p>
-            -->
-            <p><strong>Статья 8.</strong> Нарушение договора карается обязательным просмотром всей трилогии "Властелина Колец" за один день.</p>
-            <p><strong>Статья 9.</strong> Договор вступает в силу немедленно после получения всех 3 Кристаллов Опыта.</p>
+    <!-- Японские символы -->
+    <div class="japanese-border top">契約条項義務権利金銭</div>
+    <div class="japanese-border bottom">経済翻訳契約の力</div>
+    
+    <div class="container" style="max-width: 800px;">
+        <!-- Заголовок -->
+        <div class="page-header">
+            <h1 class="soul-title">«GOLDEN CONTRACT»</h1>
+            <p class="stand-subtitle">STAND USERS: ECONOMIST & TRANSLATOR | SOUL TYPE: BINDING OATH</p>
         </div>
         
-        <!-- ВСТАВЬТЕ ВАШ ВОПРОС/ИНСТРУКЦИЮ ДЛЯ ПОЛЬЗОВАТЕЛЯ ЗДЕСЬ -->
-        <p>> ВВЕДИТЕ ОТВЕТ (ПОРЯДКОВЫЙ НОМЕР СТАТЬИ):</p>
-        <!--
-        Пример:
-        <p>> Найди статью о "бесконечных пополнениях запасов эстусов" и введи её номер.</p>
-        -->
-        
-        <input type="text" id="answer-input" placeholder="Только цифра...">
-        <button onclick="checkAnswer()">ПРОВЕРИТЬ ДОГОВОР</button>
-
-        <!-- Секция успеха -->
-        <div id="success-message" class="hidden">
-            <p class="success">>> CONTRACT ACCEPTED. KEY_2 = "SOUL"</p>
-            <p>> TRANSMITTING VIDEO MESSAGE...</p>
-            <div class="video-container">
-                <!-- ВСТАВЬТЕ ВАШЕ ВИДЕО ОТ ЭКОНОМИСТА/ПЕРЕВОДЧИКА ЗДЕСЬ -->
-                <p>[VIDEO: Экономист с графиками "Финансовая модель вечеринки 21+", Переводчик с игровым глоссарием]</p>
-                <!-- Пример:
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/ВАШ_КОД_ВИДЕО" frameborder="0" allowfullscreen></iframe>
-                -->
+        <!-- Стенд -->
+        <div class="stand-card">
+            <div class="stand-icon">⚖️</div>
+            <div class="stand-info">
+                <h3>GOLDEN CONTRACT</h3>
+                <p style="color: #aaa; margin: 0;">Stand Ability: «Contract Manifestation» — Words given weight, agreements made real</p>
+                <p style="color: var(--undead-purple); margin-top: 5px; font-size: 0.9rem;">
+                    Influence: A | Flexibility: B | Loyalty: S | Potential: A
+                </p>
             </div>
-            <p>> <a href="puzzle_programmer.html" style="color: #0f0;">[>> PROCEED TO FINAL FREQUENCY]</a></p>
         </div>
-
-        <script>
-            function checkAnswer() {
-                const userAnswer = document.getElementById('answer-input').value.trim();
-                // УКАЖИТЕ ПРАВИЛЬНЫЙ ОТВЕТ ЗДЕСЬ (например, "7")
-                const correctAnswers = ["7", "семь"]; // ← ИЗМЕНИТЕ НА ВАШ ОТВЕТ
+        
+        <!-- Загадка -->
+        <div class="puzzle-container">
+            <h2 style="color: var(--estus-yellow); text-align: center; margin-bottom: 25px;">
+                謎 №2: THE ADULTHOOD CONTRACT
+            </h2>
+            
+            <div class="riddle-box">
+                <p class="riddle-text">
+                    <span style="color: var(--undead-purple);">「経済学者＆翻訳者より」</span><br>
+                    Engineer, sign this contract of adulthood. But first, you must find the clause 
+                    that guarantees your most important resource.
+                </p>
                 
-                if (correctAnswers.includes(userAnswer.toLowerCase())) {
-                    document.getElementById('success-message').classList.remove('hidden');
-                } else {
-                    alert('>> ERROR: CONTRACT VIOLATION. CHECK THE DOCUMENT AGAIN.');
-                }
-            }
-        </script>
+                <p class="riddle-text" style="color: var(--estus-yellow);">
+                    Find the article that mentions <span class="highlight">"infinite replenishment of Estus reserves"</span>.<br>
+                    Enter its <span style="color: var(--bonfire-orange);">article number</span> (digit only).
+                </p>
+            </div>
+            
+            <!-- Контракт -->
+            <div class="contract-container">
+                <h3 class="contract-title">CONTRACT OF ADULTHOOD (v21+)</h3>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 1.</span>
+                    <span class="clause-content">The right to evening gaming after laboratory trials is inalienable.</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 2.</span>
+                    <span class="clause-content">Praising the Sun at dawn is mandatory for maintaining humanity.</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 3.</span>
+                    <span class="clause-content">The Support Party shall supply phrases of encouragement such as "Don't you dare go hollow!"</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 4.</span>
+                    <span class="clause-content">Budgetary model: Income (Engineer Power = 21 u.e.) > Expenses (Coffee + Xbox).</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 5.</span>
+                    <span class="clause-content">Skills from Dark Souls (perseverance) may be converted into work competencies.</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 6.</span>
+                    <span class="clause-content">Each completed laboratory work = +1 karma and +100 respect points.</span>
+                </div>
+                
+                <!-- Статья с загадкой -->
+                <div class="contract-clause">
+                    <span class="clause-number">Article 7.</span>
+                    <span class="clause-content">The Support Party guarantees <span class="highlight">infinite replenishment of Estus reserves</span> (moral support) for all future boss fights.</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 8.</span>
+                    <span class="clause-content">Breach of contract shall be punished by mandatory viewing of the entire "Lord of the Rings" trilogy in one day.</span>
+                </div>
+                
+                <div class="contract-clause">
+                    <span class="clause-number">Article 9.</span>
+                    <span class="clause-content">This contract becomes effective immediately upon acquisition of all 3 Soul Shards.</span>
+                </div>
+            </div>
+            
+            <!-- Ввод ответа -->
+            <div class="input-group">
+                <input type="text" 
+                       class="jojo-input" 
+                       id="answerInput" 
+                       placeholder="Enter article number... (e.g., 7)"
+                       onkeypress="if(event.key === 'Enter') checkAnswer()">
+                <p class="hint-text">
+                    Scroll through the contract carefully. The answer is there.
+                </p>
+            </div>
+            
+            <!-- Кнопка проверки -->
+            <div style="text-align: center;">
+                <button class="hybrid-button" onclick="checkAnswer()" style="padding: 15px 40px; font-size: 1.2rem;">
+                    SIGN CONTRACT → メ
+                </button>
+            </div>
+            
+            <!-- Успех -->
+            <div class="success-section" id="successSection">
+                <div style="font-size: 3rem; color: var(--estus-yellow);">📜</div>
+                <h3 style="color: var(--estus-yellow); margin: 20px 0;">
+                    CONTRACT SIGNED! SOUL SHARD SECURED!
+                </h3>
+                
+                <div class="key-reveal">
+                    KEY_2 = "SOUL"
+                </div>
+                
+                <p style="color: #ccc; margin: 20px 0;">
+                    The Golden Contract binds reality to your will.<br>
+                    Transmission incoming...
+                </p>
+                
+                <!-- Место для видео -->
+                <div class="video-placeholder">
+                    [JOINT VIDEO: ECONOMIST WITH CHARTS + TRANSLATOR WITH GLOSSARY]<br>
+                    <span style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">
+                        Replace with actual video
+                    </span>
+                </div>
+                
+                <!-- Следующая страница -->
+                <div style="margin-top: 30px;">
+                    <a href="puzzle_programmer.html" class="hybrid-button" style="text-decoration: none; display: inline-block;">
+                        CLAIM FINAL SOUL SHARD → ム
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Навигация -->
+        <div class="navigation">
+            <a href="index.html" class="back-link">
+                ← RETURN TO BONFIRE
+            </a>
+            <div style="color: #666; font-family: 'MS Gothic';">
+                SOUL SHARDS: <span id="collectedCount">0</span>/3
+            </div>
+        </div>
     </div>
+
+    <script src="hybrid-sounds.js"></script>
+    <script>
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim();
+            const correctAnswers = ["7", "seven", "семь"];
+            
+            if (correctAnswers.includes(userAnswer.toLowerCase())) {
+                document.getElementById('successSection').style.display = 'block';
+                window.hybridSounds.playEstusSound();
+                
+                let progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+                progress.economist = true;
+                localStorage.setItem('quest_progress', JSON.stringify(progress));
+                
+                updateCounter();
+                document.querySelector('.hybrid-button').style.display = 'none';
+                
+            } else {
+                window.hybridSounds.playSoulsSound();
+                alert('>> CONTRACT VIOLATION!\n>> The Stand demands precise contractual understanding!');
+            }
+        }
+        
+        function updateCounter() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            const count = Object.values(progress).filter(Boolean).length;
+            document.getElementById('collectedCount').textContent = count;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounter();
+            document.getElementById('answerInput').focus();
+        });
+    </script>
 </body>
 </html>
