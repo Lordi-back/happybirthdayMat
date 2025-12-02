@@ -5,52 +5,225 @@
     <title>LICENSE ACTIVATED</title>
     <link rel="stylesheet" href="terminal.css">
     <style>
-        .license { border: 2px dashed #0f0; padding: 20px; margin: 30px auto; max-width: 600px; text-align: center; font-family: monospace; }
-        .license h1 { color: #ff0; }
-        .stamp { color: red; font-size: 2em; transform: rotate(-15deg); display: inline-block; }
+        /* ... предыдущие стили остаются ... */
+        .license { 
+            border: 2px dashed #0f0; 
+            padding: 20px; 
+            margin: 30px auto; 
+            max-width: 600px; 
+            text-align: center; 
+            font-family: monospace;
+            position: relative;
+            z-index: 10000;
+        }
+        
+        /* Эффект тумана */
+        .fog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(50,50,50,0.1) 0%, rgba(0,0,0,0.8) 100%),
+                radial-gradient(circle at 80% 80%, rgba(100,100,100,0.1) 0%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: fog-roll 5s ease-out forwards;
+        }
+        
+        @keyframes fog-roll {
+            0% { 
+                opacity: 0;
+                backdrop-filter: blur(30px);
+                background-position: 0% 0%;
+            }
+            50% {
+                opacity: 0.7;
+                backdrop-filter: blur(20px);
+                background-position: 50% 50%;
+            }
+            100% { 
+                opacity: 1;
+                backdrop-filter: blur(5px);
+                background-position: 100% 100%;
+            }
+        }
+        
+        /* Анимация появления контента */
+        .fog-content {
+            opacity: 0;
+            animation: content-appear 3s 2s ease-out forwards;
+            position: relative;
+            z-index: 10000;
+        }
+        
+        @keyframes content-appear {
+            0% { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95);
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        /* Дополнительные эффекты для текста */
+        .typewriter-final {
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing-final 3.5s steps(40, end), 
+                       blink-caret-final .75s step-end infinite;
+        }
+        
+        @keyframes typing-final {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret-final {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
     </style>
 </head>
-<body class="terminal">
-    <div class="container" style="text-align: center;">
-        <h2>>> SYSTEM MESSAGE: FINALIZATION PROTOCOL</h2>
-        <p>> ALL 3 CRYSTALS OF EXPERIENCE SYNCHRONIZED.</p>
-        <p>> ACTIVATING 'ADULT_LICENSE.EXE'...</p>
-        <div class="typewriter" style="color:#0f0;">>> INSTALLATION COMPLETE.</div>
+<body class="terminal" style="overflow-x: hidden;">
+    <!-- Слой тумана -->
+    <div class="fog-overlay"></div>
+    
+    <!-- Контент, появляющийся из тумана -->
+    <div class="fog-content">
+        <div class="container" style="text-align: center;">
+            <h2 class="typewriter-final">>> SYSTEM MESSAGE: FINALIZATION PROTOCOL</h2>
+            <p>> ALL 3 CRYSTALS OF EXPERIENCE SYNCHRONIZED.</p>
+            <p>> ACTIVATING 'ADULT_LICENSE.EXE'...</p>
+            
+            <!-- Эффект активации -->
+            <div style="color:#0f0; margin: 30px 0;">
+                <div id="activation-text" style="font-size: 1.2em;"></div>
+            </div>
 
-        <hr>
+            <hr>
 
-        <div class="license">
-            <h1>ОФИЦИАЛЬНАЯ ЛИЦЕНЗИЯ НА ВЗРОСЛОСТЬ (21+)</h1>
-            <p><strong>Владелец:</strong> [Имя Именинника]</p>
-            <p><strong>Кодовое имя:</strong> Инженер-Энергетик</p>
-            <p><strong>Дата выдачи:</strong> [Дата рождения + 21 год]</p>
-            <p><strong>Ключи активации:</strong> INVICTA, [KEY_2], [KEY_3]</p>
-            <br>
-            <p>**НАСТОЯЩИМ УДОСТОВЕРЯЕТСЯ, ЧТО ВЛАДЕЛЕЦ:**</p>
-            <ul style="list-style: none; padding: 0;">
-                <li>✓ Имеет право на вечерний гейминг после лабораторных работ.</li>
-                <li>✓ Обязан использовать навыки упорства из Dark Souls в реальной жизни.</li>
-                <li>✓ Может легитимно ворчать на новые технологии.</li>
-                <li>✓ Получает пожизненную поддержку от команды Guardians.</li>
-            </ul>
-            <br>
-            <p>PRAISING THE SUN IS MANDATORY.</p>
-            <p>DON'T YOU DARE GO HOLLOW!</p>
-            <br>
-            <p><span class="stamp">**ОФИЦИАЛЬНАЯ ПЕЧАТЬ**</span></p>
+            <div class="license">
+                <h1 style="color: #ff9900;">ОФИЦИАЛЬНАЯ ЛИЦЕНЗИЯ НА ВЗРОСЛОСТЬ (21+)</h1>
+                <p><strong>Владелец:</strong> [Имя Именинника]</p>
+                <p><strong>Кодовое имя:</strong> Инженер-Энергетик</p>
+                <p><strong>Дата выдачи:</strong> [Дата рождения + 21 год]</p>
+                <p><strong>Ключи активации:</strong> INVICTA, SOUL, SOURCE</p>
+                <br>
+                <p>**НАСТОЯЩИМ УДОСТОВЕРЯЕТСЯ, ЧТО ВЛАДЕЛЕЦ:**</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li>✓ Имеет право на вечерний гейминг после лабораторных работ.</li>
+                    <li>✓ Обязан использовать навыки упорства из Dark Souls в реальной жизни.</li>
+                    <li>✓ Может легитимно ворчать на новые технологии.</li>
+                    <li>✓ Получает пожизненную поддержку от команды Guardians.</li>
+                </ul>
+                <br>
+                <p style="color: #ff9900;">PRAISING THE SUN IS MANDATORY.</p>
+                <p style="color: #ff9900;">DON'T YOU DARE GO HOLLOW!</p>
+                <br>
+                <div style="transform: rotate(-15deg); display: inline-block;">
+                    <p style="color: red; font-size: 1.5em; text-shadow: 2px 2px 0 #000;">**ОФИЦИАЛЬНАЯ ПЕЧАТЬ**</p>
+                    <p style="font-size: 0.8em; color: #888;">Dark Sign: Activated</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>> TRANSMISSION FROM ALL GUARDIANS:</h3>
+            <div class="video-container" style="margin: 30px 0;">
+                <!-- Ваше финальное видео -->
+                <p>[ЗДЕСЬ БУДЕТ ОБЩЕЕ ВИДЕО ОТ ВСЕХ ДРУЗЕЙ]</p>
+            </div>
+
+            <div style="margin: 40px 0; padding: 20px; border: 1px solid #444; background: rgba(0,30,0,0.3);">
+                <p style="color: #ff9900;">>> ACHIEVEMENT UNLOCKED: "FULLY LICENSED ADULT"</p>
+                <p style="color: #888;">>> Bonfire has been lit at Mission Control</p>
+                <p style="color: #888;">>> You may now rest, Engineer</p>
+            </div>
+
+            <p><a href="index.html" style="color: #ff9900; font-size: 1.1em; text-decoration: underline;">[RETURN TO BONFIRE]</a></p>
         </div>
-
-        <hr>
-
-        <h3>> TRANSMISSION FROM ALL GUARDIANS:</h3>
-        <div class="video-container">
-            <!-- Вставьте ОБЩЕЕ финальное поздравительное видео -->
-            <p>[ЗДЕСЬ БУДЕТ ОБЩЕЕ ВИДЕО ОТ ВСЕХ ДРУЗЕЙ]</p>
-            <!-- <iframe width="80%" height="400" src="https://www.youtube.com/embed/FINAL_VIDEO" frameborder="0" allowfullscreen></iframe> -->
-        </div>
-
-        <p style="margin-top: 50px; color: #888;">> System shutdown in 10... 9... 8... Just kidding. Happy Birthday, Engineer.</p>
-        <p><a href="index.html" style="color: #0f0;">[RESTART SIMULATION]</a></p>
     </div>
+
+    <script>
+        // Устанавливаем флаг прохождения квеста
+        localStorage.setItem('quest_completed', 'true');
+        
+        // Анимация активации
+        document.addEventListener('DOMContentLoaded', function() {
+            const activationText = document.getElementById('activation-text');
+            const messages = [
+                ">> DECRYPTING KEYS...",
+                ">> MERGING CRYSTALS...",
+                ">> OVERRIDING CHILDHOOD PROTOCOLS...",
+                ">> INSTALLING ADULT_MODULE.EXE...",
+                ">> COMPLETE."
+            ];
+            
+            let i = 0;
+            function typeMessage() {
+                if (i < messages.length) {
+                    activationText.innerHTML += messages[i] + "<br>";
+                    i++;
+                    setTimeout(typeMessage, 800);
+                } else {
+                    // Добавляем эффект завершения
+                    setTimeout(() => {
+                        activationText.innerHTML += '<br><span style="color: #ff9900; animation: pulse 2s infinite;">>> INSTALLATION SUCCESSFUL. WELCOME TO ADULTHOOD.</span>';
+                    }, 500);
+                }
+            }
+            
+            setTimeout(typeMessage, 1000);
+            
+            // Добавляем звуковой эффект (опционально)
+            // Можно добавить простой звук костра или активации
+        });
+        
+        // Эффект частиц тумана
+        function createFogParticles() {
+            const overlay = document.querySelector('.fog-overlay');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.width = Math.random() * 100 + 50 + 'px';
+                particle.style.height = Math.random() * 100 + 50 + 'px';
+                particle.style.background = 'radial-gradient(circle, rgba(200,200,200,0.1) 0%, transparent 70%)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                particle.style.animation = `float ${Math.random() * 20 + 10}s infinite linear`;
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9998';
+                
+                // Случайное движение
+                const keyframes = `
+                    @keyframes float {
+                        0% { transform: translate(0, 0) rotate(0deg); }
+                        100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(360deg); }
+                    }
+                `;
+                
+                const style = document.createElement('style');
+                style.innerHTML = keyframes;
+                document.head.appendChild(style);
+                
+                overlay.appendChild(particle);
+            }
+        }
+        
+        // Запускаем частицы через 1 секунду
+        setTimeout(createFogParticles, 1000);
+    </script>
 </body>
 </html>
