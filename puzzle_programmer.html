@@ -2,120 +2,111 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Key 3: The Programmer</title>
+    <title>SOUL SHARD 3: Digital Overdrive</title>
     <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        .hidden { display: none; }
-        input { background: black; color: #0f0; border: 1px solid #0f0; padding: 5px; margin: 10px 0; }
-        button { background: #333; color: #0f0; border: 1px solid #0f0; padding: 5px 15px; cursor: pointer; }
-        .success { color: #0f0; font-weight: bold; }
-        .video-container { margin: 20px 0; }
-        .code-block { 
-            background: #001100; 
-            padding: 15px; 
-            margin: 20px 0; 
-            border-left: 3px solid #0f0;
+        body {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(220, 20, 60, 0.1) 50%,
+                    rgba(0, 0, 0, 0.95) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><text x="10" y="50" font-family="monospace" font-size="12" fill="rgba(255,107,0,0.05)">01010101</text></svg>');
+            min-height: 100vh;
+        }
+        
+        .code-terminal {
+            background: #0a0a0a;
+            border: 2px solid var(--abyss-red);
+            border-radius: 10px;
+            padding: 20px;
             font-family: 'Courier New', monospace;
-            overflow-x: auto;
+            color: #0f0;
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+        
+        .code-line {
+            margin: 5px 0;
+        }
+        
+        .code-comment {
+            color: #666;
+        }
+        
+        .code-function {
+            color: #4da6ff;
+        }
+        
+        .code-string {
+            color: #ff9966;
+        }
+        
+        .stand-card {
+            border-left: 4px solid var(--abyss-red);
+        }
+        
+        .stand-icon {
+            background: linear-gradient(135deg, var(--abyss-red), #000) !important;
+            font-family: 'Courier New', monospace !important;
+        }
+        
+        .matrix-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
         }
     </style>
 </head>
 <body class="terminal">
-    <div class="container">
-        <a href="index.html" style="color: #888;"><< BACK TO MISSION CONTROL</a>
-        <hr>
-        <h2>> CONNECTION ESTABLISHED: SYSTEM PROGRAMMER</h2>
-        <p>> "Приветствую, коллега. Ты близок к активации."</p>
-        <p>> "Но чтобы получить последний кристалл, нужно прочитать исходный код самой жизни... ну или этого сайта."</p>
-        
-        <!-- ВСТАВЬТЕ ВАШ ТЕКСТ ЗАГАДКИ ЗДЕСЬ -->
-        <blockquote>
-            <!-- 
-            ЗАГАДКА ОТ ПРОГРАММЕРА (ВАША)
-            Примеры на выбор:
-            
-            ВАРИАНТ 1 (про HTML):
-            <i>"Посмотри на страницу с загадкой математика. Какой HTML-тег использован для поля ввода ответа?
-            Ответ введи в угловых скобках, как в коде."</i>
-            Правильный ответ: <input>
-            
-            ВАРИАНТ 2 (про код сайта):
-            <i>"В главном меню есть ссылка на частоту Математика. Какое имя файла у этой страницы?
-            (Подсказка: посмотри в адресной строке браузера)"</i>
-            Правильный ответ: puzzle_math.html
-            
-            ВАРИАНТ 3 (философская/шутка):
-            <i>"Ответ на главный вопрос жизни, вселенной и всего такого."</i>
-            Правильный ответ: 42
-            
-            ВАРИАНТ 4 (про дату):
-            <i>"Сколько лет прошло от твоего рождения до совершеннолетия? (в годах)"</i>
-            Правильный ответ: 21
-            -->
-        </blockquote>
-        
-        <!-- Можно добавить блок с псевдокодом для атмосферы -->
-        <div class="code-block">
-            // === SYSTEM LOG: GENERATING FINAL KEY ===<br>
-            // USER_ID: ENGINEER_2004<br>
-            // CURRENT_AGE: 21<br>
-            // STATUS: ALMOST_THERE<br>
-            // REQUIRED: FINAL_ANSWER<br>
-            <br>
-            if (user.knowsCode === true) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;grantAccess();<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;awardKey("SOURCE");<br>
-            } else {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;suggestCoffee(); // Hint: maybe check the source?<br>
-            }
+    <!-- Японские символы -->
+    <div class="japanese-border top">コードプログラム開発者</div>
+    <div class="japanese-border bottom">デジタル現実ハック</div>
+    
+    <!-- Матричный эффект -->
+    <div class="matrix-effect" id="matrixEffect"></div>
+    
+    <div class="container" style="max-width: 800px; position: relative; z-index: 100;">
+        <!-- Заголовок -->
+        <div class="page-header">
+            <h1 class="soul-title">«DIGITAL OVERDRIVE»</h1>
+            <p class="stand-subtitle">STAND USER: THE PROGRAMMER | SOUL TYPE: REALITY HACK</p>
         </div>
         
-        <!-- ВСТАВЬТЕ ВАШ ВОПРОС/ИНСТРУКЦИЮ ДЛЯ ПОЛЬЗОВАТЕЛЯ ЗДЕСЬ -->
-        <p>> ВВЕДИТЕ КОД ДОСТУПА:</p>
-        <!--
-        Пример для варианта 1:
-        <p>> Какой тег HTML для поля ввода? (формат: &lt;тег&gt;)</p>
-        -->
-        
-        <input type="text" id="answer-input" placeholder="Ваш ответ...">
-        <button onclick="checkAnswer()">ВВЕСТИ КОМАНДУ</button>
-
-        <!-- Секция успеха -->
-        <div id="success-message" class="hidden">
-            <p class="success">>> ROOT ACCESS GRANTED. KEY_3 = "SOURCE"</p>
-            <p>> FINAL KEY COMBINATION: "INVICTA" + "SOUL" + "SOURCE"</p>
-            <p>> TRANSMITTING FINAL VIDEO MESSAGE...</p>
-            <div class="video-container">
-                <!-- ВСТАВЬТЕ ВАШЕ ВИДЕО ЗДЕСЬ -->
-                <p>[VIDEO: Вы за компьютером, показываете код сайта, говорите что-то про "теперь ты знаешь тайну матрицы"]</p>
-                <!-- Пример:
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/ВАШ_КОД_ВИДЕО" frameborder="0" allowfullscreen></iframe>
-                -->
+        <!-- Стенд -->
+        <div class="stand-card">
+            <div class="stand-icon">{ }</div>
+            <div class="stand-info">
+                <h3>DIGITAL OVERDRIVE</h3>
+                <p style="color: #aaa; margin: 0;">Stand Ability: «Source Code Rewrite» — Code becomes will, syntax becomes law</p>
+                <p style="color: var(--abyss-red); margin-top: 5px; font-size: 0.9rem;">
+                    Power: S | Creativity: A | Bug Resistance: B | Evolution: A
+                </p>
             </div>
-            <p>> <a href="final.html" style="color: #0f0; font-size: 1.2em;">[>> ACTIVATE ADULT_LICENSE.EXE]</a></p>
         </div>
-
-        <script>
-            function checkAnswer() {
-                const userAnswer = document.getElementById('answer-input').value.trim();
-                // УКАЖИТЕ ПРАВИЛЬНЫЙ ОТВЕТ ЗДЕСЬ
-                // Для примера с тегом <input>:
-                const correctAnswers = ["<input>", "input"]; // ← ИЗМЕНИТЕ НА ВАШ ОТВЕТ
-                // Для примера с 42:
-                // const correctAnswers = ["42", "сорок два"];
-                // Для примера с именем файла:
-                // const correctAnswers = ["puzzle_math.html", "puzzle_math"];
-                
-                if (correctAnswers.includes(userAnswer.toLowerCase())) {
-                    document.getElementById('success-message').classList.remove('hidden');
-                } else {
-                    alert('>> SYSTEM ERROR: INVALID CODE. CHECK YOUR SYNTAX.');
-                }
-            }
-        </script>
         
-        <hr>
-        <p style="color: #888; font-size: 0.8em;">> System hint: F12 откроет консоль. Но тебе это не понадобится... или понадобится?</p>
-    </div>
-</body>
-</html>
+        <!-- Загадка -->
+        <div class="puzzle-container">
+            <h2 style="color: var(--estus-yellow); text-align: center; margin-bottom: 25px;">
+                謎 №3: THE SOURCE CODE
+            </h2>
+            
+            <div class="riddle-box">
+                <p class="riddle-text">
+                    <span style="color: var(--abyss-red);">「プログラマーより」</span><br>
+                    Colleague. You stand before the final gate. To prove you understand 
+                    the fabric of this digital reality, answer this:
+                </p>
+                
+                <p class="riddle-text" style="color: var(--estus-yellow); font-size: 1.2rem;">
+                    "What HTML tag did I use to create the answer input field on the Mathematician's page?"<br>
+                    <span style="color: #888; font-size: 1rem;">
