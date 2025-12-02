@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Key 1: The Mathematician</title>
+    <link rel="stylesheet" href="terminal.css">
+    <style>
+        .hidden { display: none; }
+        input { background: black; color: #0f0; border: 1px solid #0f0; padding: 5px; margin: 10px 0; }
+        button { background: #333; color: #0f0; border: 1px solid #0f0; padding: 5px 15px; cursor: pointer; }
+        .success { color: #0f0; font-weight: bold; }
+        .video-container { margin: 20px 0; }
+    </style>
+</head>
+<body class="terminal">
+    <div class="container">
+        <a href="index.html" style="color: #888;"><< BACK TO MISSION CONTROL</a>
+        <hr>
+        <h2>> CONNECTION ESTABLISHED: THE MATHEMATICIAN</h2>
+        <p>> "Привет, инженер. Чтобы получить мой кристалл, реши задачу."</p>
+        <blockquote>
+            <p><i>Твой год рождения — 2004. Наш код дружбы — (2004 % 12) + (21 / 7) — (кол-во нас, т.е. команды).</i></p>
+            <p><i>Введи числовой результат. Подсказка: оператор '%' — это остаток от деления.</i></p>
+            <p><i>P.S. Не забывай про знак.</i></p>
+        </blockquote>
+        <p>> ВВЕДИТЕ РЕШЕНИЕ:</p>
+        <input type="text" id="answer-input" placeholder="Ваш ответ...">
+        <button onclick="checkAnswer()">ПРОВЕРИТЬ КОД</button>
 
+        <!-- Секция, которая покажется при правильном ответе -->
+        <div id="success-message" class="hidden">
+            <p class="success">>> CODE ACCEPTED. KEY_1 = "INVICTA"</p>
+            <p>> TRANSMITTING VIDEO MESSAGE...</p>
+            <div class="video-container">
+                <!-- Вставьте сюда iframe с видео от Математика (например, с YouTube, VK, Google Drive) -->
+                <p>[ЗДЕСЬ БУДЕТ ВИДЕО ОТ МАТЕМАТИКА С ГРАФИКОМ]</p>
+                <!-- Пример iframe для YouTube (замените src на ваше видео) -->
+                <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
+            </div>
+            <p>> <a href="puzzle_economist.html" style="color: #0f0;">[>> PROCEED TO NEXT FREQUENCY]</a></p>
+        </div>
+
+        <script>
+            function checkAnswer() {
+                const userAnswer = document.getElementById('answer-input').value.trim();
+                // Правильный ответ, посчитанный заранее: (0) + (3) - (4) = -1
+                const correctAnswers = ["-1", "минус один", "минус 1"]; // Несколько вариантов
+
+                if (correctAnswers.includes(userAnswer.toLowerCase())) {
+                    document.getElementById('success-message').classList.remove('hidden');
+                } else {
+                    alert('>> ERROR: CODE INVALID. TRY AGAIN.');
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
