@@ -109,4 +109,177 @@
                 
                 <p class="riddle-text" style="color: var(--estus-yellow); font-size: 1.2rem;">
                     "What HTML tag did I use to create the answer input field on the Mathematician's page?"<br>
-                    <span style="color: #888; font-size: 1rem;">
+                    <span style="color: #888; font-size: 1rem;">Enter it in angle brackets, like in actual code.</span>
+                </p>
+            </div>
+            
+            <!-- Код для атмосферы -->
+            <div class="code-terminal">
+                <div class="code-line"><span class="code-comment">// FINAL GATE - SOURCE CODE ANALYSIS</span></div>
+                <div class="code-line"><span class="code-function">if</span> (user.isWorthy) {</div>
+                <div class="code-line">&nbsp;&nbsp;grantAccess(<span class="code-string">"ADULT_LICENSE"</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;awardSoulShard(<span class="code-string">"SOURCE"</span>);</div>
+                <div class="code-line">} <span class="code-function">else</span> {</div>
+                <div class="code-line">&nbsp;&nbsp;suggestCoffee(); <span class="code-comment">// Hint: maybe check the page source?</span></div>
+                <div class="code-line">}</div>
+                <div class="code-line"><span class="code-comment">// The answer lies in the structure of reality itself</span></div>
+                <div class="code-line"><span class="code-comment">// &lt;?&gt; - what goes here?</span></div>
+            </div>
+            
+            <!-- Ввод ответа -->
+            <div class="input-group">
+                <input type="text" 
+                       class="jojo-input" 
+                       id="answerInput" 
+                       placeholder="Enter HTML tag... (e.g., <input>)"
+                       onkeypress="if(event.key === 'Enter') checkAnswer()">
+                <p class="hint-text">
+                    Press F12 to inspect the page. Or just remember from the Mathematician's challenge.
+                </p>
+            </div>
+            
+            <!-- Кнопка проверки -->
+            <div style="text-align: center;">
+                <button class="hybrid-button" onclick="checkAnswer()" style="padding: 15px 40px; font-size: 1.2rem;">
+                    HACK REALITY → ム
+                </button>
+            </div>
+            
+            <!-- Успех -->
+            <div class="success-section" id="successSection">
+                <div style="font-size: 3rem; color: var(--estus-yellow);">💾</div>
+                <h3 style="color: var(--estus-yellow); margin: 20px 0;">
+                    REALITY HACKED! FINAL SHARD OBTAINED!
+                </h3>
+                
+                <div class="key-reveal">
+                    KEY_3 = "SOURCE"
+                </div>
+                
+                <p style="color: #ccc; margin: 20px 0;">
+                    The Digital Overdrive recognizes your understanding of the source.<br>
+                    Transmission incoming...
+                </p>
+                
+                <!-- Место для видео -->
+                <div class="video-placeholder">
+                    [VIDEO: PROGRAMMER AT COMPUTER SHOWING CODE]<br>
+                    <span style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">
+                        Replace with your video
+                    </span>
+                </div>
+                
+                <!-- Финальная страница -->
+                <div style="margin-top: 30px;">
+                    <a href="final.html" class="hybrid-button" style="text-decoration: none; display: inline-block; font-size: 1.3rem;">
+                        APPROACH THE FIRST FLAME → 🔥
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Навигация -->
+        <div class="navigation">
+            <a href="index.html" class="back-link">
+                ← RETURN TO BONFIRE
+            </a>
+            <div style="color: #666; font-family: 'MS Gothic';">
+                SOUL SHARDS: <span id="collectedCount">0</span>/3
+            </div>
+        </div>
+    </div>
+
+    <script src="hybrid-sounds.js"></script>
+    <script>
+        // Создаём матричный эффект
+        function createMatrixEffect() {
+            const container = document.getElementById('matrixEffect');
+            const chars = '01アイウエオカキクケコサシスセソタチツテト';
+            
+            for (let i = 0; i < 50; i++) {
+                const stream = document.createElement('div');
+                stream.style.cssText = `
+                    position: absolute;
+                    color: rgba(0, 255, 0, 0.3);
+                    font-family: 'MS Gothic', monospace;
+                    font-size: 14px;
+                    left: ${Math.random() * 100}%;
+                    top: -50px;
+                    writing-mode: vertical-rl;
+                    text-orientation: upright;
+                    animation: matrixFall ${Math.random() * 10 + 5}s linear infinite;
+                    animation-delay: ${Math.random() * 5}s;
+                    pointer-events: none;
+                `;
+                
+                // Случайные символы
+                let content = '';
+                for (let j = 0; j < 20; j++) {
+                    content += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                stream.innerHTML = content;
+                
+                container.appendChild(stream);
+            }
+            
+            // Добавляем анимацию
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes matrixFall {
+                    from { top: -50px; opacity: 0; }
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    to { top: 100vh; opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const correctAnswers = ["<input>", "input", "<input />"];
+            
+            if (correctAnswers.includes(userAnswer)) {
+                document.getElementById('successSection').style.display = 'block';
+                window.hybridSounds.playEstusSound();
+                
+                let progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+                progress.programmer = true;
+                localStorage.setItem('quest_progress', JSON.stringify(progress));
+                
+                // Помечаем квест как пройденный
+                localStorage.setItem('quest_completed', 'true');
+                localStorage.setItem('bonfire_lit', 'true');
+                
+                updateCounter();
+                document.querySelector('.hybrid-button').style.display = 'none';
+                
+            } else {
+                window.hybridSounds.playSoulsSound();
+                alert('>> SYNTAX ERROR!\n>> The Stand demands proper HTML syntax!');
+                document.getElementById('answerInput').style.borderColor = 'var(--abyss-red)';
+            }
+        }
+        
+        function updateCounter() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            const count = Object.values(progress).filter(Boolean).length;
+            document.getElementById('collectedCount').textContent = count;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrixEffect();
+            updateCounter();
+            document.getElementById('answerInput').focus();
+            
+            // Секретная команда
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                    window.hybridSounds.playJojoSound('ora');
+                    alert('>> DEBUG MODE ACTIVATED\n>> Stand Power: 9001\n>> Estus Flasks: ∞');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
