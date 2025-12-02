@@ -3,84 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <title>LICENSE_21.EXE</title>
-    <link rel="stylesheet" href="terminal.css"> <!-- Подключаем тему-терминал -->
+    <link rel="stylesheet" href="terminal.css">
     <style>
-        /* Дополнительные стили для мигающего курсора и кликабельности */
+        /* ... предыдущие стили остаются ... */
         .cursor { animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
-        .typewriter { overflow: hidden; border-right: .15em solid green; white-space: nowrap; margin: 0 auto; letter-spacing: .15em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: green; } }
         .hidden { display: none; }
-        a { color: #0f0; text-decoration: none; } /* Зелёные ссылки как в терминале */
+        a { color: #0f0; text-decoration: none; }
+        
+        /* Новые стили для костра */
+        .bonfire {
+            display: none; /* По умолчанию скрыт */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 150px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        
+        .bonfire:hover {
+            transform: scale(1.1);
+        }
+        
+        .bonfire-flame {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse at center, 
+                rgba(255,100,0,0.9) 0%,
+                rgba(255,50,0,0.7) 40%,
+                rgba(255,0,0,0.3) 70%,
+                transparent 100%);
+            border-radius: 50%;
+            bottom: 60px;
+            left: 20px;
+            animation: fire-flicker 1s infinite alternate;
+            filter: blur(2px);
+        }
+        
+        .bonfire-wood {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: 
+                linear-gradient(45deg, #8B4513 20%, transparent 20%),
+                linear-gradient(-45deg, #8B4513 20%, transparent 20%),
+                linear-gradient(135deg, #8B4513 20%, transparent 20%),
+                linear-gradient(-135deg, #8B4513 20%, transparent 20%);
+            background-color: #A0522D;
+            border-radius: 5px;
+        }
+        
+        .bonfire-spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFAA00;
+            border-radius: 50%;
+            animation: spark-float 2s infinite linear;
+            opacity: 0;
+        }
+        
+        @keyframes fire-flicker {
+            0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.8; }
+            50% { transform: scaleY(1.2) scaleX(0.9); opacity: 1; }
+        }
+        
+        @keyframes spark-float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Стили для страницы финала с туманом */
+        .fog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(50,50,50,0.1) 0%, rgba(0,0,0,0.8) 100%),
+                radial-gradient(circle at 80% 80%, rgba(100,100,100,0.1) 0%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: fog-roll 5s ease-out forwards;
+        }
+        
+        @keyframes fog-roll {
+            0% { 
+                opacity: 0;
+                backdrop-filter: blur(20px);
+            }
+            100% { 
+                opacity: 1;
+                backdrop-filter: blur(5px);
+            }
+        }
+        
+        .fog-content {
+            opacity: 0;
+            animation: content-appear 3s 2s ease-out forwards;
+        }
+        
+        @keyframes content-appear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="terminal">
+    <!-- Костёр (появится после прохождения квеста) -->
+    <div id="bonfire" class="bonfire hidden" onclick="restAtBonfire()" title="Rest at Bonfire - Restore humanity">
+        <div class="bonfire-flame"></div>
+        <div class="bonfire-wood"></div>
+        <!-- Искры -->
+        <div class="bonfire-spark" style="left: 30px; animation-delay: 0s;"></div>
+        <div class="bonfire-spark" style="left: 50px; animation-delay: 0.5s;"></div>
+        <div class="bonfire-spark" style="left: 70px; animation-delay: 1s;"></div>
+    </div>
+
     <div class="container" style="max-width: 800px;">
-        <!-- Часть 1: Анимация загрузки -->
-        <div id="boot-screen">
-            <div class="typewriter">
-                <span>> SYSTEM BOOT... WELCOME, ENGINEER.</span><br>
-                <span>> SCANNING USER PROFILE... CONFIRMED: ИМЯ_ИМЕНИННИКА, 2004 UNIT.</span><br>
-                <span>> LOADING MISSION: 'ADULT_LICENSE.EXE'</span><br>
-                <span>> STATUS: <span style="color:orange">READY. BUT NOT ACTIVATED.</span></span><br><br>
-                <span>> TO INSTALL, YOU NEED 3 CRYSTALS OF EXPERIENCE.</span><br>
-                <span>> YOUR GUARDIAN FRIENDS HOLD THE KEYS.</span><br>
-                <span>> SYNC WITH THEIR FREQUENCIES TO PROCEED.</span><br><br>
-                <span>> TYPE '<span style="color:#0f0">START</span>' AND PRESS ENTER TO BEGIN INITIALIZATION...</span><br>
-                > <span id="cursor" class="cursor">_</span>
-            </div>
-            <!-- Поле ввода, изначально скрытое -->
-            <input type="text" id="start-input" class="hidden" style="background: black; color: #0f0; border: none; outline: none; width: 80%;" autofocus>
-        </div>
-
-        <!-- Часть 2: Главное меню (появляется после ввода "START") -->
-        <div id="main-menu" class="hidden">
-            <br>
-            <h2>> MISSION CONTROL</h2>
-            <hr>
-            <p>> OBJECTIVE: COLLECT 3 KEYS FROM YOUR GUARDIANS.</p>
-            <ul>
-                <li>> KEY 1: <a href="puzzle_math.html">[CONNECT TO: THE MATHEMATICIAN]</a> - Frequency: Logic Core</li>
-                <li>> KEY 2: <a href="puzzle_economist.html">[CONNECT TO: THE ECONOMIST & TRANSLATOR]</a> - Frequency: Contract & Soul</li>
-                <li>> KEY 3: <a href="puzzle_programmer.html">[CONNECT TO: THE PROGRAMMER]</a> - Frequency: Source Code</li>
-            </ul>
-            <p>> ACCESS WILL BE GRANTED UPON CORRECT ANSWER.</p>
-            <p>> ALL KEYS ACQUIRED? <a href="final.html">[ATTEMPT FINALIZATION]</a> (Link will be disabled)</p>
-            <hr>
-            <p style="color: #888;">> System Hint: Use your knowledge, engineer. And maybe a calculator.</p>
-        </div>
-
+        <!-- ... остальной код главной страницы ... -->
+        
         <script>
-            // Простейший скрипт для анимации начала
+            // Проверяем, пройден ли квест (по кукам или localStorage)
             document.addEventListener('DOMContentLoaded', function() {
-                const inputField = document.getElementById('start-input');
-                const mainMenu = document.getElementById('main-menu');
-                const bootScreen = document.getElementById('boot-screen');
-
-                // Через 4 секунды показываем поле для ввода "START"
-                setTimeout(() => {
-                    inputField.classList.remove('hidden');
-                    inputField.focus();
-                }, 4000);
-
-                // Обрабатываем ввод
-                inputField.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        if (this.value.toUpperCase() === 'START') {
-                            // Прячем загрузочный экран, показываем меню
-                            bootScreen.innerHTML = ''; // Можно просто очистить
-                            mainMenu.classList.remove('hidden');
-                        } else {
-                            this.value = ''; // Очищаем поле при неверном вводе
-                            // Можно добавить сообщение об ошибке
-                            const errorMsg = document.createElement('p');
-                            errorMsg.textContent = '> ERROR: COMMAND NOT RECOGNIZED. TRY "START".';
-                            errorMsg.style.color = 'red';
-                            bootScreen.appendChild(errorMsg);
-                        }
+                const bonfire = document.getElementById('bonfire');
+                
+                // Проверяем, есть ли отметка о прохождении квеста
+                if (localStorage.getItem('quest_completed') === 'true') {
+                    // Показываем костёр
+                    setTimeout(() => {
+                        bonfire.classList.remove('hidden');
+                        createSparks();
+                    }, 1000);
+                    
+                    // Добавляем сообщение о костре
+                    const menu = document.getElementById('main-menu');
+                    if (menu && !menu.classList.contains('hidden')) {
+                        const bonfireMsg = document.createElement('p');
+                        bonfireMsg.innerHTML = '>> <span style="color: #FF9900;">BONFIRES LIT: 1</span> - You may rest here, Engineer.';
+                        bonfireMsg.style.marginTop = '20px';
+                        menu.appendChild(bonfireMsg);
                     }
-                });
+                }
+                
+                // Создаём дополнительные искры
+                function createSparks() {
+                    const bonfire = document.getElementById('bonfire');
+                    for (let i = 0; i < 10; i++) {
+                        const spark = document.createElement('div');
+                        spark.className = 'bonfire-spark';
+                        spark.style.left = Math.random() * 80 + 10 + 'px';
+                        spark.style.animationDelay = Math.random() * 2 + 's';
+                        spark.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                        bonfire.appendChild(spark);
+                    }
+                }
+                
+                // Функция для "отдыха у костра"
+                window.restAtBonfire = function() {
+                    alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> All status effects cured\n\nPraise the Sun! \\[T]/');
+                };
             });
         </script>
     </div>
