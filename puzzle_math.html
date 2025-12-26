@@ -326,9 +326,6 @@
 
     <script src="hybrid-sounds.js"></script>
     <script>
-       <script src="hybrid-sounds.js"></script>
-<script src="hybrid-sounds.js"></script>
-<script>
     // Правильный ответ - текст "1000-7"
     const CORRECT_ANSWER = "1000-7";
     
@@ -367,11 +364,6 @@
             const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
             progress.math = true;
             localStorage.setItem('quest_progress', JSON.stringify(progress));
-            
-            // Проигрываем звук успеха
-            if (window.hybridSounds && window.hybridSounds.playSoulsSound) {
-                window.hybridSounds.playSoulsSound();
-            }
             
             // Активируем кнопку следующей головоломки через 2 секунды
             setTimeout(() => {
@@ -439,6 +431,6 @@
             }, index * 300);
         });
     });
-</script>>
+</script>
 </body>
 </html>
