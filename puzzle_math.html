@@ -326,108 +326,119 @@
 
     <script src="hybrid-sounds.js"></script>
     <script>
-        // Правильный ответ (замените на реальный)
-        const CORRECT_ANSWER = 1000-7; // Замените на правильное число
+       <script src="hybrid-sounds.js"></script>
+<script src="hybrid-sounds.js"></script>
+<script>
+    // Правильный ответ - текст "1000-7"
+    const CORRECT_ANSWER = "1000-7";
+    
+    function checkAnswer() {
+        const userInput = document.getElementById('answer').value;
+        const resultDiv = document.getElementById('result');
         
-        function checkAnswer() {
-            const userInput = document.getElementById('answer').value;
-            const resultDiv = document.getElementById('result');
-            
-            if (!userInput) {
-                resultDiv.innerHTML = '<p style="color: #ff6b6b;">⚠ Введи число в поле!</p>';
-                return;
-            }
-            
-            const userNumber = parseInt(userInput);
-            
-            if (userNumber === CORRECT_ANSWER) {
-                // Успех
-                resultDiv.innerHTML = `
-                    <p style="color: #98fb98; font-size: 1.3rem;">
-                        ✅ ПРАВИЛЬНО! ∫ ОСКОЛОК ДУШИ ПОЛУЧЕН ∫
-                    </p>
-                    <p style="color: #87ceeb; margin-top: 10px;">
-                        Сила Стенда "Реквием по Матану" теперь твоя!
-                    </p>
-                `;
-                
-                // Сохраняем прогресс
-                const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
-                progress.math = true;
-                localStorage.setItem('quest_progress', JSON.stringify(progress));
-                
-                // Проигрываем звук успеха
-                if (window.hybridSounds && window.hybridSounds.playSoulsSound) {
-                    window.hybridSounds.playSoulsSound();
-                }
-                
-                // Активируем кнопку следующей головоломки через 2 секунды
-                setTimeout(() => {
-                    const nextBtn = document.querySelector('.nav-link[href="puzzle_economist.html"]');
-                    nextBtn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
-                    nextBtn.style.color = '#000';
-                    nextBtn.innerHTML = '→ ПЕРЕЙТИ К ЗОЛОТОМУ КОНТРАКТУ 🔥';
-                }, 2000);
-                
-            } else {
-                // Неправильный ответ
-                resultDiv.innerHTML = `
-                    <p style="color: #ff6b6b;">❌ НЕПРАВИЛЬНО! Подумай ещё...</p>
-                    <p style="color: #ffa500; font-size: 0.9rem;">
-                        Подсказка: проверь значения всех переменных
-                    </p>
-                `;
-                
-                // Анимация ошибки
-                document.getElementById('answer').style.borderColor = '#dc143c';
-                document.getElementById('answer').style.boxShadow = '0 0 10px rgba(220, 20, 60, 0.5)';
-                
-                setTimeout(() => {
-                    document.getElementById('answer').style.borderColor = '#5d2906';
-                    document.getElementById('answer').style.boxShadow = 'none';
-                }, 1000);
-            }
+        if (!userInput) {
+            resultDiv.innerHTML = '<p style="color: #ff6b6b;">⚠ Введи ответ в поле!</p>';
+            return;
         }
         
-        function showHint() {
-            const hints = [
-                "Порядок операций: сначала вычисления в скобках!",
-                "Самой устойчивой геометрической фигурой считается треугольник",
-                "Белорусская система оценивания: 10-балльная",
-                "Проверь количество сезонов в сериалах",
-                "Не забудь про свой возраст (21 год)"
-            ];
-            
-            const randomHint = hints[Math.floor(Math.random() * hints.length)];
-            document.getElementById('result').innerHTML = 
-                `<p style="color: #87ceeb;">💡 ${randomHint}</p>`;
-        }
+        // Приводим к нижнему регистру и удаляем лишние пробелы
+        const userAnswer = userInput.toString().toLowerCase().trim();
         
-        // Автофокус на поле ввода
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('answer').focus();
+        // Принимаем несколько вариантов
+        const isCorrect = 
+            userAnswer === '1000-7' ||
+            userAnswer === '1000 - 7' ||
+            userAnswer === '993' ||
+            userAnswer === 'тысяча минус семь';
+        
+        if (isCorrect) {
+            // Успех
+            resultDiv.innerHTML = `
+                <p style="color: #98fb98; font-size: 1.3rem;">
+                    ✅ ПРАВИЛЬНО! ∫ ОСКОЛОК ДУШИ ПОЛУЧЕН ∫
+                </p>
+                <p style="color: #87ceeb; margin-top: 10px;">
+                    <strong>"1000-7... 993... 986..."</strong><br>
+                    Ты помнишь счёт. Сила Стенда "Реквием по Матану" теперь твоя!
+                </p>
+            `;
             
-            // Проверяем, если уже решена
+            // Сохраняем прогресс
             const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
-            if (progress.math) {
-                document.getElementById('result').innerHTML = `
-                    <p style="color: #98fb98;">✅ Эта головоломка уже решена!</p>
-                `;
+            progress.math = true;
+            localStorage.setItem('quest_progress', JSON.stringify(progress));
+            
+            // Проигрываем звук успеха
+            if (window.hybridSounds && window.hybridSounds.playSoulsSound) {
+                window.hybridSounds.playSoulsSound();
             }
             
-            // Анимация появления
-            const elements = document.querySelectorAll('.puzzle-box, .page-title');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 300);
-            });
+            // Активируем кнопку следующей головоломки через 2 секунды
+            setTimeout(() => {
+                const nextBtn = document.querySelector('.nav-link[href="puzzle_economist.html"]');
+                nextBtn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
+                nextBtn.style.color = '#000';
+                nextBtn.innerHTML = '→ ПЕРЕЙТИ К ЗОЛОТОМУ КОНТРАКТУ 🔥';
+            }, 2000);
+            
+        } else {
+            // Неправильный ответ
+            resultDiv.innerHTML = `
+                <p style="color: #ff6b6b;">❌ НЕПРАВИЛЬНО!</p>
+                <p style="color: #ffa500; font-size: 0.9rem;">
+                    Вспомни: "1000-7... 993... 986..."
+                </p>
+            `;
+            
+            // Анимация ошибки
+            document.getElementById('answer').style.borderColor = '#dc143c';
+            document.getElementById('answer').style.boxShadow = '0 0 10px rgba(220, 20, 60, 0.5)';
+            
+            setTimeout(() => {
+                document.getElementById('answer').style.borderColor = '#5d2906';
+                document.getElementById('answer').style.boxShadow = 'none';
+            }, 1000);
+        }
+    }
+    
+    function showHint() {
+        const hints = [
+            "Ответ — известная фраза из аниме Tokyo Ghoul",
+            "Формат: число-дефис-число",
+            "1000... минус... 7...",
+            "Это не результат вычисления, а сам процесс счёта"
+        ];
+        
+        const randomHint = hints[Math.floor(Math.random() * hints.length)];
+        document.getElementById('result').innerHTML = 
+            `<p style="color: #87ceeb;">💡 ${randomHint}</p>`;
+    }
+    
+    // Автофокус на поле ввода
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('answer').focus();
+        
+        // Проверяем, если уже решена
+        const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+        if (progress.math) {
+            document.getElementById('result').innerHTML = `
+                <p style="color: #98fb98;">✅ Эта головоломка уже решена!</p>
+            `;
+        }
+        
+        // Анимация появления
+        const elements = document.querySelectorAll('.puzzle-box, .page-title');
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 300);
         });
-    </script>
+    });
+</script>>
 </body>
 </html>
