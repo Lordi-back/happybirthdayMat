@@ -269,11 +269,74 @@
         </div>
 
         <!-- СЕКЦИЯ ДЛЯ ВИДЕО -->
-        <div class="video-section">
+
+        <!-- СЕКЦИЯ С ВИДЕОПОЗДРАВЛЕНИЕМ -->
+<!-- СЕКЦИЯ ВИДЕО -->
+<div class="video-section" style="margin: 60px 0;">
+    <h2 style="text-align: center; color: #ffd700; font-size: 2.5rem; margin-bottom: 30px;">
+        🎬 ПРЯМОЕ ВИДЕОПОЗДРАВЛЕНИЕ
+    </h2>
+    
+    <!-- Контейнер с эффектами -->
+    <div class="video-frame" style="max-width: 900px; margin: 0 auto; position: relative;">
+        <!-- Эффект свечения -->
+        <div style="position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; 
+                    background: linear-gradient(45deg, #ff6b00, #ffd700, #00ff00, #0088ff);
+                    border-radius: 15px; filter: blur(15px); opacity: 0.3; z-index: 1;"></div>
+        
+        <!-- Видео -->
+        <div style="position: relative; z-index: 2; border-radius: 10px; overflow: hidden; 
+                    border: 3px solid #333; box-shadow: 0 0 30px rgba(0,0,0,0.7);">
+            <iframe 
+                src="https://vk.com/video_ext.php?oid=298899007&id=456239524&hash=74bceac207558fd1"
+                width="100%" 
+                height="506" 
+                style="background-color: #000; display: block;"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
+                frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+        <!-- Индикатор загрузки -->
+        <div id="video-loading" style="text-align: center; margin-top: 15px; color: #888; font-size: 0.9rem;">
+            <span class="blink">▌</span> Загрузка видео из VK...
+        </div>
+    </div>
+    
+    <!-- Подпись -->
+    <div style="text-align: center; margin-top: 25px; color: #aaa; font-style: italic;">
+        <p>"Слова могут быть забыты, но этот момент останется навсегда"</p>
+    </div>
+</div>
+
+<script>
+// Скрываем индикатор загрузки когда видео готово
+document.addEventListener('DOMContentLoaded', function() {
+    const videoIframe = document.querySelector('iframe[src*="vk.com/video"]');
+    const loadingIndicator = document.getElementById('video-loading');
+    
+    if (videoIframe && loadingIndicator) {
+        videoIframe.onload = function() {
+            setTimeout(() => {
+                loadingIndicator.innerHTML = '<span style="color: #4CAF50;">✅ Видео готово к просмотру</span>';
+                setTimeout(() => {
+                    loadingIndicator.style.opacity = '0.5';
+                }, 2000);
+            }, 1000);
+        };
+    }
+});
+</script>
+    
+    <!-- Альтернативная ссылка на случай проблем -->
+   
+
+       <!-- <div class="video-section">
             <h2>🎬 ПРИВЕТСТВИЕ ОТ СОРАТНИКОВ</h2>
             
                  
-            <!-- КОНТЕЙНЕР ДЛЯ ВИДЕО -->
+            <!-- КОНТЕЙНЕР ДЛЯ ВИДЕО 
             <div class="video-container">
                 <div class="video-wrapper">
 
@@ -283,7 +346,7 @@
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
           
             <source src="https://cloud.mail.ru/home/1226.mp4?weblink=HhKA%2FCeXA7Rn5n" type="video/mp4">
-        </video>-->
+        </video>
 
                     <iframe src="https://vk.com/video298899007_456239524?list=ln-hTzQYJ4s3I6rne9etQ" 
             width="100%" 
@@ -299,12 +362,12 @@
             allow="autoplay; encrypted-media"
             allowfullscreen>
                     </iframe>
-                 КОНЕЦ ОБЛАСТИ ДЛЯ ВСТАВКИ ВИДЕО -->
+                 КОНЕЦ ОБЛАСТИ ДЛЯ ВСТАВКИ ВИДЕО 
                 </div>
             </div>
-            <!-- Конец контейнера для видео -->
+           
         </div>
-
+ Конец контейнера для видео -->
         <!-- Благодарности соратникам -->
         <section class="thanks-section">
             <h2>⚔️ БЛАГОДАРНОСТЬ ХРАНИТЕЛЯМ ОСКОЛКОВ</h2>
