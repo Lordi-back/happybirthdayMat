@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>KINDLE THE FIRST FLAME | 成人の証</title>
+    <title>ВОЗЖИГАНИЕ ПЕРВОГО ПЛАМЕНИ | 成人の証</title>
     <link rel="stylesheet" href="terminal.css">
     <link rel="stylesheet" href="hybrid-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -14,6 +14,9 @@
                 radial-gradient(circle at 70% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 40%),
                 #0a0a0a;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрирование по горизонтали */
         }
         
         .page-title {
@@ -76,6 +79,9 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: center; /* Центрирование сетки */
         }
         
         .stand-item {
@@ -88,6 +94,10 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрирование внутри карточки */
+            text-align: center; /* Текст по центру */
         }
         
         .stand-item:hover {
@@ -153,6 +163,47 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        
+        /* Центрирование контейнера */
+        .container {
+            max-width: 1200px;
+            position: relative;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрирование всего содержимого */
+            width: 100%;
+        }
+        
+        /* Центрирование легенды */
+        .legend-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 40px;
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .legend-items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            text-align: center;
+        }
+        
+        /* Центрирование финального блока */
+        .final-challenge {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            border-top: 2px dashed var(--bonfire-orange);
+            width: 100%;
+            max-width: 900px;
+        }
     </style>
 </head>
 <body class="terminal">
@@ -163,139 +214,141 @@
     <div class="japanese-border right">魂<br>の<br>価<br>値</div>
 
     <!-- Костёр (появится после прохождения) -->
-    <div id="bonfire-corner" class="bonfire-corner" onclick="restAtBonfire()" title="Rest at Bonfire">
+    <div id="bonfire-corner" class="bonfire-corner" onclick="restAtBonfire()" title="Отдохнуть у костра">
         <div style="text-align: center;">
             <div style="font-size: 40px;">🔥</div>
-            <div style="font-size: 12px; color: var(--estus-yellow);">Bonfire</div>
+            <div style="font-size: 12px; color: var(--estus-yellow);">Костёр</div>
         </div>
     </div>
 
-    <div class="container" style="max-width: 1200px; position: relative; z-index: 100;">
+    <div class="container">
         <!-- Частицы душ -->
         <div id="soul-particles"></div>
 
-        <h1 class="page-title">KINDLING THE ADULT FLAME</h1>
-        <p class="subtitle">¶ スタンドは魂の形 ¶ Stands are but Souls given Form ¶</p>
+        <!-- ЗАГОЛОВОК С ПЕРЕВОДОМ -->
+        <h1 class="page-title">ВОЗЖИГАНИЕ ВЗРОСЛОГО ПЛАМЕНИ</h1>
+        <p class="subtitle">¶ Стенд — это материализованная душа ¶ Stands are but Souls given Form ¶</p>
         
+        <!-- ЛОГ КВЕСТА С ПЕРЕВОДОМ -->
         <div class="quest-log">
-            <h2 style="color: var(--estus-yellow); border-bottom: 2px solid var(--bonfire-orange); padding-bottom: 10px;">
-                <span style="color: var(--abyss-red)">†</span> QUEST: ASCENSION TO ADULTHOOD <span style="color: var(--abyss-red)">†</span>
+            <h2 style="color: var(--estus-yellow); border-bottom: 2px solid var(--bonfire-orange); padding-bottom: 10px; text-align: center;">
+                <span style="color: var(--abyss-red)">†</span> КВЕСТ: ВОЗНЕСЕНИЕ К ВЗРОСЛЕНИЮ <span style="color: var(--abyss-red)">†</span>
             </h2>
             
-            <p style="line-height: 1.6; margin: 20px 0;">
-                <span style="color: var(--bonfire-orange)">Chosen Undead</span>, you stand at the precipice of a new Age.<br>
-                To claim your <span style="color: var(--estus-yellow)">License of Adulthood</span>, you must gather three <span style="color: var(--souls-blue)">"Soul Shards"</span> - 
-                manifestations of your companions' <span style="color: var(--abyss-red)">Stands</span>.<br>
-                Each shard holds a fragment of experience, a memory forged in friendship's fire.
+            <p style="line-height: 1.6; margin: 20px 0; text-align: center;">
+                <span style="color: var(--bonfire-orange)">Избранный Негорящий</span>, ты стоишь на пороге новой Эры.<br>
+                Чтобы получить свою <span style="color: var(--estus-yellow)">Лицензию Взросления</span>, ты должен собрать три <span style="color: var(--souls-blue)">"Осколка Души"</span> - 
+                проявления <span style="color: var(--abyss-red)">Стендов</span> твоих соратников.<br>
+                Каждый осколок содержит фрагмент опыта, воспоминание, выкованное в огне дружбы.
             </p>
             
-            <p style="font-style: italic; color: #aaa; border-left: 3px solid var(--undead-purple); padding-left: 15px; margin: 25px 0;">
-                "Fear not the dark, my friend, and let the feast begin."<br>
-                - But with 21 years comes great responsibility... and great gaming sessions.
+            <p style="font-style: italic; color: #aaa; border-left: 3px solid var(--undead-purple); padding-left: 15px; margin: 25px 0; text-align: center;">
+                "Не бойся тьмы, мой друг, и пусть пир начнётся."<br>
+                — Но с 21 годом приходит великая ответственность... и великие игровые сессии.
             </p>
         </div>
 
-        <!-- Стенды-души -->
+        <!-- СТЕНДЫ-ДУШИ С ПЕРЕВОДОМ -->
         <h2 style="text-align: center; color: var(--estus-yellow); margin: 40px 0 20px 0;">
             <span style="color: var(--abyss-red)">《</span> 
-            SOUL STANDS AWAITING 
+            ОСКОЛКИ ДУШ, ОЖИДАЮЩИЕ ТЕБЯ 
             <span style="color: var(--abyss-red)">》</span>
         </h2>
         
         <div class="stand-grid">
-            <!-- Математик - Soul Stand 1 -->
+            <!-- Математик - Осколок Души 1 -->
             <div class="stand-item" onclick="navigateTo('puzzle_math.html')">
                 <div class="stand-icon" style="background: linear-gradient(135deg, var(--souls-blue), #000);">∫</div>
                 <div class="stand-status" id="status-math"></div>
                 <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «CALCULUS REQUIEM»
+                    «РЕКВИЕМ ПО МАТАНУ»
                 </h3>
                 <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keeper:</strong> The Mathematician<br>
-                    <strong>Soul Type:</strong> Logical Flame<br>
-                    <strong>Power:</strong> ∞ (Transcendent)
+                    <strong>Хранитель:</strong> Математик<br>
+                    <strong>Тип Души:</strong> Логическое Пламя<br>
+                    <strong>Сила:</strong> ∞ (Трансцендентная)
                 </p>
                 <p style="font-size: 0.9em; color: #aaa;">
-                    This Stand bends reality through mathematical truth. Its equations can unravel the fabric of the mundane world.
+                    Этот Стенд искривляет реальность через математическую истину. Его уравнения способны распутать ткань обыденного мира.
                 </p>
                 <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    CHALLENGE THIS STAND → ゴ
+                    БРОСИТЬ ВЫЗОВ ЭТОМУ СТЕНДУ → ゴ
                 </button>
             </div>
             
-            <!-- Экономист/Переводчик - Soul Stand 2 -->
+            <!-- Экономист/Переводчик - Осколок Души 2 -->
             <div class="stand-item" onclick="navigateTo('puzzle_economist.html')">
                 <div class="stand-icon" style="background: linear-gradient(135deg, var(--undead-purple), #000);">⚖️</div>
                 <div class="stand-status" id="status-economist"></div>
                 <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «GOLDEN CONTRACT»
+                    «ЗОЛОТОЙ КОНТРАКТ»
                 </h3>
                 <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keepers:</strong> Economist & Translator<br>
-                    <strong>Soul Type:</strong Binding Oath<br>
-                    <strong>Range:</strong> A (Wide)
+                    <strong>Хранители:</strong> Экономист & Переводчик<br>
+                    <strong>Тип Души:</strong> Связывающая Клятва<br>
+                    <strong>Дальность:</strong> А (Широкая)
                 </p>
                 <p style="font-size: 0.9em; color: #aaa;">
-                    Words given weight, contracts made manifest. This Stand enforces agreements upon reality itself.
+                    Словам придан вес, контракты материализованы. Этот Стенд навязывает реальности соглашения между людьми.
                 </p>
                 <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    NEGOTIATE TERMS → メ
+                    ОБСУДИТЬ УСЛОВИЯ → メ
                 </button>
             </div>
             
-            <!-- Программист - Soul Stand 3 -->
+            <!-- Программист - Осколок Души 3 -->
             <div class="stand-item" onclick="navigateTo('puzzle_programmer.html')">
                 <div class="stand-icon" style="background: linear-gradient(135deg, var(--abyss-red), #000);">{ }</div>
                 <div class="stand-status" id="status-programmer"></div>
                 <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «DIGITAL OVERDRIVE»
+                    «ЦИФРОВОЙ ОВЕРДРАЙВ»
                 </h3>
                 <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keeper:</strong> The Programmer<br>
-                    <strong>Soul Type:</strong> Reality Hack<br>
-                    <strong>Speed:</strong> S (Maximum)
+                    <strong>Хранитель:</strong> Программист<br>
+                    <strong>Тип Души:</strong> Взлом Реальности<br>
+                    <strong>Скорость:</strong> S (Максимальная)
                 </p>
                 <p style="font-size: 0.9em; color: #aaa;">
-                    Code becomes will, syntax becomes law. This Stand rewrites the world's source code in real-time.
+                    Код становится волей, синтаксис — законом. Этот Стенд переписывает исходный код мира в реальном времени.
                 </p>
                 <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    HACK REALITY → ム
+                    ВЗЛОМАТЬ РЕАЛЬНОСТЬ → ム
                 </button>
             </div>
         </div>
         
-        <!-- Финальный вызов -->
-        <div style="text-align: center; margin: 50px 0; padding: 30px; border-top: 2px dashed var(--bonfire-orange);">
+        <!-- ФИНАЛЬНЫЙ ВЫЗОВ С ПЕРЕВОДОМ -->
+        <div class="final-challenge">
             <p style="color: var(--estus-yellow); font-size: 1.2rem; margin-bottom: 20px;">
-                When all three Soul Shards are gathered, approach the First Flame...
+                Когда все три Осколка Души будут собраны, приблизься к Первому Пламени...
             </p>
             <button class="hybrid-button" id="final-button" disabled style="opacity: 0.5; padding: 15px 40px; font-size: 1.3rem;">
-                KINDLING DISABLED - GATHER SOULS FIRST
+                ВОЗЖИГАНИЕ ЗАБЛОКИРОВАНО - СОБЕРИТЕ ДУШИ
             </button>
-            <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">
-                <em>«Do not dare go hollow on this journey, chosen engineer.»</em>
+            <p style="color: #666; font-size: 0.9rem; margin-top: 15px; text-align: center;">
+                <em>«Не смей опустошиться в этом путешествии, избранный инженер.»</em>
             </p>
         </div>
         
-        <!-- Легенда -->
-        <div style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 5px; margin-top: 40px; border: 1px solid #333;">
-            <h4 style="color: var(--bonfire-orange); margin-bottom: 10px;">¶ LEGEND OF THE FLAME ¶</h4>
-            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; text-align: center;">
+        <!-- ЛЕГЕНДА С ПЕРЕВОДОМ -->
+        <div class="legend-container">
+            <h4 style="color: var(--bonfire-orange); margin-bottom: 10px; text-align: center;">¶ ЛЕГЕНДА ПЛАМЕНИ ¶</h4>
+            <div class="legend-items">
                 <div>
                     <div style="color: var(--estus-yellow); font-size: 1.5rem;">🔥</div>
-                    <div style="font-size: 0.8rem;">Bonfire<br><span style="color: #aaa;">Rest Point</span></div>
+                    <div style="font-size: 0.8rem;">Костёр<br><span style="color: #aaa;">Точка Отдыха</span></div>
                 </div>
                 <div>
                     <div style="color: var(--souls-blue); font-size: 1.5rem;">💎</div>
-                    <div style="font-size: 0.8rem;">Soul Shard<br><span style="color: #aaa;">Stand Fragment</span></div>
+                    <div style="font-size: 0.8rem;">Осколок Души<br><span style="color: #aaa;">Фрагмент Стенда</span></div>
                 </div>
                 <div>
                     <div style="color: var(--abyss-red); font-size: 1.5rem;">ゴ</div>
-                    <div style="font-size: 0.8rem;">Stand Cry<br><span style="color: #aaa;">Sound Effect</span></div>
+                    <div style="font-size: 0.8rem;">Крик Стенда<br><span style="color: #aaa;">Звуковой Эффект</span></div>
                 </div>
                 <div>
                     <div style="color: var(--undead-purple); font-size: 1.5rem;">⚔️</div>
-                    <div style="font-size: 0.8rem;">Challenge<br><span style="color: #aaa;">Puzzle Battle</span></div>
+                    <div style="font-size: 0.8rem;">Испытание<br><span style="color: #aaa;">Битва-Головоломка</span></div>
                 </div>
             </div>
         </div>
@@ -353,7 +406,7 @@
                 const finalBtn = document.getElementById('final-button');
                 finalBtn.disabled = false;
                 finalBtn.style.opacity = '1';
-                finalBtn.innerHTML = 'APPROACH THE FIRST FLAME → 🔥';
+                finalBtn.innerHTML = 'ПРИБЛИЗИТЬСЯ К ПЕРВОМУ ПЛАМЕНИ → 🔥';
                 finalBtn.onclick = () => window.location.href = 'final.html';
                 
                 // Зажигаем костёр
@@ -369,7 +422,7 @@
         
         function restAtBonfire() {
             playEstusSound();
-            alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> Stand Power: 100%\n\nPraise the Sun! \\[T]/\n\nNow go forth, chosen engineer. The Age of Adulthood awaits.');
+            alert('>> КОСТЁР ЗАЖЖЁН\n>> ЧЕЛОВЕЧНОСТЬ ВОССТАНОВЛЕНА\n>> Фляга с Эстусом пополнена\n>> Сила Стенда: 100%\n\nСлавься Солнце! \\[T]/\n\nТеперь иди вперёд, избранный инженер. Эра Взросления ждёт.');
         }
         
         function createSoulParticles() {
