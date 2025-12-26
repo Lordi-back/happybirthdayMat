@@ -2,254 +2,417 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>ADULT_LICENSE.exe - JOJO EDITION</title>
+    <title>KINDLE THE FIRST FLAME | 成人の証</title>
     <link rel="stylesheet" href="terminal.css">
-    <link rel="stylesheet" href="jojo-styles.css">
+    <link rel="stylesheet" href="hybrid-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
-        /* Дополнительные стили для JoJo */
         body {
             background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(65, 105, 225, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(220, 20, 60, 0.05) 0%, transparent 50%),
-                #000;
-            overflow-x: hidden;
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path d="M20,50 Q50,20 80,50 T140,50" stroke="%23FF6B00" fill="none"/></svg>'),
+                radial-gradient(circle at 30% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 40%),
+                #0a0a0a;
+            min-height: 100vh;
         }
         
-        .jojo-header {
+        .page-title {
+            font-family: 'MedievalSharp', cursive;
             text-align: center;
-            margin: 40px 0;
+            color: var(--estus-yellow);
+            font-size: 3rem;
+            margin: 2rem 0;
             position: relative;
+            text-shadow: 
+                3px 3px 0 #000,
+                0 0 20px rgba(255, 107, 0, 0.7);
         }
         
-        .jojo-subtitle {
-            font-family: 'MS Gothic', monospace;
-            color: #4169E1;
-            font-size: 18px;
-            letter-spacing: 3px;
-            margin-top: 10px;
-        }
-        
-        .mission-box {
-            border: 4px double #FFD700;
-            padding: 30px;
-            margin: 40px auto;
-            max-width: 800px;
-            background: rgba(0, 0, 0, 0.8);
-            position: relative;
-        }
-        
-        .mission-box::before,
-        .mission-box::after {
-            content: '■';
-            color: #DC143C;
-            font-size: 24px;
+        .page-title::after {
+            content: '¶';
+            color: var(--abyss-red);
+            font-size: 2rem;
             position: absolute;
+            right: -30px;
+            top: 10px;
+            animation: pulse 2s infinite;
         }
         
-        .mission-box::before {
+        .subtitle {
+            text-align: center;
+            color: var(--souls-blue);
+            font-family: 'MS Gothic', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+        }
+        
+        .quest-log {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px double var(--bonfire-orange);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            position: relative;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .quest-log::before {
+            content: '✧';
+            position: absolute;
             top: -15px;
-            left: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            padding: 0 15px;
+            color: var(--estus-yellow);
+            font-size: 1.5rem;
         }
         
-        .mission-box::after {
-            bottom: -15px;
-            right: -15px;
+        .stand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stand-item {
+            background: linear-gradient(145deg, 
+                rgba(20, 20, 20, 0.9) 0%,
+                rgba(65, 105, 225, 0.1) 50%,
+                rgba(20, 20, 20, 0.9) 100%);
+            padding: 1.5rem;
+            border-left: 4px solid var(--bonfire-orange);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stand-item:hover {
+            transform: translateX(10px);
+            border-left-color: var(--estus-yellow);
+            box-shadow: 
+                -10px 0 20px rgba(255, 107, 0, 0.3),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        
+        .stand-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bonfire-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .stand-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #444;
+        }
+        
+        .stand-status.active {
+            background: var(--estus-yellow);
+            box-shadow: 0 0 10px var(--estus-yellow);
+        }
+        
+        .bonfire-corner {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 100px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: 1000;
+        }
+        
+        .bonfire-lit {
+            opacity: 1;
+            animation: bonfire-glow 3s infinite alternate;
+        }
+        
+        @keyframes bonfire-glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.7)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body class="terminal">
-    <!-- Японские символы по краям -->
-    <div class="japanese-border top">メメメメメメメメメメメメメメメメメメメメメメメメメ</div>
-    <div class="japanese-border bottom">ムムムムムムムムムムムムムムムムムムムムムムムムム</div>
-    <div class="japanese-border left">覚<br>醒<br>！<br>ス<br>タ<br>ン<br>ド<br>発<br>動<br>！</div>
-    <div class="japanese-border right">成<br>人<br>認<br>可<br>！<br>２<br>１<br>＋<br>！</div>
+    <!-- Гибридные символы по краям -->
+    <div class="japanese-border top dynamic-symbols"></div>
+    <div class="japanese-border bottom dynamic-symbols"></div>
+    <div class="japanese-border left">火<br>継<br>ぐ<br>者<br>へ</div>
+    <div class="japanese-border right">魂<br>の<br>価<br>値</div>
 
-    <div class="container" style="max-width: 1200px;">
-        <div class="jojo-header">
-            <h1 class="jojo-title">ADULT LICENSE.exe</h1>
-            <p class="jojo-subtitle">STAND POWER: [ ENGINEER TYPE ] - REQUIRES 3 CRYSTAL KEYS</p>
-        </div>
-
-        <div class="mission-box">
-            <h2 style="color: #FFD700; text-align: center;">>> MISSION BRIEFING</h2>
-            <p style="text-align: center; margin: 20px 0;">
-                <span class="menacing-text">危機</span> エンジニア! あなたの <span style="color: #DC143C;">「成人ライセンス」</span> は準備完了です。<br>
-                しかし、<span style="color: #4169E1;">3つのスタンド使い</span> から <span style="color: #FFD700;">「経験の結晶」</span> を集める必要があります。
-            </p>
-            
-            <div class="stands-container">
-                <!-- Стенд 1: Математик -->
-                <div class="stand-card" style="--order: 0;">
-                    <div class="stand-inner">
-                        <div class="stand-front">
-                            <!-- ВСТАВЬТЕ ВАШУ КАРТИНКУ СТЕНДА -->
-                            <img src="path/to/your/math-stand-image.jpg" alt="Stand: Mathematical Mind" class="stand-image">
-                            <div class="stand-name">CALCULUS REQUIEM</div>
-                            <div class="stand-user">The Mathematician</div>
-                            <p style="color: #aaa; margin-top: 15px;">Power: ∞</p>
-                        </div>
-                        <div class="stand-back">
-                            <h3 style="color: #FFD700;">STAND ABILITY</h3>
-                            <p class="stand-ability">「無限の計算」 - 複雑な数式を瞬時に解析し、現実を歪めることができる。</p>
-                            <div class="stand-stats">
-                                <div class="stat-item">
-                                    <div class="stat-label">精密性</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">速度</div>
-                                    <div class="stat-value">B</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">持続</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">成長性</div>
-                                    <div class="stat-value">∞</div>
-                                </div>
-                            </div>
-                            <a href="puzzle_math.html" class="jojo-button" style="margin-top: 20px;">
-                                CHALLENGE!
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Стенд 2: Экономист/Переводчик -->
-                <div class="stand-card" style="--order: 1;">
-                    <div class="stand-inner">
-                        <div class="stand-front">
-                            <!-- ВСТАВЬТЕ ВАШУ КАРТИНКУ СТЕНДА -->
-                            <img src="path/to/your/economist-stand-image.jpg" alt="Stand: Market Oracle" class="stand-image">
-                            <div class="stand-name">GOLDEN CONTRACT</div>
-                            <div class="stand-user">Economist & Translator</div>
-                            <p style="color: #aaa; margin-top: 15px;">Power: A</p>
-                        </div>
-                        <div class="stand-back">
-                            <h3 style="color: #FFD700;">STAND ABILITY</h3>
-                            <p class="stand-ability">「契約の縛り」 - 書かれた契約を現実の法則に変え、言葉を物理的力に変換する。</p>
-                            <div class="stand-stats">
-                                <div class="stat-item">
-                                    <div class="stat-label">影響範囲</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">柔軟性</div>
-                                    <div class="stat-value">B</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">忠実度</div>
-                                    <div class="stat-value">S</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">多言語</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                            </div>
-                            <a href="puzzle_economist.html" class="jojo-button" style="margin-top: 20px;">
-                                NEGOTIATE!
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Стенд 3: Программист -->
-                <div class="stand-card" style="--order: 2;">
-                    <div class="stand-inner">
-                        <div class="stand-front">
-                            <!-- ВСТАВЬТЕ ВАШУ КАРТИНКУ СТЕНДА -->
-                            <img src="path/to/your/programmer-stand-image.jpg" alt="Stand: Code Breaker" class="stand-image">
-                            <div class="stand-name">DIGITAL OVERDRIVE</div>
-                            <div class="stand-user">The Programmer</div>
-                            <p style="color: #aaa; margin-top: 15px;">Power: S</p>
-                        </div>
-                        <div class="stand-back">
-                            <h3 style="color: #FFD700;">STAND ABILITY</h3>
-                            <p class="stand-ability">「現実のハッキング」 - デジタル世界の法則を現実に適用し、コードで物理法則を上書きする。</p>
-                            <div class="stand-stats">
-                                <div class="stat-item">
-                                    <div class="stat-label">技術力</div>
-                                    <div class="stat-value">S</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">創造性</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">バグ耐性</div>
-                                    <div class="stat-value">B</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label">進化速度</div>
-                                    <div class="stat-value">A</div>
-                                </div>
-                            </div>
-                            <a href="puzzle_programmer.html" class="jojo-button" style="margin-top: 20px;">
-                                HACK!
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin: 50px 0;">
-            <p style="color: #aaa; font-style: italic;">
-                "スタンドは心の力... そして友情の形だ。"
-            </p>
-            <button class="jojo-button" onclick="startAdventure()" style="font-size: 24px; padding: 20px 50px;">
-                冒険を始める! 
-            </button>
+    <!-- Костёр (появится после прохождения) -->
+    <div id="bonfire-corner" class="bonfire-corner" onclick="restAtBonfire()" title="Rest at Bonfire">
+        <div style="text-align: center;">
+            <div style="font-size: 40px;">🔥</div>
+            <div style="font-size: 12px; color: var(--estus-yellow);">Bonfire</div>
         </div>
     </div>
 
-    <script src="jojo-sounds.js"></script>
-    <script>
-        function startAdventure() {
-            window.jojoSounds.playJojoSound('wryyy');
-            
-            // Эффект перехода
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: #000;
-                z-index: 100000;
-                opacity: 0;
-                animation: fadeIn 0.5s forwards;
-            `;
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeIn {
-                    to { opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            document.body.appendChild(overlay);
-            
-            setTimeout(() => {
-                window.location.href = 'puzzle_math.html';
-            }, 500);
-        }
+    <div class="container" style="max-width: 1200px; position: relative; z-index: 100;">
+        <!-- Частицы душ -->
+        <div id="soul-particles"></div>
+
+        <h1 class="page-title">KINDLING THE ADULT FLAME</h1>
+        <p class="subtitle">¶ スタンドは魂の形 ¶ Stands are but Souls given Form ¶</p>
         
-        // Анимация появления стендов
-        document.addEventListener('DOMContentLoaded', () => {
-            const stands = document.querySelectorAll('.stand-card');
-            stands.forEach((stand, index) => {
-                stand.style.animationDelay = `${index * 0.2}s`;
+        <div class="quest-log">
+            <h2 style="color: var(--estus-yellow); border-bottom: 2px solid var(--bonfire-orange); padding-bottom: 10px;">
+                <span style="color: var(--abyss-red)">†</span> QUEST: ASCENSION TO ADULTHOOD <span style="color: var(--abyss-red)">†</span>
+            </h2>
+            
+            <p style="line-height: 1.6; margin: 20px 0;">
+                <span style="color: var(--bonfire-orange)">Chosen Undead</span>, you stand at the precipice of a new Age.<br>
+                To claim your <span style="color: var(--estus-yellow)">License of Adulthood</span>, you must gather three <span style="color: var(--souls-blue)">"Soul Shards"</span> - 
+                manifestations of your companions' <span style="color: var(--abyss-red)">Stands</span>.<br>
+                Each shard holds a fragment of experience, a memory forged in friendship's fire.
+            </p>
+            
+            <p style="font-style: italic; color: #aaa; border-left: 3px solid var(--undead-purple); padding-left: 15px; margin: 25px 0;">
+                "Fear not the dark, my friend, and let the feast begin."<br>
+                - But with 21 years comes great responsibility... and great gaming sessions.
+            </p>
+        </div>
+
+        <!-- Стенды-души -->
+        <h2 style="text-align: center; color: var(--estus-yellow); margin: 40px 0 20px 0;">
+            <span style="color: var(--abyss-red)">《</span> 
+            SOUL STANDS AWAITING 
+            <span style="color: var(--abyss-red)">》</span>
+        </h2>
+        
+        <div class="stand-grid">
+            <!-- Математик - Soul Stand 1 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_math.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--souls-blue), #000);">∫</div>
+                <div class="stand-status" id="status-math"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «CALCULUS REQUIEM»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keeper:</strong> The Mathematician<br>
+                    <strong>Soul Type:</strong> Logical Flame<br>
+                    <strong>Power:</strong> ∞ (Transcendent)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    This Stand bends reality through mathematical truth. Its equations can unravel the fabric of the mundane world.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    CHALLENGE THIS STAND → ゴ
+                </button>
+            </div>
+            
+            <!-- Экономист/Переводчик - Soul Stand 2 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_economist.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--undead-purple), #000);">⚖️</div>
+                <div class="stand-status" id="status-economist"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «GOLDEN CONTRACT»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keepers:</strong> Economist & Translator<br>
+                    <strong>Soul Type:</strong Binding Oath<br>
+                    <strong>Range:</strong> A (Wide)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    Words given weight, contracts made manifest. This Stand enforces agreements upon reality itself.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    NEGOTIATE TERMS → メ
+                </button>
+            </div>
+            
+            <!-- Программист - Soul Stand 3 -->
+            <div class="stand-item" onclick="navigateTo('puzzle_programmer.html')">
+                <div class="stand-icon" style="background: linear-gradient(135deg, var(--abyss-red), #000);">{ }</div>
+                <div class="stand-status" id="status-programmer"></div>
+                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
+                    «DIGITAL OVERDRIVE»
+                </h3>
+                <p style="color: #ccc; margin-bottom: 15px;">
+                    <strong>Keeper:</strong> The Programmer<br>
+                    <strong>Soul Type:</strong> Reality Hack<br>
+                    <strong>Speed:</strong> S (Maximum)
+                </p>
+                <p style="font-size: 0.9em; color: #aaa;">
+                    Code becomes will, syntax becomes law. This Stand rewrites the world's source code in real-time.
+                </p>
+                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
+                    HACK REALITY → ム
+                </button>
+            </div>
+        </div>
+        
+        <!-- Финальный вызов -->
+        <div style="text-align: center; margin: 50px 0; padding: 30px; border-top: 2px dashed var(--bonfire-orange);">
+            <p style="color: var(--estus-yellow); font-size: 1.2rem; margin-bottom: 20px;">
+                When all three Soul Shards are gathered, approach the First Flame...
+            </p>
+            <button class="hybrid-button" id="final-button" disabled style="opacity: 0.5; padding: 15px 40px; font-size: 1.3rem;">
+                KINDLING DISABLED - GATHER SOULS FIRST
+            </button>
+            <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">
+                <em>«Do not dare go hollow on this journey, chosen engineer.»</em>
+            </p>
+        </div>
+        
+        <!-- Легенда -->
+        <div style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 5px; margin-top: 40px; border: 1px solid #333;">
+            <h4 style="color: var(--bonfire-orange); margin-bottom: 10px;">¶ LEGEND OF THE FLAME ¶</h4>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; text-align: center;">
+                <div>
+                    <div style="color: var(--estus-yellow); font-size: 1.5rem;">🔥</div>
+                    <div style="font-size: 0.8rem;">Bonfire<br><span style="color: #aaa;">Rest Point</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--souls-blue); font-size: 1.5rem;">💎</div>
+                    <div style="font-size: 0.8rem;">Soul Shard<br><span style="color: #aaa;">Stand Fragment</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--abyss-red); font-size: 1.5rem;">ゴ</div>
+                    <div style="font-size: 0.8rem;">Stand Cry<br><span style="color: #aaa;">Sound Effect</span></div>
+                </div>
+                <div>
+                    <div style="color: var(--undead-purple); font-size: 1.5rem;">⚔️</div>
+                    <div style="font-size: 0.8rem;">Challenge<br><span style="color: #aaa;">Puzzle Battle</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="hybrid-sounds.js"></script>
+    <script>
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем прогресс
+            checkProgress();
+            
+            // Создаём частицы душ
+            createSoulParticles();
+            
+            // Привязываем звуки к кнопкам
+            const buttons = document.querySelectorAll('.hybrid-button, .stand-item');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    // 50% шанс звука Dark Souls, 50% JoJo
+                    if (Math.random() > 0.5) {
+                        playSoulsSound();
+                    } else {
+                        playJojoSound();
+                    }
+                });
+                
+                button.addEventListener('click', () => {
+                    playEstusSound();
+                });
             });
             
-            // Случайные звуки при загрузке
-            setTimeout(() => {
-                if (Math.random() > 0.5) {
-                    window.jojoSounds.playJojoSound('dora');
-                }
-            }, 1000);
+            // Проверяем, зажжён ли костёр
+            if (localStorage.getItem('bonfire_lit') === 'true') {
+                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
+            }
         });
+        
+        function checkProgress() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            
+            // Обновляем статусы стендов
+            if (progress.math) {
+                document.getElementById('status-math').classList.add('active');
+            }
+            if (progress.economist) {
+                document.getElementById('status-economist').classList.add('active');
+            }
+            if (progress.programmer) {
+                document.getElementById('status-programmer').classList.add('active');
+            }
+            
+            // Активируем финальную кнопку если всё пройдено
+            if (progress.math && progress.economist && progress.programmer) {
+                const finalBtn = document.getElementById('final-button');
+                finalBtn.disabled = false;
+                finalBtn.style.opacity = '1';
+                finalBtn.innerHTML = 'APPROACH THE FIRST FLAME → 🔥';
+                finalBtn.onclick = () => window.location.href = 'final.html';
+                
+                // Зажигаем костёр
+                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
+                localStorage.setItem('bonfire_lit', 'true');
+            }
+        }
+        
+        function navigateTo(page) {
+            playBonfireSound();
+            window.location.href = page;
+        }
+        
+        function restAtBonfire() {
+            playEstusSound();
+            alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> Stand Power: 100%\n\nPraise the Sun! \\[T]/\n\nNow go forth, chosen engineer. The Age of Adulthood awaits.');
+        }
+        
+        function createSoulParticles() {
+            const container = document.getElementById('soul-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'soul-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.width = particle.style.height = (Math.random() * 6 + 4) + 'px';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Звуковые функции
+        function playSoulsSound() {
+            // Звук Dark Souls (меч, доспехи и т.д.)
+            if (window.hybridSounds) {
+                window.hybridSounds.playSoulsSound();
+            }
+        }
+        
+        function playJojoSound() {
+            // Звук JoJo
+            if (window.hybridSounds) {
+                window.hybridSounds.playJojoSound();
+            }
+        }
+        
+        function playEstusSound() {
+            // Звук употребления эстуса
+            if (window.hybridSounds) {
+                window.hybridSounds.playEstusSound();
+            }
+        }
+        
+        function playBonfireSound() {
+            // Звук костра
+            if (window.hybridSounds) {
+                window.hybridSounds.playBonfireSound();
+            }
+        }
     </script>
 </body>
 </html>
