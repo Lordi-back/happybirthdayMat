@@ -2,435 +2,479 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>SOUL SHARD 2: Golden Contract</title>
-    <link rel="stylesheet" href="terminal.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЗОЛОТОЙ КОНТРАКТ | Головоломка</title>
     <link rel="stylesheet" href="hybrid-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
+            margin: 0;
+            padding: 0;
             background: 
-                linear-gradient(135deg, 
-                    rgba(0, 0, 0, 0.95) 0%,
-                    rgba(138, 43, 226, 0.1) 50%,
-                    rgba(0, 0, 0, 0.95) 100%),
-                url('7ea98628-b5a8-43a4-b71e-24331ad752b5_702d7457-0cb1-4416-9b8d-2fdec4ba02e7.png')
+                /* Затемнение фона чтобы текст читался */
+                linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+                url('economist-stand.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #f0e6d2;
+            font-family: 'Cinzel', serif;
             min-height: 100vh;
+            position: relative;
         }
         
-       
- body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('7ea98628-b5a8-43a4-b71e-24331ad752b5_702d7457-0cb1-4416-9b8d-2fdec4ba02e7.png');
-        background-size: cover;
-        background-position: center;
-        opacity: 0.1;
-        z-index: 0;
-        pointer-events: none;
-    }
-        .container {
-        position: relative;
-        z-index: 100;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(5px);
-        border-radius: 15px;
-        margin-top: 20px;
-        padding: 30px;
-    }
-
-        
+        /* Контейнер с полупрозрачным фоном */
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
-            z-index: 100;
+            z-index: 10;
         }
         
-        .page-header {
+        /* Заголовок */
+        .page-title {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px double var(--bonfire-orange);
-            position: relative;
-        }
-        
-        .soul-title {
             font-family: 'MedievalSharp', cursive;
-            color: var(--estus-yellow);
-            font-size: 2.5rem;
-            margin: 0;
+            font-size: 3.5rem;
+            color: #ffd700;
             text-shadow: 
-                2px 2px 0 #000,
-                0 0 15px rgba(255, 107, 0, 0.7);
+                0 0 10px rgba(255, 215, 0, 0.5),
+                0 0 20px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
         }
         
-        .stand-subtitle {
-            color: var(--souls-blue);
-            font-family: 'MS Gothic', monospace;
-            letter-spacing: 2px;
-            margin-top: 10px;
-            font-size: 1.1rem;
+        .subtitle {
+            text-align: center;
+            color: #9370db;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-style: italic;
         }
         
-        .puzzle-container {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--bonfire-orange);
+        /* Блок загадки - ПОЛУПРОЗРАЧНЫЙ */
+        .puzzle-box {
+            background: rgba(30, 25, 20, 0.8); /* 80% прозрачности */
+            border: 3px solid #8b7355;
             border-radius: 10px;
             padding: 30px;
             margin: 30px 0;
             box-shadow: 
-                0 0 30px rgba(255, 107, 0, 0.2),
+                0 0 30px rgba(147, 112, 219, 0.3),
                 inset 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px); /* Лёгкое размытие для красоты */
         }
         
-        .stand-card {
-            display: flex;
-            align-items: center;
-            background: rgba(20, 20, 40, 0.6);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--souls-blue);
+        .puzzle-title {
+            color: #ffa500;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid #8b7355;
+            padding-bottom: 10px;
         }
         
-        .stand-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--souls-blue), #000);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 2.5rem;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .stand-info h3 {
-            color: var(--estus-yellow);
-            margin: 0 0 10px 0;
+        /* Загадка */
+        .riddle {
+            font-family: 'Cinzel', serif;
             font-size: 1.4rem;
-        }
-        
-        .riddle-box {
-            background: rgba(0, 10, 20, 0.7);
-            border: 1px solid rgba(65, 105, 225, 0.3);
+            color: #f0e6d2;
+            text-align: center;
+            margin: 30px 0;
             padding: 25px;
-            border-radius: 5px;
-            margin: 25px 0;
-            font-family: 'Courier New', monospace;
+            background: rgba(50, 40, 30, 0.5);
+            border-radius: 8px;
+            border: 1px solid #d4af37;
             line-height: 1.6;
         }
         
-        .riddle-text {
-            color: #ccc;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+        .riddle-highlight {
+            color: #ffd700;
+            font-weight: bold;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
         
-        .code-block {
-            background: #001122;
-            color: #0f0;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            margin: 15px 0;
-            border-left: 3px solid var(--estus-yellow);
-            overflow-x: auto;
+        /* Блок с данными - ПОЛУПРОЗРАЧНЫЙ */
+        .data-box {
+            background: rgba(40, 35, 50, 0.7);
+            border-left: 4px solid #9370db;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
         }
         
-        .input-group {
-            margin: 30px 0;
+        .data-box h3 {
+            color: #b19cd9;
+            margin-top: 0;
         }
         
-        .jojo-input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--bonfire-orange);
-            color: var(--estus-yellow);
-            font-size: 1.2rem;
-            font-family: 'MS Gothic', monospace;
-            border-radius: 5px;
+        .data-item {
+            margin: 12px 0;
+            color: #e0c9a6;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .data-item::before {
+            content: '⚖️';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        /* Поле ввода */
+        .input-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .input-label {
+            display: block;
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .answer-input {
+            width: 300px;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #8b7355;
+            border-radius: 8px;
+            color: #f0e6d2;
+            margin: 0 10px;
             transition: all 0.3s;
         }
         
-        .jojo-input:focus {
+        .answer-input:focus {
             outline: none;
-            border-color: var(--estus-yellow);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         
-        .hint-text {
-            color: #888;
+        /* Формат ответа */
+        .format-hint {
+            color: #87ceeb;
             font-size: 0.9rem;
             margin-top: 10px;
             font-style: italic;
         }
         
-        .success-section {
-            display: none;
-            margin-top: 40px;
-            padding: 30px;
-            background: rgba(0, 30, 0, 0.3);
-            border: 2px solid var(--estus-yellow);
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .key-reveal {
-            font-size: 2rem;
-            color: var(--estus-yellow);
-            font-family: 'MS Gothic', monospace;
-            letter-spacing: 5px;
-            margin: 20px 0;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-        }
-        
-        .video-placeholder {
-            width: 100%;
-            height: 300px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px dashed var(--bonfire-orange);
+        /* Кнопки */
+        .button-group {
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #888;
-            margin: 20px 0;
-            font-family: 'MS Gothic', monospace;
+            gap: 20px;
+            margin-top: 25px;
         }
         
+        .hybrid-button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            min-width: 180px;
+        }
+        
+        /* Подсказка */
+        .hint {
+            background: rgba(147, 112, 219, 0.15);
+            border: 1px dashed #9370db;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 8px;
+            color: #d8bfd8;
+            font-style: italic;
+        }
+        
+        /* Навигация */
         .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
+            text-align: center;
+            margin-top: 50px;
             padding-top: 20px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #444;
         }
         
-        .back-link {
-            color: var(--souls-blue);
+        .nav-link {
+            color: #b19cd9;
             text-decoration: none;
-            font-family: 'MS Gothic', monospace;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border: 1px solid #9370db;
+            border-radius: 5px;
             transition: all 0.3s;
         }
         
-        .back-link:hover {
-            color: var(--estus-yellow);
-            transform: translateX(-5px);
+        .nav-link:hover {
+            background: rgba(147, 112, 219, 0.2);
+            color: #e6e6fa;
         }
         
-        .soul-particles {
+        /* Экономические символы по краям */
+        .econ-symbols {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.1);
             z-index: 1;
+            user-select: none;
         }
-       
-      
+        
+        .econ-left {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .econ-right {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.5rem; }
+            .riddle { font-size: 1.2rem; padding: 15px; }
+            .answer-input { width: 250px; }
+            .button-group { flex-direction: column; align-items: center; }
+            .econ-symbols { display: none; }
+        }
     </style>
 </head>
-<body class="terminal">
-    <!-- Японские символы -->
-    <div class="japanese-border top">契約条項義務権利金銭</div>
-    <div class="japanese-border bottom">経済翻訳契約の力</div>
-    
-    <div class="container" style="max-width: 800px;">
-        <!-- Заголовок -->
-        <div class="page-header">
-            <h1 class="soul-title">«GOLDEN CONTRACT»</h1>
-            <p class="stand-subtitle">STAND USERS: ECONOMIST & TRANSLATOR | SOUL TYPE: BINDING OATH</p>
-        </div>
+<body>
+    <!-- Экономические символы на фоне -->
+    <div class="econ-symbols econ-left">
+        $<br>€<br>£<br>¥<br>₽<br>%
+    </div>
+    <div class="econ-symbols econ-right">
+        📈<br>📉<br>⚖️<br>📊<br>💎<br>📜
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">⚖️ ЗОЛОТОЙ КОНТРАКТ ⚖️</h1>
+        <p class="subtitle">Стенд Экономиста & Переводчика | Связывающая Клятва | Дальность: А</p>
         
-        <!-- Стенд -->
-        <div class="stand-card">
-            <div class="stand-icon">⚖️</div>
-            <div class="stand-info">
-                <h3>GOLDEN CONTRACT</h3>
-                <p style="color: #aaa; margin: 0;">Stand Ability: «Contract Manifestation» — Words given weight, agreements made real</p>
-                <p style="color: var(--undead-purple); margin-top: 5px; font-size: 0.9rem;">
-                    Influence: A | Flexibility: B | Loyalty: S | Potential: A
-                </p>
-            </div>
-        </div>
-        
-        <!-- Загадка -->
-        <div class="puzzle-container">
-            <h2 style="color: var(--estus-yellow); text-align: center; margin-bottom: 25px;">
-                謎 №2: THE ADULTHOOD CONTRACT
-            </h2>
+        <div class="puzzle-box">
+            <h2 class="puzzle-title">‡ ДОГОВОР С РЕАЛЬНОСТЬЮ ‡</h2>
             
-            <div class="riddle-box">
-                <p class="riddle-text">
-                    <span style="color: var(--undead-purple);">「経済学者＆翻訳者より」</span><br>
-                    Engineer, sign this contract of adulthood. But first, you must find the clause 
-                    that guarantees your most important resource.
-                </p>
-                
-                <p class="riddle-text" style="color: var(--estus-yellow);">
-                    Find the article that mentions <span class="highlight">"infinite replenishment of Estus reserves"</span>.<br>
-                    Enter its <span style="color: var(--bonfire-orange);">article number</span> (digit only).
-                </p>
+            <p style="text-align: center; font-size: 1.2rem; color: #c9b18b;">
+                Избранный Инженер, этот контракт написан языком цифр и адресов.<br>
+                Расшифруй его, чтобы получить второй Осколок Души.
+            </p>
+            
+            <!-- НОВАЯ ЗАГАДКА -->
+            <div class="riddle">
+                В летний сезон у среднестатистической компании людей на застолье есть 
+                <span class="riddle-highlight">10 бутылок пива по 5,5%</span> и 
+                <span class="riddle-highlight">1 настойка 23%</span>. 
+                На каком адресе собираются люди с таким набором? 
+                <br><br>
+                От получившейся цифры отними подобранное число, исходя из вышеперечисленных цифр.
             </div>
             
-            <!-- Контракт -->
-            <div class="contract-container">
-                <h3 class="contract-title">CONTRACT OF ADULTHOOD (v21+)</h3>
+            <div class="data-box">
+                <h3>≡ ДАННЫЕ ДЛЯ РАСЧЁТА ≡</h3>
                 
-                <div class="contract-clause">
-                    <span class="clause-number">Article 1.</span>
-                    <span class="clause-content">The right to evening gaming after laboratory trials is inalienable.</span>
+                <div class="data-item">
+                    <strong>Пиво:</strong> 10 бутылок × 5,5% крепости
                 </div>
                 
-                <div class="contract-clause">
-                    <span class="clause-number">Article 2.</span>
-                    <span class="clause-content">Praising the Sun at dawn is mandatory for maintaining humanity.</span>
+                <div class="data-item">
+                    <strong>Настойка:</strong> 1 бутылка × 23% крепости
                 </div>
                 
-                <div class="contract-clause">
-                    <span class="clause-number">Article 3.</span>
-                    <span class="clause-content">The Support Party shall supply phrases of encouragement such as "Don't you dare go hollow!"</span>
+                <div class="data-item">
+                    <strong>Летний сезон:</strong> подсказка к типу заведения
                 </div>
                 
-                <div class="contract-clause">
-                    <span class="clause-number">Article 4.</span>
-                    <span class="clause-content">Budgetary model: Income (Engineer Power = 21 u.e.) > Expenses (Coffee + Xbox).</span>
+                <div class="data-item">
+                    <strong>Среднестатистическая компания:</strong> стандартный размер компании
                 </div>
                 
-                <div class="contract-clause">
-                    <span class="clause-number">Article 5.</span>
-                    <span class="clause-content">Skills from Dark Souls (perseverance) may be converted into work competencies.</span>
-                </div>
-                
-                <div class="contract-clause">
-                    <span class="clause-number">Article 6.</span>
-                    <span class="clause-content">Each completed laboratory work = +1 karma and +100 respect points.</span>
-                </div>
-                
-                <!-- Статья с загадкой -->
-                <div class="contract-clause">
-                    <span class="clause-number">Article 7.</span>
-                    <span class="clause-content">The Support Party guarantees <span class="highlight">infinite replenishment of Estus reserves</span> (moral support) for all future boss fights.</span>
-                </div>
-                
-                <div class="contract-clause">
-                    <span class="clause-number">Article 8.</span>
-                    <span class="clause-content">Breach of contract shall be punished by mandatory viewing of the entire "Lord of the Rings" trilogy in one day.</span>
-                </div>
-                
-                <div class="contract-clause">
-                    <span class="clause-number">Article 9.</span>
-                    <span class="clause-content">This contract becomes effective immediately upon acquisition of all 3 Soul Shards.</span>
+                <div class="data-item">
+                    <strong>Подобранное число:</strong> нужно вычесть из результата
                 </div>
             </div>
             
-            <!-- Ввод ответа -->
-            <div class="input-group">
-                <input type="text" 
-                       class="jojo-input" 
-                       id="answerInput" 
-                       placeholder="Enter article number... (e.g., 7)"
-                       onkeypress="if(event.key === 'Enter') checkAnswer()">
-                <p class="hint-text">
-                    Scroll through the contract carefully. The answer is there.
-                </p>
+            <div class="hint">
+                💡 <strong>Логика решения:</strong> 
+                1) Посчитай общий объём алкоголя. 
+                2) Переведи в адрес (номер дома). 
+                3) Вычти "подобранное число" из цифр в условии.
+                4) Получи адрес в формате "Улица [Номер]".
             </div>
             
-            <!-- Кнопка проверки -->
-            <div style="text-align: center;">
-                <button class="hybrid-button" onclick="checkAnswer()" style="padding: 15px 40px; font-size: 1.2rem;">
-                    SIGN CONTRACT → メ
-                </button>
+            <div class="input-section">
+                <label class="input-label">ВВЕДИ АДРЕС (полный ответ):</label>
+                <input type="text" id="answer" class="answer-input" placeholder="Улица...">
+                <div class="format-hint">
+                    Формат: "Улица инициативная 99А" или подобный
+                </div>
+                
+                <div class="button-group">
+                    <button class="hybrid-button" onclick="checkAnswer()">
+                        ЗАКЛЮЧИТЬ КОНТРАКТ → メ
+                    </button>
+                    <button class="hybrid-button" onclick="showCalculationHint()" 
+                            style="background: linear-gradient(135deg, #9370db, #4b0082);">
+                        ПОСЧИТАТЬ ПОДСКАЗКУ
+                    </button>
+                </div>
+                
+                <div id="result" style="margin-top: 20px; min-height: 40px;"></div>
             </div>
             
-            <!-- Успех -->
-            <div class="success-section" id="successSection">
-                <div style="font-size: 3rem; color: var(--estus-yellow);">📜</div>
-                <h3 style="color: var(--estus-yellow); margin: 20px 0;">
-                    CONTRACT SIGNED! SOUL SHARD SECURED!
-                </h3>
-                
-                <div class="key-reveal">
-                    KEY_2 = "SOUL"
-                </div>
-                
-                <p style="color: #ccc; margin: 20px 0;">
-                    The Golden Contract binds reality to your will.<br>
-                    Transmission incoming...
-                </p>
-                
-                <!-- Место для видео -->
-                <div class="video-placeholder">
-                    [JOINT VIDEO: ECONOMIST WITH CHARTS + TRANSLATOR WITH GLOSSARY]<br>
-                    <span style="font-size: 0.8rem; color: #666; display: block; margin-top: 10px;">
-                        Replace with actual video
-                    </span>
-                </div>
-                
-                <!-- Следующая страница -->
-                <div style="margin-top: 30px;">
-                    <a href="puzzle_programmer.html" class="hybrid-button" style="text-decoration: none; display: inline-block;">
-                        CLAIM FINAL SOUL SHARD → ム
-                    </a>
-                </div>
+            <div style="text-align: center; color: #aaa; font-size: 0.9rem; margin-top: 30px;">
+                <p><em>«В экономике магия чисел становится реальностью.»</em></p>
             </div>
         </div>
         
-        <!-- Навигация -->
         <div class="navigation">
-            <a href="index.html" class="back-link">
-                ← RETURN TO BONFIRE
-            </a>
-            <div style="color: #666; font-family: 'MS Gothic';">
-                SOUL SHARDS: <span id="collectedCount">0</span>/3
-            </div>
+            <a href="puzzle_math.html" class="nav-link">← ВЕРНУТЬСЯ К МАТАНУ</a>
+            <a href="index.html" class="nav-link">ВЕРНУТЬСЯ К КОСТРУ</a>
+            <a href="puzzle_programmer.html" class="nav-link">СЛЕДУЮЩАЯ ГОЛОВОЛОМКА →</a>
         </div>
     </div>
 
     <script src="hybrid-sounds.js"></script>
     <script>
+        // Правильный ответ - адрес
+        const CORRECT_ANSWERS = [
+            "улица инициативная 99а",
+            "улица инициативная 99а ",
+            "инициативная 99а",
+            "инициативная 99а ",
+            "ул инициативная 99а",
+            "ул. инициативная 99а"
+        ];
+        
         function checkAnswer() {
-            const userAnswer = document.getElementById('answerInput').value.trim();
-            const correctAnswers = ["7", "seven", "семь"];
+            const userInput = document.getElementById('answer').value;
+            const resultDiv = document.getElementById('result');
             
-            if (correctAnswers.includes(userAnswer.toLowerCase())) {
-                document.getElementById('successSection').style.display = 'block';
-                window.hybridSounds.playEstusSound();
+            if (!userInput) {
+                resultDiv.innerHTML = '<p style="color: #ff6b6b;">⚠ Введи адрес в поле!</p>';
+                return;
+            }
+            
+            // Нормализуем ответ
+            const userAnswer = userInput
+                .toString()
+                .toLowerCase()
+                .trim()
+                .replace(/ё/g, 'е') // Заменяем ё на е
+                .replace(/\s+/g, ' ') // Убираем лишние пробелы
+                .replace(/\./g, '')   // Убираем точки
+                .replace(/ул[а-я]*\.?\s*/g, 'улица ') // Приводим "ул" к "улица"
+                .replace(/^улица\s+/, 'улица ');
+            
+            // Проверяем совпадение
+            let isCorrect = false;
+            
+            // Проверка точного совпадения
+            for (const correctAnswer of CORRECT_ANSWERS) {
+                if (userAnswer === correctAnswer.toLowerCase().trim()) {
+                    isCorrect = true;
+                    break;
+                }
+            }
+            
+            // Проверка частичного совпадения (содержит ключевые слова)
+            if (!isCorrect) {
+                const hasKeywords = 
+                    userAnswer.includes('инициативная') && 
+                    userAnswer.includes('99');
                 
-                let progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+                if (hasKeywords) {
+                    isCorrect = true;
+                }
+            }
+            
+            if (isCorrect) {
+                // Успех
+                resultDiv.innerHTML = `
+                    <p style="color: #98fb98; font-size: 1.3rem;">
+                        ✅ КОНТРАКТ ЗАКЛЮЧЁН! ⚖️ ОСКОЛОК ДУШИ ПОЛУЧЕН ⚖️
+                    </p>
+                    <p style="color: #b19cd9; margin-top: 10px;">
+                        <strong>"Улица Инициативная 99А"</strong><br>
+                        Ты нашёл место сбора. Сила Стенда "Золотой Контракт" теперь твоя!
+                    </p>
+                `;
+                
+                // Сохраняем прогресс
+                const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
                 progress.economist = true;
                 localStorage.setItem('quest_progress', JSON.stringify(progress));
                 
-                updateCounter();
-                document.querySelector('.hybrid-button').style.display = 'none';
+                // Анимация успеха
+                document.getElementById('answer').style.borderColor = '#98fb98';
+                document.getElementById('answer').style.boxShadow = '0 0 15px rgba(152, 251, 152, 0.5)';
+                
+                // Активируем кнопку следующей головоломки через 2 секунды
+                setTimeout(() => {
+                    const nextBtn = document.querySelector('.nav-link[href="puzzle_programmer.html"]');
+                    nextBtn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
+                    nextBtn.style.color = '#000';
+                    nextBtn.innerHTML = '→ ПЕРЕЙТИ К ЦИФРОВОМУ ОВЕРДРАЙВУ 🔥';
+                }, 2000);
                 
             } else {
-                window.hybridSounds.playSoulsSound();
-                alert('>> CONTRACT VIOLATION!\n>> The Stand demands precise contractual understanding!');
+                // Неправильный ответ
+                resultDiv.innerHTML = `
+                    <p style="color: #ff6b6b;">❌ НЕВЕРНЫЙ АДРЕС!</p>
+                    <p style="color: #ffa500; font-size: 0.9rem;">
+                        Проверь расчёт: (10 × 5.5) + (1 × 23) = ?
+                    </p>
+                `;
+                
+                // Анимация ошибки
+                document.getElementById('answer').style.borderColor = '#dc143c';
+                document.getElementById('answer').style.boxShadow = '0 0 10px rgba(220, 20, 60, 0.5)';
+                
+                setTimeout(() => {
+                    document.getElementById('answer').style.borderColor = '#8b7355';
+                    document.getElementById('answer').style.boxShadow = 'none';
+                }, 1000);
             }
         }
         
-        function updateCounter() {
-            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
-            const count = Object.values(progress).filter(Boolean).length;
-            document.getElementById('collectedCount').textContent = count;
+        function showCalculationHint() {
+            // Показываем расчёт
+            const calculation = "10 × 5.5 = 55\n1 × 23 = 23\n55 + 23 = 78\n\n78 - ? = номер дома\n\nПодсказка: 'подобранное число' — это одна из цифр в условии (5, 5, 23, 10...)";
+            
+            document.getElementById('result').innerHTML = 
+                `<div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; text-align: left;">
+                    <p style="color: #87ceeb; margin: 0 0 10px 0;"><strong>Расчёт:</strong></p>
+                    <pre style="color: #f0e6d2; font-family: monospace; margin: 0;">${calculation}</pre>
+                </div>`;
         }
         
+        // Автофокус на поле ввода
         document.addEventListener('DOMContentLoaded', function() {
-            updateCounter();
-            document.getElementById('answerInput').focus();
+            document.getElementById('answer').focus();
+            
+            // Проверяем, если уже решена
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            if (progress.economist) {
+                document.getElementById('result').innerHTML = `
+                    <p style="color: #98fb98;">✅ Этот контракт уже заключён!</p>
+                `;
+            }
+            
+            // Анимация появления
+            const elements = document.querySelectorAll('.puzzle-box, .page-title');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
         });
     </script>
 </body>
