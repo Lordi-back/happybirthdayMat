@@ -2,419 +2,448 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>KINDLE THE FIRST FLAME | 成人の証</title>
-    <link rel="stylesheet" href="terminal.css">
-    <link rel="stylesheet" href="hybrid-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Возжигание Взрослого Пламени</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><path d="M20,50 Q50,20 80,50 T140,50" stroke="%23FF6B00" fill="none"/></svg>'),
-                radial-gradient(circle at 30% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 70% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 40%),
-                #0a0a0a;
+            font-family: 'Cinzel', serif;
+            background: #0a0a0a url('https://images.unsplash.com/photo-1534796636918-6a8c0be14515?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #f0e6d2;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-        
-        .page-title {
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            z-index: -1;
+        }
+
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Заголовок на японском */
+        .japanese-title {
+            font-size: 3.5rem;
+            letter-spacing: 15px;
+            margin-bottom: 40px;
+            color: #ff6b35;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.7);
+        }
+
+        .japanese-title span {
+            display: inline-block;
+            margin: 0 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Главный заголовок */
+        .main-title {
             font-family: 'MedievalSharp', cursive;
-            text-align: center;
-            color: var(--estus-yellow);
-            font-size: 3rem;
-            margin: 2rem 0;
-            position: relative;
-            text-shadow: 
-                3px 3px 0 #000,
-                0 0 20px rgba(255, 107, 0, 0.7);
+            font-size: 4.5rem;
+            color: #d4af37;
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
         }
-        
-        .page-title::after {
-            content: '¶';
-            color: var(--abyss-red);
-            font-size: 2rem;
-            position: absolute;
-            right: -30px;
-            top: 10px;
-            animation: pulse 2s infinite;
-        }
-        
+
         .subtitle {
-            text-align: center;
-            color: var(--souls-blue);
-            font-family: 'MS Gothic', monospace;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            letter-spacing: 3px;
-        }
-        
-        .quest-log {
-            background: rgba(0, 0, 0, 0.8);
-            border: 3px double var(--bonfire-orange);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 900px;
-            position: relative;
-            box-shadow: 
-                0 0 30px rgba(255, 107, 0, 0.3),
-                inset 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .quest-log::before {
-            content: '✧';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000;
-            padding: 0 15px;
-            color: var(--estus-yellow);
             font-size: 1.5rem;
+            color: #c9b18b;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
-        
-        .stand-grid {
+
+        /* Блок описания квеста */
+        .quest-description {
+            background: rgba(30, 20, 10, 0.7);
+            border: 3px solid #5d2906;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .quest-title {
+            color: #e25822;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(226, 88, 34, 0.5);
+        }
+
+        .quest-text {
+            font-size: 1.3rem;
+            color: #f0e6d2;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ffd700;
+            border-left: 4px solid #d4af37;
+            padding-left: 20px;
+            margin: 30px 0;
+            font-size: 1.4rem;
+        }
+
+        /* Секция со Стендами */
+        .stands-section {
+            margin-bottom: 80px;
+        }
+
+        .stands-title {
+            color: #9acd32;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-shadow: 0 0 15px rgba(154, 205, 50, 0.5);
+        }
+
+        .stands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
         }
-        
-        .stand-item {
-            background: linear-gradient(145deg, 
-                rgba(20, 20, 20, 0.9) 0%,
-                rgba(65, 105, 225, 0.1) 50%,
-                rgba(20, 20, 20, 0.9) 100%);
-            padding: 1.5rem;
-            border-left: 4px solid var(--bonfire-orange);
-            transition: all 0.3s;
+
+        .stand-card {
+            background: rgba(40, 25, 10, 0.8);
+            border: 3px solid #8b7355;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
-        .stand-item:hover {
-            transform: translateX(10px);
-            border-left-color: var(--estus-yellow);
-            box-shadow: 
-                -10px 0 20px rgba(255, 107, 0, 0.3),
-                inset 0 0 20px rgba(255, 215, 0, 0.1);
+
+        .stand-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
-        
+
+        .stand-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stand-card:hover::before {
+            opacity: 1;
+        }
+
         .stand-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--bonfire-orange);
-            border-radius: 50%;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .stand-name {
+            color: #ffa500;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-family: 'MedievalSharp', cursive;
+        }
+
+        .stand-keeper {
+            color: #87ceeb;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .stand-type {
+            color: #98fb98;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(0, 100, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        .stand-description {
+            color: #e0c9a6;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        /* Кнопки для навигации */
+        .stand-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to bottom, #8b4513, #5d2906);
+            color: #ffd700;
+            text-decoration: none;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.3rem;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .stand-button:hover {
+            background: linear-gradient(to bottom, #a0522d, #8b4513);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+        }
+
+        /* Легенда */
+        .legend {
+            background: rgba(20, 15, 10, 0.8);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 60px;
+            border: 2px solid #444;
+        }
+
+        .legend-title {
+            color: #b0e0e6;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .legend-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .legend-symbol {
             font-size: 1.8rem;
-            color: #000;
-            font-weight: bold;
         }
-        
-        .stand-status {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #444;
+
+        /* Огонь внизу */
+        .bonfire {
+            font-size: 5rem;
+            color: #ff4500;
+            text-shadow: 0 0 30px #ff4500;
+            margin: 50px 0;
+            animation: flicker 2s infinite alternate;
         }
-        
-        .stand-status.active {
-            background: var(--estus-yellow);
-            box-shadow: 0 0 10px var(--estus-yellow);
-        }
-        
-        .bonfire-corner {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 80px;
-            height: 100px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 1s;
-            z-index: 1000;
-        }
-        
-        .bonfire-lit {
-            opacity: 1;
-            animation: bonfire-glow 3s infinite alternate;
-        }
-        
-        @keyframes bonfire-glow {
-            from { filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.7)); }
-            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
-        }
-        
-        @keyframes pulse {
+
+        @keyframes flicker {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.7; }
+        }
+
+        .warning {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .japanese-title { font-size: 2.2rem; letter-spacing: 8px; }
+            .main-title { font-size: 3rem; }
+            .subtitle { font-size: 1.2rem; }
+            .quest-title { font-size: 2rem; }
+            .stands-title { font-size: 2.2rem; }
+            .stands-grid { grid-template-columns: 1fr; }
+            .stand-card { padding: 20px; }
         }
     </style>
 </head>
-<body class="terminal">
-    <!-- Гибридные символы по краям -->
-    <div class="japanese-border top dynamic-symbols"></div>
-    <div class="japanese-border bottom dynamic-symbols"></div>
-    <div class="japanese-border left">火<br>継<br>ぐ<br>者<br>へ</div>
-    <div class="japanese-border right">魂<br>の<br>価<br>値</div>
-
-    <!-- Костёр (появится после прохождения) -->
-    <div id="bonfire-corner" class="bonfire-corner" onclick="restAtBonfire()" title="Rest at Bonfire">
-        <div style="text-align: center;">
-            <div style="font-size: 40px;">🔥</div>
-            <div style="font-size: 12px; color: var(--estus-yellow);">Bonfire</div>
-        </div>
-    </div>
-
-    <div class="container" style="max-width: 1200px; position: relative; z-index: 100;">
-        <!-- Частицы душ -->
-        <div id="soul-particles"></div>
-
-        <h1 class="page-title">KINDLING THE ADULT FLAME</h1>
-        <p class="subtitle">¶ スタンドは魂の形 ¶ Stands are but Souls given Form ¶</p>
-        
-        <div class="quest-log">
-            <h2 style="color: var(--estus-yellow); border-bottom: 2px solid var(--bonfire-orange); padding-bottom: 10px;">
-                <span style="color: var(--abyss-red)">†</span> QUEST: ASCENSION TO ADULTHOOD <span style="color: var(--abyss-red)">†</span>
-            </h2>
-            
-            <p style="line-height: 1.6; margin: 20px 0;">
-                <span style="color: var(--bonfire-orange)">Chosen Undead</span>, you stand at the precipice of a new Age.<br>
-                To claim your <span style="color: var(--estus-yellow)">License of Adulthood</span>, you must gather three <span style="color: var(--souls-blue)">"Soul Shards"</span> - 
-                manifestations of your companions' <span style="color: var(--abyss-red)">Stands</span>.<br>
-                Each shard holds a fragment of experience, a memory forged in friendship's fire.
-            </p>
-            
-            <p style="font-style: italic; color: #aaa; border-left: 3px solid var(--undead-purple); padding-left: 15px; margin: 25px 0;">
-                "Fear not the dark, my friend, and let the feast begin."<br>
-                - But with 21 years comes great responsibility... and great gaming sessions.
-            </p>
+<body>
+    <div class="container">
+        <!-- Японское название -->
+        <div class="japanese-title">
+            <span>火</span><span>継</span><span>ぐ</span><span>者</span><span>へ</span><br>
+            <span>魂</span><span>の</span><span>価</span><span>値</span>
         </div>
 
-        <!-- Стенды-души -->
-        <h2 style="text-align: center; color: var(--estus-yellow); margin: 40px 0 20px 0;">
-            <span style="color: var(--abyss-red)">《</span> 
-            SOUL STANDS AWAITING 
-            <span style="color: var(--abyss-red)">》</span>
-        </h2>
+        <!-- Главный заголовок -->
+        <h1 class="main-title">🔥 ВОЗЖИГАНИЕ ВЗРОСЛОГО ПЛАМЕНИ 🔥</h1>
         
-        <div class="stand-grid">
-            <!-- Математик - Soul Stand 1 -->
-            <div class="stand-item" onclick="navigateTo('puzzle_math.html')">
-                <div class="stand-icon" style="background: linear-gradient(135deg, var(--souls-blue), #000);">∫</div>
-                <div class="stand-status" id="status-math"></div>
-                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «CALCULUS REQUIEM»
-                </h3>
-                
-                <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keeper:</strong> The Mathematician<br>
-                    <strong>Soul Type:</strong> Logical Flame<br>
-                    <strong>Power:</strong> ∞ (Transcendent)
-                </p>
-                <p style="font-size: 0.9em; color: #aaa;">
-                    This Stand bends reality through mathematical truth. Its equations can unravel the fabric of the mundane world.
-                </p>
-                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    CHALLENGE THIS STAND → ゴ
-                </button>
+        <p class="subtitle">
+            ¶ Стенд — это материализованная душа ¶<br>
+            Каждый Стенд — это душа, обретшая форму ¶
+        </p>
+
+        <!-- Описание квеста -->
+        <section class="quest-description">
+            <h2 class="quest-title">† КВЕСТ: ВОЗНЕСЕНИЕ К ВЗРОСЛЕНИЮ †</h2>
+            
+            <p class="quest-text">
+                Избранный Негорящий, ты стоишь на пороге новой Эры.<br>
+                Чтобы получить свою <strong style="color:#ffd700">"Лицензию Взросления"</strong>, ты должен собрать три <strong style="color:#ffd700">"Осколка Души"</strong> — проявления Стендов твоих соратников.
+            </p>
+            
+            <p class="quest-text">
+                Каждый осколок содержит фрагмент опыта, воспоминание, выкованное в огне дружбы.
+            </p>
+            
+            <blockquote class="quote">
+                "Не бойся тьмы, мой друг, и пусть пир начнётся."<br>
+                — Но с 21 годом приходит великая ответственность... и великие игровые сессии.
+            </blockquote>
+        </section>
+
+        <!-- Стенды для сбора -->
+        <section class="stands-section">
+            <h2 class="stands-title">《 ОСКОЛКИ ДУШ, ОЖИДАЮЩИЕ ТЕБЯ 》</h2>
+            
+            <div class="stands-grid">
+                <!-- Стенд Математика -->
+                <div class="stand-card" onclick="window.location.href='puzzle_math.html'">
+                    <div class="stand-icon">∫</div>
+                    <h3 class="stand-name">«РЕКВИЕМ ПО МАТАНУ»</h3>
+                    <p class="stand-keeper">Хранитель: Математик</p>
+                    <span class="stand-type">Тип Души: Логическое Пламя</span>
+                    <p class="stand-description">
+                        Этот Стенд искривляет реальность через математическую истину. Его уравнения способны распутать ткань обыденного мира.
+                    </p>
+                    <a href="puzzle_math.html" class="stand-button">Бросить вызов</a>
+                </div>
+
+                <!-- Стенд Экономиста -->
+                <div class="stand-card" onclick="window.location.href='puzzle_economist.html'">
+                    <div class="stand-icon">⚖️</div>
+                    <h3 class="stand-name">«ЗОЛОТОЙ КОНТРАКТ»</h3>
+                    <p class="stand-keeper">Хранители: Экономист & Переводчик</p>
+                    <span class="stand-type">Тип Души: Дальность: А (Широкая)</span>
+                    <p class="stand-description">
+                        Словам придан вес, контракты материализованы. Этот Стенд навязывает реальности соглашения, заключённые между людьми.
+                    </p>
+                    <a href="puzzle_economist.html" class="stand-button">Бросить вызов</a>
+                </div>
+
+                <!-- Стенд Программиста -->
+                <div class="stand-card" onclick="window.location.href='puzzle_programmer.html'">
+                    <div class="stand-icon">{ }</div>
+                    <h3 class="stand-name">«ЦИФРОВОЙ ОВЕРДРАЙВ»</h3>
+                    <p class="stand-keeper">Хранитель: Программист</p>
+                    <span class="stand-type">Тип Души: Взлом Реальности</span>
+                    <p class="stand-description">
+                        Код становится волей, синтаксис — законом. Этот Стенд переписывает исходный код мира в реальном времени.
+                    </p>
+                    <a href="puzzle_programmer.html" class="stand-button">Бросить вызов</a>
+                </div>
             </div>
-            
-            <!-- Экономист/Переводчик - Soul Stand 2 -->
-            <div class="stand-item" onclick="navigateTo('puzzle_economist.html')">
-                <div class="stand-icon" style="background: linear-gradient(135deg, var(--undead-purple), #000);">⚖️</div>
-                <div class="stand-status" id="status-economist"></div>
-                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «GOLDEN CONTRACT»
-                </h3>
-               
-                <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keepers:</strong> Economist & Translator<br>
-                    <strong>Soul Type:</strong Binding Oath<br>
-                    <strong>Range:</strong> A (Wide)
-                </p>
-                <p style="font-size: 0.9em; color: #aaa;">
-                    Words given weight, contracts made manifest. This Stand enforces agreements upon reality itself.
-                </p>
-                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    NEGOTIATE TERMS → メ
-                </button>
-            </div>
-            
-            <!-- Программист - Soul Stand 3 -->
-            <div class="stand-item" onclick="navigateTo('puzzle_programmer.html')">
-                <div class="stand-icon" style="background: linear-gradient(135deg, var(--abyss-red), #000);">{ }</div>
-                <div class="stand-status" id="status-programmer"></div>
-                <h3 style="color: var(--estus-yellow); margin: 0 0 10px 0;">
-                    «DIGITAL OVERDRIVE»
-                </h3>
-                <p style="color: #ccc; margin-bottom: 15px;">
-                    <strong>Keeper:</strong> The Programmer<br>
-                    <strong>Soul Type:</strong> Reality Hack<br>
-                    <strong>Speed:</strong> S (Maximum)
-                </p>
-                <p style="font-size: 0.9em; color: #aaa;">
-                    Code becomes will, syntax becomes law. This Stand rewrites the world's source code in real-time.
-                </p>
-                <button class="hybrid-button" style="margin-top: 15px; width: 100%;">
-                    HACK REALITY → ム
-                </button>
-            </div>
-        </div>
-        
-        <!-- Финальный вызов -->
-        <div style="text-align: center; margin: 50px 0; padding: 30px; border-top: 2px dashed var(--bonfire-orange);">
-            <p style="color: var(--estus-yellow); font-size: 1.2rem; margin-bottom: 20px;">
-                When all three Soul Shards are gathered, approach the First Flame...
+
+            <p class="quest-text" style="text-align: center; margin-top: 40px; font-size: 1.4rem;">
+                Когда все три Осколка Души будут собраны, приблизься к Первому Пламени...
             </p>
-            <button class="hybrid-button" id="final-button" disabled style="opacity: 0.5; padding: 15px 40px; font-size: 1.3rem;">
-                KINDLING DISABLED - GATHER SOULS FIRST
-            </button>
-            <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">
-                <em>«Do not dare go hollow on this journey, chosen engineer.»</em>
+            
+            <p class="warning">
+                «Не смей опустошиться в этом путешествии, избранный инженер.»
             </p>
-        </div>
-        
+        </section>
+
         <!-- Легенда -->
-        <div style="background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 5px; margin-top: 40px; border: 1px solid #333;">
-            <h4 style="color: var(--bonfire-orange); margin-bottom: 10px;">¶ LEGEND OF THE FLAME ¶</h4>
-            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; text-align: center;">
-                <div>
-                    <div style="color: var(--estus-yellow); font-size: 1.5rem;">🔥</div>
-                    <div style="font-size: 0.8rem;">Bonfire<br><span style="color: #aaa;">Rest Point</span></div>
+        <div class="legend">
+            <h3 class="legend-title">¶ ЛЕГЕНДА ПЛАМЕНИ ¶</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-symbol">🔥</span>
+                    <span>Костёр — Точка Отдыха</span>
                 </div>
-                <div>
-                    <div style="color: var(--souls-blue); font-size: 1.5rem;">💎</div>
-                    <div style="font-size: 0.8rem;">Soul Shard<br><span style="color: #aaa;">Stand Fragment</span></div>
+                <div class="legend-item">
+                    <span class="legend-symbol">💎</span>
+                    <span>Осколок Души — Фрагмент Стенда</span>
                 </div>
-                <div>
-                    <div style="color: var(--abyss-red); font-size: 1.5rem;">ゴ</div>
-                    <div style="font-size: 0.8rem;">Stand Cry<br><span style="color: #aaa;">Sound Effect</span></div>
+                <div class="legend-item">
+                    <span class="legend-symbol">ゴ</span>
+                    <span>Крик Стенда — Звуковой Эффект</span>
                 </div>
-                <div>
-                    <div style="color: var(--undead-purple); font-size: 1.5rem;">⚔️</div>
-                    <div style="font-size: 0.8rem;">Challenge<br><span style="color: #aaa;">Puzzle Battle</span></div>
+                <div class="legend-item">
+                    <span class="legend-symbol">⚔️</span>
+                    <span>Испытание — Битва-Головоломка</span>
                 </div>
             </div>
         </div>
+
+        <!-- Костёр внизу -->
+        <div class="bonfire">
+            🔥 Костер 🔥
+        </div>
     </div>
 
-    <script src="hybrid-sounds.js"></script>
     <script>
-        // Инициализация
+        // Добавляем эффекты при наведении на карточки Стендов
         document.addEventListener('DOMContentLoaded', function() {
-            // Проверяем прогресс
-            checkProgress();
+            const cards = document.querySelectorAll('.stand-card');
             
-            // Создаём частицы душ
-            createSoulParticles();
-            
-            // Привязываем звуки к кнопкам
-            const buttons = document.querySelectorAll('.hybrid-button, .stand-item');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', () => {
-                    // 50% шанс звука Dark Souls, 50% JoJo
-                    if (Math.random() > 0.5) {
-                        playSoulsSound();
-                    } else {
-                        playJojoSound();
-                    }
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
                 });
                 
-                button.addEventListener('click', () => {
-                    playEstusSound();
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                // Клик на всей карточке ведёт на страницу головоломки
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A') { // Чтобы не конфликтовало с кликом по кнопке
+                        const link = this.querySelector('a');
+                        if (link) {
+                            window.location.href = link.href;
+                        }
+                    }
                 });
             });
             
-            // Проверяем, зажжён ли костёр
-            if (localStorage.getItem('bonfire_lit') === 'true') {
-                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
-            }
-        });
-        
-        function checkProgress() {
-            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
-            
-            // Обновляем статусы стендов
-            if (progress.math) {
-                document.getElementById('status-math').classList.add('active');
-            }
-            if (progress.economist) {
-                document.getElementById('status-economist').classList.add('active');
-            }
-            if (progress.programmer) {
-                document.getElementById('status-programmer').classList.add('active');
-            }
-            
-            // Активируем финальную кнопку если всё пройдено
-            if (progress.math && progress.economist && progress.programmer) {
-                const finalBtn = document.getElementById('final-button');
-                finalBtn.disabled = false;
-                finalBtn.style.opacity = '1';
-                finalBtn.innerHTML = 'APPROACH THE FIRST FLAME → 🔥';
-                finalBtn.onclick = () => window.location.href = 'final.html';
+            // Анимация появления элементов при загрузке
+            const elements = document.querySelectorAll('.japanese-title span, .main-title, .stand-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
                 
-                // Зажигаем костёр
-                document.getElementById('bonfire-corner').classList.add('bonfire-lit');
-                localStorage.setItem('bonfire_lit', 'true');
-            }
-        }
-        
-        function navigateTo(page) {
-            playBonfireSound();
-            window.location.href = page;
-        }
-        
-        function restAtBonfire() {
-            playEstusSound();
-            alert('>> BONFIRE LIT\n>> HUMANITY RESTORED\n>> Estus Flask replenished\n>> Stand Power: 100%\n\nPraise the Sun! \\[T]/\n\nNow go forth, chosen engineer. The Age of Adulthood awaits.');
-        }
-        
-        function createSoulParticles() {
-            const container = document.getElementById('soul-particles');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'soul-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 3 + 's';
-                particle.style.width = particle.style.height = (Math.random() * 6 + 4) + 'px';
-                container.appendChild(particle);
-            }
-        }
-        
-        // Звуковые функции
-        function playSoulsSound() {
-            // Звук Dark Souls (меч, доспехи и т.д.)
-            if (window.hybridSounds) {
-                window.hybridSounds.playSoulsSound();
-            }
-        }
-        
-        function playJojoSound() {
-            // Звук JoJo
-            if (window.hybridSounds) {
-                window.hybridSounds.playJojoSound();
-            }
-        }
-        
-        function playEstusSound() {
-            // Звук употребления эстуса
-            if (window.hybridSounds) {
-                window.hybridSounds.playEstusSound();
-            }
-        }
-        
-        function playBonfireSound() {
-            // Звук костра
-            if (window.hybridSounds) {
-                window.hybridSounds.playBonfireSound();
-            }
-        }
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
     </script>
 </body>
 </html>
