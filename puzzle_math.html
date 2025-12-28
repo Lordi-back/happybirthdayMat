@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             background: 
-                /* Затемнение фона чтобы текст читался */
                 linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('math-stand.png') no-repeat center center fixed;
             background-size: cover;
@@ -19,9 +18,9 @@
             font-family: 'Cinzel', serif;
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
         }
         
-        /* Контейнер с полупрозрачным фоном */
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -30,7 +29,6 @@
             z-index: 10;
         }
         
-        /* Заголовок */
         .page-title {
             text-align: center;
             font-family: 'MedievalSharp', cursive;
@@ -50,9 +48,8 @@
             font-style: italic;
         }
         
-        /* Блок загадки - ПОЛУПРОЗРАЧНЫЙ */
         .puzzle-box {
-            background: rgba(20, 20, 20, 0.75); /* 75% прозрачности */
+            background: rgba(20, 20, 20, 0.75);
             border: 3px solid #5d2906;
             border-radius: 10px;
             padding: 30px;
@@ -60,7 +57,7 @@
             box-shadow: 
                 0 0 30px rgba(139, 0, 0, 0.3),
                 inset 0 0 20px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px); /* Лёгкое размытие для красоты */
+            backdrop-filter: blur(5px);
         }
         
         .puzzle-title {
@@ -72,7 +69,6 @@
             padding-bottom: 10px;
         }
         
-        /* Формула загадки */
         .formula {
             font-family: 'Courier New', monospace;
             font-size: 1.8rem;
@@ -86,7 +82,6 @@
             line-height: 1.5;
         }
         
-        /* Описание переменных - ПОЛУПРОЗРАЧНОЕ */
         .variables {
             background: rgba(30, 30, 40, 0.7);
             border-left: 4px solid #4169e1;
@@ -110,7 +105,6 @@
             font-weight: bold;
         }
         
-        /* Поле ввода */
         .input-section {
             text-align: center;
             margin: 40px 0;
@@ -143,7 +137,6 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         
-        /* Кнопки */
         .button-group {
             display: flex;
             justify-content: center;
@@ -157,7 +150,6 @@
             min-width: 180px;
         }
         
-        /* Подсказка */
         .hint {
             background: rgba(139, 0, 0, 0.2);
             border: 1px dashed #8b0000;
@@ -168,7 +160,6 @@
             font-style: italic;
         }
         
-        /* Навигация */
         .navigation {
             text-align: center;
             margin-top: 50px;
@@ -191,7 +182,6 @@
             color: #b0e0e6;
         }
         
-        /* Математические символы по краям */
         .math-symbols {
             position: fixed;
             font-size: 2rem;
@@ -212,23 +202,221 @@
             transform: translateY(-50%);
         }
         
-        /* Анимация */
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.1; }
+        /* СТИЛИ ДЛЯ ВИДЕОПОЗДРАВЛЕНИЯ */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
         }
         
-        /* Адаптивность */
+        .video-container {
+            background: linear-gradient(135deg, 
+                rgba(30, 15, 5, 0.97) 0%,
+                rgba(60, 30, 10, 0.97) 50%,
+                rgba(30, 15, 5, 0.97) 100%);
+            border: 4px solid #ff6b35;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 
+                0 0 50px rgba(255, 107, 53, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.7);
+            animation: slideUp 0.6s ease;
+        }
+        
+        .video-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #8b0000;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        
+        .video-close:hover {
+            background: #dc143c;
+            transform: scale(1.1);
+        }
+        
+        .video-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5d2906;
+        }
+        
+        .video-header h2 {
+            color: #ffd700;
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .video-subtitle {
+            color: #c9b18b;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .video-player {
+            margin: 25px 0;
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            min-height: 450px;
+        }
+        
+        .video-player iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            display: block;
+        }
+        
+        .video-info {
+            background: rgba(40, 20, 0, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4169e1;
+            text-align: center;
+        }
+        
+        .video-info p {
+            margin: 8px 0;
+            color: #f0e6d2;
+        }
+        
+        .video-info strong {
+            color: #ffa500;
+        }
+        
+        .video-info em {
+            color: #87ceeb;
+            font-style: italic;
+        }
+        
+        .video-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .video-next-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+        }
+        
+        .video-next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.6);
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+        }
+        
+        .video-replay-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #4169e1, #000080);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .video-replay-btn:hover {
+            background: linear-gradient(135deg, #5a7de1, #191970);
+            transform: translateY(-2px);
+        }
+        
+        .video-progress {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        .video-progress p {
+            color: #87ceeb;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 300px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b00, #ffd700);
+            border-radius: 5px;
+            transition: width 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
         @media (max-width: 768px) {
             .page-title { font-size: 2.5rem; }
             .formula { font-size: 1.4rem; }
             .button-group { flex-direction: column; align-items: center; }
             .math-symbols { display: none; }
+            .video-container { padding: 20px; width: 95%; }
+            .video-header h2 { font-size: 1.8rem; }
+            .video-player { min-height: 300px; }
+            .video-player iframe { height: 300px; }
+            .video-actions { flex-direction: column; align-items: center; }
+            .video-next-btn, .video-replay-btn { width: 100%; max-width: 300px; }
         }
     </style>
 </head>
 <body>
-    <!-- Математические символы на фоне -->
     <div class="math-symbols math-left">
         ∫<br>∑<br>π<br>∞<br>∂<br>Δ
     </div>
@@ -248,10 +436,9 @@
                 Реши её, чтобы получить первый Осколок Души.
             </p>
             
-            <!-- НОВАЯ ФОРМУЛА ЗАГАДКИ -->
             <div class="formula">
                 ((("Мой максимум в жиме лёжа" - <br>
-                ("кол-во сезонов Соло Левелинг" * " кол-во сезонов Девушка на час")) * <br>
+                ("кол-во сезонов Соло Левелинс" * " кол-во сезонов Девушка на час")) * <br>
                 "система оценивания в Республике Беларусь") — <br>
                 ("количество твоих лет" / "Самую устойчивую фигуру "))
             </div>
@@ -261,17 +448,17 @@
                 
                 <div class="variable-item">
                     <span class="variable-name">"Мой максимум в жиме лёжа"</span> — 
-                    <span>Мой личный рекорд в килограммах</span>
+                    <span>Твой личный рекорд в килограммах</span>
                 </div>
                 
                 <div class="variable-item">
-                    <span class="variable-name">"кол-во сезонов Соло Левелинг"</span> — 
-                    <span>Сколько сезонов в аниме "Соло Левелинг"?</span>
+                    <span class="variable-name">"кол-во сезонов Соло Левелинс"</span> — 
+                    <span>Сколько сезонов в сериале "Соло Левелинс"?</span>
                 </div>
                 
                 <div class="variable-item">
                     <span class="variable-name">"кол-во сезонов Девушка на час"</span> — 
-                    <span>Сколько сезонов в аниме "Девушка на час"?</span>
+                    <span>Сколько сезонов в сериале "Девушка на час"?</span>
                 </div>
                 
                 <div class="variable-item">
@@ -291,14 +478,13 @@
             </div>
             
             <div class="hint">
-                💡 <strong>Подсказка:</strong> Ответом является не число, а выражение. 
-                Убедись, что правильно определил все переменные. 
-                Помни порядок операций: скобки → умножение/деление → сложение/вычитание.
+                💡 <strong>Подсказка:</strong> Ответом является текст, а не число. 
+                Вспомни известную мантру из аниме. Формат: "число-дефис-число".
             </div>
             
             <div class="input-section">
-                <label class="input-label">ВВЕДИ ЧИСЛОВОЙ ОТВЕТ:</label>
-                <input type="text" id="answer" class="answer-input" placeholder="?">
+                <label class="input-label">ВВЕДИ ОТВЕТ:</label>
+                <input type="text" id="answer" class="answer-input" placeholder="1000-7?">
                 
                 <div class="button-group">
                     <button class="hybrid-button" onclick="checkAnswer()">
@@ -324,113 +510,246 @@
         </div>
     </div>
 
+    <!-- ВИДЕОПОЗДРАВЛЕНИЕ ПОСЛЕ РЕШЕНИЯ -->
+    <div id="congratsVideo" class="video-overlay">
+        <div class="video-container">
+            <button class="video-close" onclick="closeVideo()">✕</button>
+            
+            <div class="video-header">
+                <h2>🔥 СТЕНД АКТИВИРОВАН! 🔥</h2>
+                <p class="video-subtitle">«Реквием по Матану» переходит под твой контроль</p>
+            </div>
+            
+            <div class="video-player">
+                <iframe 
+                    id="videoPlayer"
+                    src="https://vk.com/video_ext.php?oid=298899007&id=456239525&hash=4efc8ca97357b90c"
+                    width="853" 
+                    height="480" 
+                    style="background-color: #000"
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+                    frameborder="0" 
+                    allowfullscreen
+                    title="Поздравление от Математика">
+                </iframe>
+            </div>
+            
+            <div class="video-info">
+                <p><strong>Хранитель:</strong> Математик</p>
+                <p><strong>Сила Стенда:</strong> ∞ (Трансцендентная)</p>
+                <p><em>"Математика — это язык, на котором написана книга природы."</em></p>
+            </div>
+            
+            <div class="video-actions">
+                <button class="video-next-btn" onclick="goToNextPuzzle()">
+                    🎯 ПЕРЕЙТИ К СЛЕДУЮЩЕЙ ЗАГАДКЕ
+                </button>
+                <button class="video-replay-btn" onclick="replayVideo()">
+                    🔄 ПРОСМОТРЕТЬ ЕЩЁ РАЗ
+                </button>
+            </div>
+            
+            <div class="video-progress">
+                <p>Собрано осколков: <span id="progressCount">1</span>/3</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="hybrid-sounds.js"></script>
     <script>
-    // Правильный ответ - текст "1000-7"
-    const CORRECT_ANSWER = "1000-7";
-    
-    function checkAnswer() {
-        const userInput = document.getElementById('answer').value;
-        const resultDiv = document.getElementById('result');
-        
-        if (!userInput) {
-            resultDiv.innerHTML = '<p style="color: #ff6b6b;">⚠ Введи ответ в поле!</p>';
-            return;
+        // ===== ПРОВЕРКА ОТВЕТА =====
+        function checkAnswer() {
+            const userInput = document.getElementById('answer').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!userInput) {
+                resultDiv.innerHTML = '<p style="color: #ff6b6b;">⚠ Введи ответ в поле!</p>';
+                return;
+            }
+            
+            const userAnswer = userInput.toString().toLowerCase().trim();
+            
+            const isCorrect = 
+                userAnswer === '1000-7' ||
+                userAnswer === '1000 - 7' ||
+                userAnswer === '993' ||
+                userAnswer === 'тысяча минус семь';
+            
+            if (isCorrect) {
+                // УСПЕХ - ПОКАЗЫВАЕМ ВИДЕО
+                resultDiv.innerHTML = `
+                    <p style="color: #98fb98; font-size: 1.3rem;">
+                        ✅ ПРАВИЛЬНО! Запускаю видеопоздравление...
+                    </p>
+                    <p style="color: #87ceeb; margin-top: 10px; font-size: 0.9rem;">
+                        Ожидайте появления видео (2-3 секунды)
+                    </p>
+                `;
+                
+                // Анимация успеха
+                document.getElementById('answer').style.borderColor = '#98fb98';
+                document.getElementById('answer').style.boxShadow = '0 0 15px rgba(152, 251, 152, 0.5)';
+                
+                // Через 2 секунды показываем видео
+                setTimeout(() => {
+                    showCongratsVideo();
+                }, 2000);
+                
+            } else {
+                // НЕПРАВИЛЬНЫЙ ОТВЕТ
+                resultDiv.innerHTML = `
+                    <p style="color: #ff6b6b;">❌ НЕПРАВИЛЬНО!</p>
+                    <p style="color: #ffa500; font-size: 0.9rem;">
+                        Вспомни: "1000-7... 993... 986..."
+                    </p>
+                `;
+                
+                // Анимация ошибки
+                document.getElementById('answer').style.borderColor = '#dc143c';
+                document.getElementById('answer').style.boxShadow = '0 0 10px rgba(220, 20, 60, 0.5)';
+                
+                setTimeout(() => {
+                    document.getElementById('answer').style.borderColor = '#5d2906';
+                    document.getElementById('answer').style.boxShadow = 'none';
+                }, 1000);
+            }
         }
         
-        // Приводим к нижнему регистру и удаляем лишние пробелы
-        const userAnswer = userInput.toString().toLowerCase().trim();
-        
-        // Принимаем несколько вариантов
-        const isCorrect = 
-            userAnswer === '1000-7' ||
-            userAnswer === '1000 - 7' ||
-            userAnswer === '993' ||
-            userAnswer === 'тысяча минус семь';
-        
-        if (isCorrect) {
-            // Успех
-            resultDiv.innerHTML = `
-                <p style="color: #98fb98; font-size: 1.3rem;">
-                    ✅ ПРАВИЛЬНО! ∫ ОСКОЛОК ДУШИ ПОЛУЧЕН ∫
-                </p>
-                <p style="color: #87ceeb; margin-top: 10px;">
-                    <strong>"1000-7... 993... 986..."</strong><br>
-                    Ты помнишь счёт. Сила Стенда "Реквием по Матану" теперь твоя!
-                </p>
-            `;
+        function showHint() {
+            const hints = [
+                "Ответ — известная фраза из аниме Tokyo Ghoul",
+                "Формат: число-дефис-число",
+                "1000... минус... 7...",
+                "Это не результат вычисления, а сам процесс счёта"
+            ];
             
+            const randomHint = hints[Math.floor(Math.random() * hints.length)];
+            document.getElementById('result').innerHTML = 
+                `<p style="color: #87ceeb;">💡 ${randomHint}</p>`;
+        }
+        
+        // ===== ФУНКЦИИ ДЛЯ ВИДЕОПОЗДРАВЛЕНИЯ =====
+        function showCongratsVideo() {
+            // Показываем блок
+            document.getElementById('congratsVideo').style.display = 'flex';
+            
+            // Блокируем скролл основной страницы
+            document.body.style.overflow = 'hidden';
+            
+            // Обновляем прогресс
+            updateProgressBar();
+            
+            // Проигрываем звук успеха
+            if (window.hybridSounds && window.hybridSounds.playSoulsSound) {
+                window.hybridSounds.playSoulsSound();
+            }
+        }
+        
+        function closeVideo() {
+            document.getElementById('congratsVideo').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Останавливаем видео при закрытии
+            const iframe = document.getElementById('videoPlayer');
+            try {
+                iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+            } catch(e) {}
+        }
+        
+        function goToNextPuzzle() {
             // Сохраняем прогресс
             const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
             progress.math = true;
             localStorage.setItem('quest_progress', JSON.stringify(progress));
             
-            // Активируем кнопку следующей головоломки через 2 секунды
+            // Закрываем видео
+            closeVideo();
+            
+            // Показываем сообщение
+            const resultDiv = document.getElementById('result');
+            if (resultDiv) {
+                resultDiv.innerHTML = `
+                    <p style="color: #98fb98; font-size: 1.4rem;">
+                        ✅ Переход к следующей загадке...
+                    </p>
+                `;
+            }
+            
+            // Перенаправляем через 1.5 секунды
             setTimeout(() => {
-                const nextBtn = document.querySelector('.nav-link[href="puzzle_economist.html"]');
-                nextBtn.style.background = 'linear-gradient(135deg, #ffd700, #ff8c00)';
-                nextBtn.style.color = '#000';
-                nextBtn.innerHTML = '→ ПЕРЕЙТИ К ЗОЛОТОМУ КОНТРАКТУ 🔥';
-            }, 2000);
-            
-        } else {
-            // Неправильный ответ
-            resultDiv.innerHTML = `
-                <p style="color: #ff6b6b;">❌ НЕПРАВИЛЬНО!</p>
-                <p style="color: #ffa500; font-size: 0.9rem;">
-                    Вспомни: "1000-7... 993... 986..."
-                </p>
-            `;
-            
-            // Анимация ошибки
-            document.getElementById('answer').style.borderColor = '#dc143c';
-            document.getElementById('answer').style.boxShadow = '0 0 10px rgba(220, 20, 60, 0.5)';
-            
-            setTimeout(() => {
-                document.getElementById('answer').style.borderColor = '#5d2906';
-                document.getElementById('answer').style.boxShadow = 'none';
-            }, 1000);
-        }
-    }
-    
-    function showHint() {
-        const hints = [
-            "Ответ — известная фраза из аниме Tokyo Ghoul",
-            "Формат: число-дефис-число",
-            "1000... минус... 7...",
-            "Это не результат вычисления, а сам процесс счёта"
-        ];
-        
-        const randomHint = hints[Math.floor(Math.random() * hints.length)];
-        document.getElementById('result').innerHTML = 
-            `<p style="color: #87ceeb;">💡 ${randomHint}</p>`;
-    }
-    
-    // Автофокус на поле ввода
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('answer').focus();
-        
-        // Проверяем, если уже решена
-        const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
-        if (progress.math) {
-            document.getElementById('result').innerHTML = `
-                <p style="color: #98fb98;">✅ Эта головоломка уже решена!</p>
-            `;
+                window.location.href = 'puzzle_economist.html';
+            }, 1500);
         }
         
-        // Анимация появления
-        const elements = document.querySelectorAll('.puzzle-box, .page-title');
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
+        function replayVideo() {
+            const iframe = document.getElementById('videoPlayer');
             
+            // Перезагружаем iframe для перезапуска видео
+            const currentSrc = iframe.src;
+            iframe.src = '';
             setTimeout(() => {
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, index * 300);
+                iframe.src = currentSrc;
+            }, 100);
+            
+            // Анимация кнопки
+            const btn = document.querySelector('.video-replay-btn');
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        function updateProgressBar() {
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            
+            // Считаем сколько осколков уже собрано
+            let collected = 0;
+            if (progress.math) collected++;
+            if (progress.economist) collected++;
+            if (progress.programmer) collected++;
+            
+            // Добавляем текущий осколок (если ещё не сохранён)
+            if (!progress.math) collected++;
+            
+            // Обновляем счетчик
+            document.getElementById('progressCount').textContent = collected;
+            
+            // Обновляем полоску прогресса
+            const progressFill = document.querySelector('.progress-fill');
+            if (progressFill) {
+                const width = (collected / 3) * 100;
+                progressFill.style.width = `${width}%`;
+            }
+        }
+        
+        // Автофокус на поле ввода
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('answer').focus();
+            
+            // Проверяем, если уже решена
+            const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
+            if (progress.math) {
+                document.getElementById('result').innerHTML = `
+                    <p style="color: #98fb98;">✅ Эта головоломка уже решена!</p>
+                `;
+            }
+            
+            // Анимация появления
+            const elements = document.querySelectorAll('.puzzle-box, .page-title');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 300);
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
