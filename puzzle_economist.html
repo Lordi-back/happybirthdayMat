@@ -306,43 +306,11 @@
             min-height: 450px;
         }
         
-        /* HTML5 video для локального файла */
-        #localVideoPlayer {
+        .video-player iframe {
             width: 100%;
-            height: auto;
-            max-height: 450px;
+            height: 480px;
+            border: none;
             display: block;
-            border-radius: 7px;
-        }
-        
-        .video-loading {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            font-size: 1.2rem;
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #333;
-            border-top: 5px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         
         .video-info {
@@ -366,53 +334,6 @@
         .video-info em {
             color: #b19cd9;
             font-style: italic;
-        }
-        
-        .video-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-        }
-        
-        .video-control-btn {
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid #d4af37;
-            color: #ffd700;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .video-control-btn:hover {
-            background: rgba(255, 215, 0, 0.4);
-            transform: scale(1.05);
-        }
-        
-        #volume-slider {
-            -webkit-appearance: none;
-            height: 8px;
-            background: #333;
-            border-radius: 4px;
-            outline: none;
-        }
-        
-        #volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #ffd700;
-            border-radius: 50%;
-            cursor: pointer;
         }
         
         .video-actions {
@@ -509,7 +430,7 @@
             .video-container { padding: 20px; width: 95%; }
             .video-header h2 { font-size: 1.8rem; }
             .video-player { min-height: 300px; }
-            #localVideoPlayer { max-height: 300px; }
+            .video-player iframe { height: 300px; }
             .video-actions { flex-direction: column; align-items: center; }
             .video-next-btn, .video-replay-btn { width: 100%; max-width: 300px; }
         }
@@ -607,7 +528,7 @@
         </div>
     </div>
 
-    <!-- ВИДЕОПОЗДРАВЛЕНИЕ ПОСЛЕ РЕШЕНИЯ (видео из GitHub) -->
+    <!-- ВИДЕОПОЗДРАВЛЕНИЕ ПОСЛЕ РЕШЕНИЯ -->
     <div id="congratsVideo" class="video-overlay">
         <div class="video-container">
             <button class="video-close" onclick="closeVideo()">✕</button>
@@ -618,32 +539,22 @@
             </div>
             
             <div class="video-player">
-                <!-- HTML5 video для локального файла -->
-                <video id="localVideoPlayer" controls>
-                    <source id="videoSource" src="" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
-                
-                <!-- Индикатор загрузки -->
-                <div id="videoLoading" class="video-loading">
-                    <div class="loading-spinner"></div>
-                    <p>Загрузка видеопоздравления...</p>
-                </div>
-            </div>
-            
-            <div class="video-controls">
-                <button onclick="videoPlayPause()" class="video-control-btn">
-                    <span id="playIcon">▶️</span> <span id="playText">Воспроизвести</span>
-                </button>
-                <button onclick="videoMuteToggle()" class="video-control-btn">
-                    <span id="muteIcon">🔊</span>
-                </button>
-                <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.7" 
-                       oninput="changeVolume(this.value)" style="width: 100px;">
+                <!-- ВИДЕО ИЗ VK (ВАШ КОД) -->
+                <iframe 
+                    id="videoPlayer"
+                    src="https://vk.com/video_ext.php?oid=298899007&id=456239532&hash=e0de15e4258edb30"
+                    width="853" 
+                    height="480" 
+                    style="background-color: #000"
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+                    frameborder="0" 
+                    allowfullscreen
+                    title="Поздравление от Экономиста и Переводчика">
+                </iframe>
             </div>
             
             <div class="video-info">
-                <p><strong>Хранитель:</strong> Экономист & Переводчик</p>
+                <p><strong>Хранители:</strong> Экономист & Переводчик</p>
                 <p><strong>Дальность Стенда:</strong> А (Широкая)</p>
                 <p><em>"Слова имеют цену, дружба — бесценна."</em></p>
             </div>
@@ -655,10 +566,6 @@
                 <button class="video-replay-btn" onclick="replayVideo()">
                     🔄 ПРОСМОТРЕТЬ ЕЩЁ РАЗ
                 </button>
-                <button class="video-replay-btn" onclick="downloadVideo()" 
-                        style="background: linear-gradient(135deg, #2e8b57, #006400);">
-                    ⬇️ СКАЧАТЬ ВИДЕО
-                </button>
             </div>
             
             <div class="video-progress">
@@ -666,9 +573,6 @@
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 66%"></div>
                 </div>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">
-                    Видео загружено из репозитория GitHub
-                </p>
             </div>
         </div>
     </div>
@@ -733,7 +637,7 @@
                         ✅ ПРАВИЛЬНО! Запускаю видеопоздравление...
                     </p>
                     <p style="color: #87ceeb; margin-top: 10px; font-size: 0.9rem;">
-                        Ожидайте загрузки видео (2-3 секунды)
+                        Ожидайте появления видео (2-3 секунды)
                     </p>
                 `;
                 
@@ -776,157 +680,32 @@
                 </div>`;
         }
         
-        // ===== ФУНКЦИИ ДЛЯ ВИДЕО ИЗ GITHUB =====
-        let currentVideo = null;
-        
+        // ===== ФУНКЦИИ ДЛЯ ВИДЕОПОЗДРАВЛЕНИЯ =====
         function showCongratsVideo() {
             // Показываем блок
             document.getElementById('congratsVideo').style.display = 'flex';
+            
+            // Блокируем скролл основной страницы
             document.body.style.overflow = 'hidden';
             
             // Обновляем прогресс
             updateProgressBar();
             
-            // Загружаем видео
-            loadVideoFromGitHub();
-            
-            // Звук успеха
+            // Проигрываем звук успеха
             if (window.hybridSounds && window.hybridSounds.playSoulsSound) {
                 window.hybridSounds.playSoulsSound();
             }
         }
         
-        function loadVideoFromGitHub() {
-            const videoPlayer = document.getElementById('localVideoPlayer');
-            const videoSource = document.getElementById('videoSource');
-            const loadingDiv = document.getElementById('videoLoading');
-            
-            // Варианты источников (пробуем по порядку)
-            const videoSources = [
-                // 1. Прямая raw ссылка на GitHub
-                "https://raw.githubusercontent.com/Lordi-back/happybirthdayMat/main/videos/economist_congrats.mp4",
-                // 2. Относительный путь если видео в папке
-                "./videos/economist_congrats.mp4",
-                // 3. В корне репозитория
-                "economist_congrats.mp4",
-                // 4. Альтернативный raw URL
-                "https://github.com/Lordi-back/happybirthdayMat/raw/main/videos/economist_congrats.mp4"
-            ];
-            
-            // Скрываем видео, показываем загрузку
-            videoPlayer.style.display = 'none';
-            loadingDiv.style.display = 'flex';
-            
-            let currentSourceIndex = 0;
-            
-            function tryNextSource() {
-                if (currentSourceIndex >= videoSources.length) {
-                    // Все источники исчерпаны
-                    loadingDiv.innerHTML = 
-                        '<p style="color: #ff6b6b;">❌ Не удалось загрузить видео</p>' +
-                        '<p style="color: #aaa; font-size: 0.9rem;">Проверьте наличие файла economist_congrats.mp4 в репозитории</p>';
-                    return;
-                }
-                
-                const sourceUrl = videoSources[currentSourceIndex];
-                currentSourceIndex++;
-                
-                console.log("Пробуем загрузить видео из:", sourceUrl);
-                
-                // Устанавливаем источник
-                videoSource.src = sourceUrl;
-                
-                // Загружаем видео
-                videoPlayer.load();
-                
-                // Событие успешной загрузки
-                videoPlayer.onloadeddata = function() {
-                    loadingDiv.style.display = 'none';
-                    videoPlayer.style.display = 'block';
-                    currentVideo = videoPlayer;
-                    
-                    // Пытаемся запустить
-                    setTimeout(() => {
-                        videoPlayer.play().catch(e => {
-                            console.log("Автовоспроизведение заблокировано");
-                            updatePlayButton(false);
-                        });
-                    }, 500);
-                    
-                    updatePlayButton(true);
-                };
-                
-                // Событие ошибки
-                videoPlayer.onerror = function() {
-                    console.log("Ошибка загрузки из:", sourceUrl);
-                    // Пробуем следующий источник
-                    setTimeout(tryNextSource, 500);
-                };
-            }
-            
-            // Начинаем пробовать источники
-            tryNextSource();
-        }
-        
-        // Управление видео
-        function videoPlayPause() {
-            if (!currentVideo) return;
-            
-            if (currentVideo.paused) {
-                currentVideo.play();
-                updatePlayButton(true);
-            } else {
-                currentVideo.pause();
-                updatePlayButton(false);
-            }
-        }
-        
-        function updatePlayButton(isPlaying) {
-            document.getElementById('playIcon').textContent = isPlaying ? '⏸️' : '▶️';
-            document.getElementById('playText').textContent = isPlaying ? 'Пауза' : 'Воспроизвести';
-        }
-        
-        function videoMuteToggle() {
-            if (!currentVideo) return;
-            
-            currentVideo.muted = !currentVideo.muted;
-            document.getElementById('muteIcon').textContent = currentVideo.muted ? '🔇' : '🔊';
-        }
-        
-        function changeVolume(value) {
-            if (!currentVideo) return;
-            currentVideo.volume = value;
-        }
-        
-        function replayVideo() {
-            if (currentVideo) {
-                currentVideo.currentTime = 0;
-                currentVideo.play();
-                updatePlayButton(true);
-            }
-        }
-        
-        function downloadVideo() {
-            // Ссылка на скачивание видео из GitHub
-            const downloadUrl = "https://raw.githubusercontent.com/Lordi-back/happybirthdayMat/main/videos/economist_congrats.mp4";
-            
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = 'Золотой_Контракт_поздравление.mp4';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-        
         function closeVideo() {
-            if (currentVideo) {
-                currentVideo.pause();
-                currentVideo.currentTime = 0;
-            }
-            
             document.getElementById('congratsVideo').style.display = 'none';
             document.body.style.overflow = 'auto';
+            
+            // Останавливаем видео при закрытии
+            const iframe = document.getElementById('videoPlayer');
+            try {
+                iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+            } catch(e) {}
         }
         
         function goToNextPuzzle() {
@@ -935,7 +714,18 @@
             progress.economist = true;
             localStorage.setItem('quest_progress', JSON.stringify(progress));
             
+            // Закрываем видео
             closeVideo();
+            
+            // Показываем сообщение
+            const resultDiv = document.getElementById('result');
+            if (resultDiv) {
+                resultDiv.innerHTML = `
+                    <p style="color: #98fb98; font-size: 1.4rem;">
+                        ✅ Переход к следующей загадке...
+                    </p>
+                `;
+            }
             
             // Перенаправляем через 1.5 секунды
             setTimeout(() => {
@@ -943,19 +733,40 @@
             }, 1500);
         }
         
+        function replayVideo() {
+            const iframe = document.getElementById('videoPlayer');
+            
+            // Перезагружаем iframe для перезапуска видео
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            setTimeout(() => {
+                iframe.src = currentSrc;
+            }, 100);
+            
+            // Анимация кнопки
+            const btn = document.querySelector('.video-replay-btn');
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
         function updateProgressBar() {
             const progress = JSON.parse(localStorage.getItem('quest_progress') || '{}');
             
+            // Считаем сколько осколков уже собрано
             let collected = 0;
             if (progress.math) collected++;
             if (progress.economist) collected++;
             if (progress.programmer) collected++;
             
-            // Добавляем текущий осколок
+            // Добавляем текущий осколок (если ещё не сохранён)
             if (!progress.economist) collected++;
             
+            // Обновляем счетчик
             document.getElementById('progressCount').textContent = collected;
             
+            // Обновляем полоску прогресса
             const progressFill = document.querySelector('.progress-fill');
             if (progressFill) {
                 const width = (collected / 3) * 100;
@@ -963,7 +774,7 @@
             }
         }
         
-        // Инициализация
+        // Автофокус на поле ввода
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('answer').focus();
             
